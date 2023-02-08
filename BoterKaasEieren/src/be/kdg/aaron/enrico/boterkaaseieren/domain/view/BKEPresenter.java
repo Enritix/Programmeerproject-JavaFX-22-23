@@ -1,6 +1,6 @@
-package be.kdg.aaron.enrico.boterkaaseieren.view;
+package be.kdg.aaron.enrico.boterkaaseieren.domain.view;
 
-import be.kdg.aaron.enrico.boterkaaseieren.model.BKEModel;
+import be.kdg.aaron.enrico.boterkaaseieren.domain.model.BKEModel;
 
 public class BKEPresenter {
     private BKEModel model;
