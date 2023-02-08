@@ -10,6 +10,9 @@ public class BoterKaasEieren extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-
+        stage.setWidth(800);
+        stage.setHeight(800);
+        stage.setTitle("Boter, kaas & eieren");
+        stage.show();
     }
 }
