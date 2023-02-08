@@ -7,7 +7,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class BKEView extends Application {
-    private static final double ELEMENT_SIZE = 100;
+    private static final double ELEMENT_SIZE = 90;
     private static final double GAP = ELEMENT_SIZE / 10;
 
     private TilePane tilePane = new TilePane();

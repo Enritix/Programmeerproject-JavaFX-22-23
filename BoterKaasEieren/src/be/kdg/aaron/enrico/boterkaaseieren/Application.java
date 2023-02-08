@@ -12,13 +12,12 @@ public class Application extends javafx.application.Application {
     public static void main(String[] args) {
         javafx.application.Application.launch(args);
     }
-    BKEView bkeView = new BKEView(3,3);
     @Override
     public void start(Stage stage) throws Exception {
 
         //Fields to specify number of rows/columns
-        TextField rowField = new TextField("2");
-        TextField columnField = new TextField("4");
+        TextField rowField = new TextField("5");
+        TextField columnField = new TextField("5");
 
         //Function to set an action when text field loses focus
         buildTextFieldActions(rowField, columnField);
@@ -28,11 +27,12 @@ public class Application extends javafx.application.Application {
         fields.getChildren().add(new Label("x"));
         fields.getChildren().add(columnField);
 
+        BKEView bkeView = new BKEView(5,5);
         BorderPane mainPanel = new BorderPane();
         mainPanel.setCenter(bkeView.getDisplay());
         mainPanel.setTop(fields);
 
-        Scene scene = new Scene(mainPanel, 1000, 800);
+        Scene scene = new Scene(mainPanel, 800, 800);
         stage.setTitle("Test grid display");
         stage.setScene(scene);
         stage.show();
@@ -43,6 +43,7 @@ public class Application extends javafx.application.Application {
                 if (!rowField.getText().equals("")) {
                     try {
                         int nbRow = Integer.parseInt(rowField.getText());
+                        BKEView bkeView = new BKEView(5,5);
                         bkeView.setRows(nbRow);
                     } catch (NumberFormatException nfe) {
                         System.out.println("Please enter a valid number.");
@@ -56,6 +57,7 @@ public class Application extends javafx.application.Application {
                 if (!columnField.getText().equals("")) {
                     try {
                         int nbColumn = Integer.parseInt(columnField.getText());
+                        BKEView bkeView = new BKEView(5,5);
                         bkeView.setColumns(nbColumn);
                     } catch (NumberFormatException nfe) {
                         System.out.println("Please enter a valid number.");
