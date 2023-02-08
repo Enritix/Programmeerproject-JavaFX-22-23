@@ -54,7 +54,8 @@ public class Application extends javafx.application.Application {
             }
         });
 
-        columnField.focusedProperty().addListener((ov, t, t1) -> {
+        columnField.focusedProperty().addListener((ov, t, t1) -> //TODO: lambda wegwerken!
+        {
             if (!t1) {
                 if (!columnField.getText().equals("")) {
                     try {
