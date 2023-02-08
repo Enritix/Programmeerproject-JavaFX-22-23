@@ -12,12 +12,13 @@ public class Application extends javafx.application.Application {
     public static void main(String[] args) {
         javafx.application.Application.launch(args);
     }
+    BKEView bkeView;
     @Override
     public void start(Stage stage) throws Exception {
 
         //Fields to specify number of rows/columns
-        TextField rowField = new TextField("5");
-        TextField columnField = new TextField("5");
+        TextField rowField = new TextField("3");
+        TextField columnField = new TextField("3");
 
         //Function to set an action when text field loses focus
         buildTextFieldActions(rowField, columnField);
@@ -27,7 +28,7 @@ public class Application extends javafx.application.Application {
         fields.getChildren().add(new Label("x"));
         fields.getChildren().add(columnField);
 
-        BKEView bkeView = new BKEView(5,5);
+        BKEView bkeView = new BKEView(3,3);
         BorderPane mainPanel = new BorderPane();
         mainPanel.setCenter(bkeView.getDisplay());
         mainPanel.setTop(fields);
@@ -38,7 +39,8 @@ public class Application extends javafx.application.Application {
         stage.show();
     }
     private void buildTextFieldActions(final TextField rowField, final TextField columnField) {
-        rowField.focusedProperty().addListener((ov, t, t1) -> {
+        rowField.focusedProperty().addListener((ov, t, t1) -> //TODO: lambda wegwerken!
+                 {
             if (!t1) {
                 if (!rowField.getText().equals("")) {
                     try {
@@ -65,5 +67,10 @@ public class Application extends javafx.application.Application {
                 }
             }
         });
+    }
+
+    public void getView() {
+        this.bkeView = new BKEView(3,3);
+        //TODO
     }
 }
