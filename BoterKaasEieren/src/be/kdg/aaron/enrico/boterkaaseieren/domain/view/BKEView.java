@@ -7,6 +7,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
@@ -26,29 +29,41 @@ public class BKEView extends BorderPane {
     private void initialiseNodes() {
         lblPlayer1 = new Label("Player 1");
         lblPlayer1.setFont(Font.font("Verdana", FONT_SIZE));
-        lblPlayer1.setStyle("-fx-text-fill: #68C8FF; ");
+        lblPlayer1.setStyle("-fx-background-color: #032056; -fx-text-fill: #68C8FF; -fx-background-radius: 15px"); //player 2 text colour
+        /*lblPlayer1.setBackground(new Background(
+                new BackgroundFill(
+                        Color.rgb(3,32,86), null, null)));*/
         lblPlayer2 = new Label("Player 2");
         lblPlayer2.setFont(Font.font("Verdana", FONT_SIZE));
-        lblPlayer2.setStyle("-fx-text-fill: #68C8FF; ");
+        lblPlayer2.setStyle("-fx-background-color: #032056; -fx-text-fill: #68C8FF; -fx-background-radius: 15px"); //player 2 text colour
+        /*lblPlayer2.setBackground(new Background(
+                new BackgroundFill(
+                        Color.rgb(3,32,86), null, null)));*/
         btnNewGame = new Button("New Game");
         btnNewGame.setFont(Font.font("Verdana", FONT_SIZE));
-        btnNewGame.setStyle("-fx-text-fill: #68C8FF; ");
-        btnNewGame.setBackground(new Background(
+        /*btnNewGame.setBackground(new Background(
                 new BackgroundFill(
-                        Color.rgb(3,32,86), null, null)));
+                        Color.rgb(3,32,86), null, null))); //new game button bg*/
+        btnNewGame.setStyle("-fx-font-weight: bold; -fx-background-color: #032056; -fx-text-fill: #68C8FF; -fx-background-radius: 15px"); //new game button text colour
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
                 btnBoardSquares[i][j] = new Button();
                 btnBoardSquares[i][j].setMaxSize(250, 250);
-                btnBoardSquares[i][j].setStyle("-fx-background-color: #032056; ");
+                btnBoardSquares[i][j].setStyle("-fx-background-color: #032056; -fx-background-radius: 15px"); //board squares background
             }
         }
     }
 
         private void layoutNodes() {
-        this.setBackground(new Background(
+        /*this.setBackground(new Background(
                 new BackgroundFill(
-                        Color.rgb(0,0,0), null, null)));
+                        Color.rgb(0,0,0), null, null))); //full background*/
+            this.setBackground(Background.fill(new LinearGradient(
+                    0, 0, 1, 1, true,                      //sizing
+                    CycleMethod.NO_CYCLE,                  //cycling
+                    new Stop(0, Color.web("#fdea16")),     //colors
+                    new Stop(1, Color.web("#fd60e9"))))
+            );
         GridPane gpBoard = new GridPane();
             for (int i = 0; i < SIZE; i++) {
                 for (int j = 0; j < SIZE; j++) {
@@ -61,10 +76,16 @@ public class BKEView extends BorderPane {
             gpBoard.setHgap(10);
             this.setCenter(gpBoard);
             gpBoard.setMaxSize(300,300);
-            gpBoard.setBackground(
+            /*gpBoard.setBackground(
                     new Background(
                             new BackgroundFill(
-                                    Color.rgb(104,200,255), null, null)));
+                                    Color.rgb(104,200,255), null, null))); //board bg*/
+            gpBoard.setBackground(Background.fill(new LinearGradient(
+                            0, 0, 1, 1, true,                      //sizing
+                            CycleMethod.NO_CYCLE,                  //cycling
+                            new Stop(0, Color.web("#fdea16")),     //colors
+                            new Stop(1, Color.web("#fd60e9"))))
+                    );
             HBox hbTopRight = new HBox(lblPlayer2);
             hbTopRight.setSpacing(20);
             HBox hbTop = new HBox(lblPlayer1, hbTopRight);
