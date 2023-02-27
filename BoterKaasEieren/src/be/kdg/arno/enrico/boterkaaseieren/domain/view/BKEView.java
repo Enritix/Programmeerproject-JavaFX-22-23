@@ -1,4 +1,4 @@
-package be.kdg.aaron.enrico.boterkaaseieren.domain.view;
+package be.kdg.arno.enrico.boterkaaseieren.domain.view;
 
 
 import javafx.geometry.Insets;
@@ -11,7 +11,6 @@ import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 
 public class BKEView extends BorderPane {
     public static final int FONT_SIZE = 30;
@@ -44,7 +43,7 @@ public class BKEView extends BorderPane {
         /*btnNewGame.setBackground(new Background(
                 new BackgroundFill(
                         Color.rgb(3,32,86), null, null))); //new game button bg*/
-        btnNewGame.setStyle("-fx-font-weight: bold; -fx-background-color: #032056; -fx-text-fill: #68C8FF; -fx-background-radius: 15px"); //new game button text colour
+        btnNewGame.setStyle("-fx-background-color: #032056; -fx-text-fill: #68C8FF; -fx-background-radius: 15px"); //new game button text colour --> bold: -fx-font-weight: bold;
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
                 btnBoardSquares[i][j] = new Button();
