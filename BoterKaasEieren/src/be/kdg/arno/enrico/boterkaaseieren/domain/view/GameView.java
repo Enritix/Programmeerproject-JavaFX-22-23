@@ -12,7 +12,7 @@ import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
 import javafx.scene.text.Font;
 
-public class BKEView extends BorderPane {
+public class GameView extends BorderPane {
     public static final int FONT_SIZE = 30;
     public static final int SIZE = 3;
     private Label lblPlayer1;
@@ -20,7 +20,7 @@ public class BKEView extends BorderPane {
     private Button[][] btnBoardSquares = new Button[SIZE][SIZE]; //new Button[Board.SIZE][Board.SIZE];
     private Button btnNewGame;
 
-    public BKEView() {
+    public GameView() {
         initialiseNodes();
         layoutNodes();
     }
