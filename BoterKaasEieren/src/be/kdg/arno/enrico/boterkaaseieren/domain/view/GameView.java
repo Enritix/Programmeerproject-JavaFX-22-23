@@ -19,6 +19,7 @@ public class GameView extends BorderPane {
     private Label lblPlayer2;
     private Button[][] btnBoardSquares = new Button[SIZE][SIZE]; //new Button[Board.SIZE][Board.SIZE];
     private Button btnNewGame;
+    private Button btnQuit;
 
     public GameView() {
         initialiseNodes();
@@ -44,11 +45,14 @@ public class GameView extends BorderPane {
                 new BackgroundFill(
                         Color.rgb(3,32,86), null, null))); //new game button bg*/
         btnNewGame.setStyle("-fx-background-color: #032056; -fx-text-fill: #68C8FF; -fx-background-radius: 15px"); //new game button text colour --> bold: -fx-font-weight: bold;
+        btnQuit = new Button("Quit");
+        btnQuit.setFont(Font.font("Verdana", FONT_SIZE));
+        btnQuit.setStyle("-fx-background-color: #032056; -fx-text-fill: #68C8FF; -fx-background-radius: 15px"); //quit button text colour --> bold: -fx-font-weight: bold;
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
                 btnBoardSquares[i][j] = new Button();
                 btnBoardSquares[i][j].setMaxSize(250, 250);
-                btnBoardSquares[i][j].setStyle("-fx-background-color: #032056; -fx-background-radius: 15px"); //board squares background
+                btnBoardSquares[i][j].setStyle("-fx-background-color: #032056; -fx-background-radius: 15px; -fx-text-fill: black"); //board squares background
             }
         }
     }
@@ -75,16 +79,13 @@ public class GameView extends BorderPane {
             gpBoard.setHgap(10);
             this.setCenter(gpBoard);
             gpBoard.setMaxSize(300,300);
-            /*gpBoard.setBackground(
-                    new Background(
-                            new BackgroundFill(
-                                    Color.rgb(104,200,255), null, null))); //board bg*/
-            gpBoard.setBackground(Background.fill(new LinearGradient(
+            gpBoard.setStyle(" -fx-background-color: transparent"); //board bg
+            /*gpBoard.setBackground(Background.fill(new LinearGradient(
                             0, 0, 1, 1, true,                      //sizing
                             CycleMethod.NO_CYCLE,                  //cycling
                             new Stop(0, Color.web("#fdea16")),     //colors
                             new Stop(1, Color.web("#fd60e9"))))
-                    );
+                    );*/
             HBox hbTopRight = new HBox(lblPlayer2);
             hbTopRight.setSpacing(20);
             HBox hbTop = new HBox(lblPlayer1, hbTopRight);
@@ -96,10 +97,30 @@ public class GameView extends BorderPane {
             BorderPane.setMargin(gpBoard, new Insets(10));
             BorderPane.setMargin(hbTop, new Insets(10));
             this.setBottom(btnNewGame);
-            BorderPane.setAlignment(btnNewGame, Pos.BOTTOM_CENTER);
+            BorderPane.setAlignment(btnNewGame, Pos.BOTTOM_LEFT);
             BorderPane.setMargin(btnNewGame, new Insets(10));
+
+            HBox hbBottom = new HBox(btnNewGame, btnQuit);
+            hbBottom.setSpacing(20);
+            hbBottom.setAlignment(Pos.CENTER);
+            hbBottom.setPadding(new Insets(10));
+
+            // add HBox to bottom of BorderPane
+            this.setBottom(hbBottom);
+            BorderPane.setMargin(hbBottom, new Insets(10));
         }
 
+    public Button[][] getBtnBoardSquares() {
+        return btnBoardSquares;
     }
+
+    public Button getBtnNewGame() {
+        return btnNewGame;
+    }
+
+    public Button getBtnQuit() {
+        return btnQuit;
+    }
+}
 
 

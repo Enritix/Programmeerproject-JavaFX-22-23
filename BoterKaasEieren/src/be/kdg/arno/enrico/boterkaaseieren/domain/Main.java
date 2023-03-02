@@ -1,5 +1,7 @@
 package be.kdg.arno.enrico.boterkaaseieren.domain;
 
+import be.kdg.arno.enrico.boterkaaseieren.domain.model.BoterKaasEieren;
+import be.kdg.arno.enrico.boterkaaseieren.domain.view.GamePresenter;
 import be.kdg.arno.enrico.boterkaaseieren.domain.view.GameView;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -14,7 +16,9 @@ public class Main extends Application {
     }
     @Override
     public void start(Stage stage) throws Exception {
+        BoterKaasEieren game = new BoterKaasEieren(3);
         GameView view = new GameView();
+        GamePresenter presenter = new GamePresenter(game, view);
         Scene scene = new Scene(view);
         stage.getIcons().add(new Image(new FileInputStream("resources/images/bke_logo.png")));
         stage.setScene(scene);
