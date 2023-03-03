@@ -23,10 +23,10 @@ public class ComputerPlayer implements Player{
         System.out.println("\nComputer played: (" + row + "," + col + ")\n");
     }
 
-    /*@Override
+    @Override
     public String getName() {
         return null;
-    }*/
+    }
 
     @Override
     public void setName(String name) {

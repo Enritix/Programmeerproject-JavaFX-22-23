@@ -75,7 +75,7 @@ public class BKEApplication {
                         e.printStackTrace();
                     }
                     game.clearPlayers();
-                    game.twoPlayers();
+                    game.twoPlayers(player1, player2);
                     game.playGame();
 //                    PlayedGames.addGame(game);
                     break;
@@ -92,7 +92,7 @@ public class BKEApplication {
                         e.printStackTrace();
                     }
                     game.clearPlayers();
-                    game.onePlayerOneComputer();
+                    game.onePlayerOneComputer(player);
                     game.playGame();
                     //PlayedGames.addGame(game);
                     break;

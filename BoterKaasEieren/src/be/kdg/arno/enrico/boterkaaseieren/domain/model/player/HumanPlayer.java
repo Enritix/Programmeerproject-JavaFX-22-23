@@ -9,7 +9,7 @@ public class HumanPlayer implements Player {
     private String name;
     private String player;
 
-    public HumanPlayer(String player) {
+    public HumanPlayer(String name, String player) {
         this.name = name;
         this.player = player;
     }
@@ -32,10 +32,10 @@ public class HumanPlayer implements Player {
 
     }
 
-    /*@Override
+    @Override
     public String getName() {
         return name;
-    }*/
+    }
 
     @Override
     public void setName(String name) {

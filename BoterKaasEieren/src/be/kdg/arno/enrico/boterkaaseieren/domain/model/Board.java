@@ -39,6 +39,7 @@ public class Board {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
+        System.out.println();
         for (int i = 0; i < tiles.length; i++) {
             for (int j = 0; j < tiles[i].length; j++) {
                 if (tiles[i][j] == null) {
@@ -48,17 +49,17 @@ public class Board {
                         sb.append("   ");
                     }
                 } else {
-                    if (tiles[i][j].equals("O")) {
-                        if (j < 2) {
-                            sb.append(" O").append(" ║");
-                        } else {
-                            sb.append(" O ");
-                        }
-                    } else {
+                    if (tiles[i][j].equals("X")) {
                         if (j < 2) {
                             sb.append(" X").append(" ║");
                         } else {
                             sb.append(" X ");
+                        }
+                    } else {
+                        if (j < 2) {
+                            sb.append(" O").append(" ║");
+                        } else {
+                            sb.append(" O ");
                         }
                     }
                 }

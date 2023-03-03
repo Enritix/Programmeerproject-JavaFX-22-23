@@ -27,13 +27,13 @@ public class GameView extends BorderPane {
     }
 
     private void initialiseNodes() {
-        lblPlayer1 = new Label("Player 1");
+        lblPlayer1 = new Label();
         lblPlayer1.setFont(Font.font("Verdana", FONT_SIZE));
         lblPlayer1.setStyle("-fx-background-color: #032056; -fx-text-fill: #68C8FF; -fx-background-radius: 15px"); //player 2 text colour
         /*lblPlayer1.setBackground(new Background(
                 new BackgroundFill(
                         Color.rgb(3,32,86), null, null)));*/
-        lblPlayer2 = new Label("Player 2");
+        lblPlayer2 = new Label();
         lblPlayer2.setFont(Font.font("Verdana", FONT_SIZE));
         lblPlayer2.setStyle("-fx-background-color: #032056; -fx-text-fill: #68C8FF; -fx-background-radius: 15px"); //player 2 text colour
         /*lblPlayer2.setBackground(new Background(
@@ -53,6 +53,7 @@ public class GameView extends BorderPane {
                 btnBoardSquares[i][j] = new Button();
                 btnBoardSquares[i][j].setMaxSize(250, 250);
                 btnBoardSquares[i][j].setStyle("-fx-background-color: #032056; -fx-background-radius: 15px; -fx-text-fill: black"); //board squares background
+                btnBoardSquares[i][j].setFont(Font.font("Verdana", FONT_SIZE));
             }
         }
     }
@@ -120,6 +121,14 @@ public class GameView extends BorderPane {
 
     public Button getBtnQuit() {
         return btnQuit;
+    }
+
+    public Label getLblPlayer1() {
+        return lblPlayer1;
+    }
+
+    public Label getLblPlayer2() {
+        return lblPlayer2;
     }
 }
 
