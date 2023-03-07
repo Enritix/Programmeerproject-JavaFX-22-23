@@ -10,6 +10,8 @@ public class BoterKaasEieren {
     private int moveCounter = 0;
     private String currentPlayer;
     private boolean winnaar = false;
+    private boolean won;
+    private boolean draw;
 
 
 
@@ -109,16 +111,36 @@ public class BoterKaasEieren {
             if (board.checkWin()) {
                 if (players[0].getPlayer().equals("X")) {
                     System.out.println("\n" + players[0].getName() + " (X) wins!\n");
+                    won = true;
                 } else {
                     System.out.println("\n" + players[1].getName() + " (O) wins!\n");
+                    won = true;
                 }
                 board.clearBoard();
             } else if (board.isFull()) {
                 System.out.println("\nDraw!\n");
                 board.clearBoard();
+                draw = true;
             }
         } else {
             System.out.println("Tile is already taken. Try again.");
+        }
+    }
+
+    public boolean hasWon() {
+        if (won) {
+            moveCounter--;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean isDraw() {
+        if (draw) {
+            return true;
+        } else {
+            return false;
         }
     }
 }

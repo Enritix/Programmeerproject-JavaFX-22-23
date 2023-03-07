@@ -4,6 +4,7 @@ package be.kdg.arno.enrico.boterkaaseieren.domain.view;
 import be.kdg.arno.enrico.boterkaaseieren.domain.model.BoterKaasEieren;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Border;
@@ -45,10 +46,10 @@ public class GamePresenter {
                         view.getBtnBoardSquares()[i][j].setText("");
                         game.clearBoard();
                         view.getBtnBoardSquares()[i][j].setDisable(false);
-                        System.out.println("Board and players cleared...");
-                        System.out.println(game.getBoard().toString());
                     }
                 }
+                System.out.println("Board and players cleared...");
+                System.out.println(game.getBoard().toString());
             }
 
         });
@@ -62,12 +63,28 @@ public class GamePresenter {
                     @Override
                     public void handle(ActionEvent actionEvent) {
 
-                            game.playGame();
-                            String playerXorO = game.getCurrentPlayer().getPlayer();
-                            view.getBtnBoardSquares()[row][col].setText(playerXorO);
-                            game.addPieceOnBoard(row, col);
-                            view.getBtnBoardSquares()[row][col].setDisable(true);
-                            updateView();
+                        game.playGame();
+                        String playerXorO = game.getCurrentPlayer().getPlayer();
+                        view.getBtnBoardSquares()[row][col].setText(playerXorO);
+                        game.addPieceOnBoard(row, col);
+                        view.getBtnBoardSquares()[row][col].setDisable(true);
+                        updateView();
+                        if (game.hasWon()) {
+                            /*Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setTitle("Tic Tac Toe");
+                            alert.setContentText(String.format("%s (%s) has won!",
+                                    game.getCurrentPlayer().getName(), game.getCurrentPlayer().getPlayer()));
+                            alert.show();*/
+                            GameView.showMessage(String.format("%s (%s) has won!",
+                                    game.getCurrentPlayer().getName(), game.getCurrentPlayer().getPlayer()));
+                        } else if (game.isDraw()) {
+                            /*Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setTitle("Tic Tac Toe");
+                            alert.setContentText("Draw!");
+                            alert.show();*/
+                            GameView.showMessage("Draw!");
+                        }
+
                     }
                 });
             }
@@ -89,6 +106,14 @@ public class GamePresenter {
             //border rond lblPlayer2
             view.getLblPlayer2().setBorder(Border.stroke(Color.RED));
             view.getLblPlayer1().setBorder(null);
+        }
+
+        if (game.getBoard().checkWin()) {
+            for (int i = 0; i < game.getBoardSize(); i++) {
+                for (int j = 0; j < game.getBoardSize(); j++) {
+                    view.getBtnBoardSquares()[i][j].setDisable(true);
+                }
+            }
         }
     }
 }

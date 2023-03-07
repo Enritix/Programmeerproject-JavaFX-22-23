@@ -3,6 +3,7 @@ package be.kdg.arno.enrico.boterkaaseieren.domain.view;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
@@ -129,6 +130,13 @@ public class GameView extends BorderPane {
 
     public Label getLblPlayer2() {
         return lblPlayer2;
+    }
+    
+    public static void showMessage(String text) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText((String) null);
+        alert.setContentText(text);
+        alert.showAndWait();
     }
 }
 
