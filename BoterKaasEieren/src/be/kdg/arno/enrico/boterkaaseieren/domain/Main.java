@@ -1,8 +1,6 @@
 package be.kdg.arno.enrico.boterkaaseieren.domain;
 
-import be.kdg.arno.enrico.boterkaaseieren.domain.model.BoterKaasEieren;
-import be.kdg.arno.enrico.boterkaaseieren.domain.view.GamePresenter;
-import be.kdg.arno.enrico.boterkaaseieren.domain.view.GameView;
+import be.kdg.arno.enrico.boterkaaseieren.domain.view.StartUpView;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -16,9 +14,22 @@ public class Main extends Application {
     }
     @Override
     public void start(Stage stage) throws Exception {
-        BoterKaasEieren game = new BoterKaasEieren(3);
+
+        StartUpView startupview = new StartUpView();
+        Scene startscene = new Scene(startupview);
+        stage.getIcons().add(new Image(new FileInputStream("resources/images/bke_logo.png")));
+        stage.setScene(startscene);
+        stage.setTitle("Boter, kaas & eieren");
+        stage.setMinHeight(550);
+        stage.setMinWidth(850);
+        stage.show();
+
+
+
+
+
+/*
         GameView view = new GameView();
-        GamePresenter presenter = new GamePresenter(game, view);
         Scene scene = new Scene(view);
         stage.getIcons().add(new Image(new FileInputStream("resources/images/bke_logo.png")));
         stage.setScene(scene);
@@ -26,5 +37,7 @@ public class Main extends Application {
         stage.setMinHeight(500);
         stage.setMinWidth(500);
         stage.show();
+*/
+
     }
 }
