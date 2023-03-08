@@ -1,10 +1,10 @@
-package be.kdg.arno.enrico.boterkaaseieren.domain.model;
+package be.kdg.arno.enrico.tictactoe.domain.model;
 
-import be.kdg.arno.enrico.boterkaaseieren.domain.model.player.ComputerPlayer;
-import be.kdg.arno.enrico.boterkaaseieren.domain.model.player.HumanPlayer;
-import be.kdg.arno.enrico.boterkaaseieren.domain.model.player.Player;
+import be.kdg.arno.enrico.tictactoe.domain.model.player.ComputerPlayer;
+import be.kdg.arno.enrico.tictactoe.domain.model.player.HumanPlayer;
+import be.kdg.arno.enrico.tictactoe.domain.model.player.Player;
 
-public class BoterKaasEieren {
+public class TicTacToe {
     private Board board;
     private Player[] players;
     private int moveCounter = 0;
@@ -12,46 +12,56 @@ public class BoterKaasEieren {
     private boolean winnaar = false;
     private boolean won;
     private boolean draw;
+    private int size;
 
 
 
-    public BoterKaasEieren(int size) {
-        this.board = new Board(size);
+    public TicTacToe(int size) {
+        this.size = size;
+        this.board = new Board(this.size);
         board.toString();
         this.players = new Player[2];
         currentPlayer = "X";
     }
 
-    public void playGame() {
-        /*do {
+    public void reset() {
+        this.board = new Board(this.size);
+        clearBoard();
+        this.moveCounter = 0;
+        this.won = false;
+        this.draw = false;
+    }
+
+    /*public void playGame() {
+        *//*do {
             if (!board.isFull()) {
-                *//*players[0].play(board);*//*
-                *//*System.out.println(board.toString());*//*
+                *//**//*players[0].play(board);*//**//*
+                *//**//*System.out.println(board.toString());*//**//*
                 winnaar = board.checkWin();
             }
             if (!winnaar) {
                 if (!board.isFull()) {
-                    *//*players[1].play(board);*//*
-                    *//*System.out.println(board.toString());*//*
+                    *//**//*players[1].play(board);*//**//*
+                    *//**//*System.out.println(board.toString());*//**//*
                     winnaar = board.checkWin();
                 }
             }
-        } while (!winnaar && !board.isFull());*/
+        } while (!winnaar && !board.isFull());*//*
         if (winnaar == true && players[0].getPlayer().equals("X")) {
             System.out.println("\n" + players[0].getName() + " (X) wins!\n");
             board.clearBoard();
-            /*Score winnaarO = new Score(players[0], board);*/
+            *//*Score winnaarO = new Score(players[0], board);*//*
         } else if (winnaar == true && players[1].getPlayer().equals("O")) {
             System.out.println("\n" + players[1].getName() + " (O) wins!\n");
             board.clearBoard();
-            /*Score winnaarX = new Score(players[1], board);*/
+            *//*Score winnaarX = new Score(players[1], board);*//*
         } else if (board.isFull()){
             System.out.println("\nDraw!\n");
             board.clearBoard();
-            /*Score draw = new Score(players[0], board);
-            Score draw2 = new Score(players[1], board);*/
+            *//*Score draw = new Score(players[0], board);
+            Score draw2 = new Score(players[1], board);*//*
         }
-    }
+    }*/
 
     public void twoPlayers(String player1, String player2) {
         players[0] = new HumanPlayer(player1, "X");
@@ -103,7 +113,7 @@ public class BoterKaasEieren {
         System.out.println(board.toString());
     }*/
 
-    public void addPieceOnBoard(int rowNumber, int colNumber) {
+    public void playGame(int rowNumber, int colNumber) {
         Player currentPlayer = getCurrentPlayer();
         moveCounter++;
         if (board.addPiece(currentPlayer.getPlayer(), rowNumber, colNumber)) {

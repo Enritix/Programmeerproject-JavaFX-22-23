@@ -1,19 +1,22 @@
-package be.kdg.arno.enrico.boterkaaseieren.domain.model;
+package be.kdg.arno.enrico.tictactoe.domain.model;
 
 public class Board {
     private int size;
     private String[][] tiles;
+    /*private ArrayList<String>[][] tiles;*/
     private int pieceCounter;
 
     public Board(int size) {
         this.size = size;
         this.tiles = new String[size][size];
+        /*this.tiles = new ArrayList[size][size];*/
         this.pieceCounter = 0;
     }
 
     public boolean addPiece(String player, int rowNumber, int colNumber) {
-        if (tiles[colNumber][rowNumber] == null) {
+        if (this.tiles[colNumber][rowNumber] == null) {
             this.pieceCounter++;
+            /*tiles[colNumber][rowNumber].add(player);*/
             tiles[colNumber][rowNumber] = player;
             return true;
         } else {
@@ -32,7 +35,8 @@ public class Board {
     public void clearBoard() {
         for (int i = 0; i < tiles.length; i++) {
             for (int j = 0; j < tiles.length; j++) {
-                tiles[i][j] = " ";
+                /*tiles[i][j].clear();*/
+                tiles[i][j] = "space";
             }
         }
     }
@@ -42,7 +46,7 @@ public class Board {
         System.out.println();
         for (int i = 0; i < tiles.length; i++) {
             for (int j = 0; j < tiles[i].length; j++) {
-                if (tiles[i][j] == null) {
+                if (tiles[i][j] == null || tiles[i][j].equals("")) {
                     if (j < 2) {
                         sb.append("  ").append(" ║");
                     } else {
@@ -73,7 +77,8 @@ public class Board {
 
     public boolean checkWin() {
         if (size == 3) {
-            if ((tiles[0][0] + tiles[0][1] + tiles[0][2]).equals("XXX") || (tiles[0][0] + tiles[0][1] + tiles[0][2]).equals("OOO")) {
+            if ((tiles[0][0] + tiles[0][1] + tiles[0][2]).equals("XXX") ||
+                    (tiles[0][0] + tiles[0][1] + tiles[0][2]).equals("OOO")) {
                 return true;
             } else if ((tiles[1][0] + tiles[1][1] + tiles[1][2]).equals("XXX") || (tiles[1][0] + tiles[1][1] + tiles[1][2]).equals("OOO")) {
                 return true;
@@ -84,6 +89,35 @@ public class Board {
             } else if ((tiles[2][0] + tiles[1][1] + tiles[0][2]).equals("XXX") || (tiles[2][0] + tiles[1][1] + tiles[0][2]).equals("OOO")) {
                 return true;
             }
+            /*// Check horizontal lines
+            for (int row = 0; row < 3; row++) {
+                if (tiles[row][0].equals("X") && tiles[row][1].equals("X") && tiles[row][2].equals("X") ||
+                        tiles[row][0].equals("O") && tiles[row][1].equals("O") && tiles[row][2].equals("O")) {
+                    return true;
+                }
+            }
+
+            // Check vertical lines
+            for (int col = 0; col < 3; col++) {
+                if (tiles[0][col].equals("X") && tiles[1][col].equals("X") && tiles[2][col].equals("X") ||
+                        tiles[0][col].equals("O") && tiles[1][col].equals("O") && tiles[2][col].equals("O")) {
+                    return true;
+                }
+            }
+
+            // Check diagonal lines
+            if (tiles[0][0].equals("X") && tiles[1][1].equals("X") && tiles[2][2].equals("X") ||
+                    tiles[0][0].equals("O") && tiles[1][1].equals("O") && tiles[2][2].equals("O")) {
+                return true;
+            }
+
+            if (tiles[0][2].equals("X") && tiles[1][1].equals("X") && tiles[2][0].equals("X") ||
+                    (tiles[0][2].equals("O") && tiles[1][1].equals("O") && tiles[2][0].equals("O"))) {
+                return true;
+            }
+
+            // No win found
+            return false;*/
         }
         //TODO: size 5 en 7
         return false;

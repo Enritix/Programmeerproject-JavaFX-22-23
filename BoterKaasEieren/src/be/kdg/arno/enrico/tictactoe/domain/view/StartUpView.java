@@ -1,4 +1,4 @@
-package be.kdg.arno.enrico.boterkaaseieren.domain.view;
+package be.kdg.arno.enrico.tictactoe.domain.view;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -100,23 +100,22 @@ public class StartUpView extends BorderPane {
         this.setRight(scorebox);
         BorderPane.setMargin(scorebox, new Insets(20));
 
+    }
 
+    public Button getPlay1v1() {
+        return play1v1;
+    }
 
+    public Button getPlayComputer() {
+        return playComputer;
+    }
 
+    public Button getRules() {
+        return rules;
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public Button getExit() {
+        return exit;
     }
 }
 

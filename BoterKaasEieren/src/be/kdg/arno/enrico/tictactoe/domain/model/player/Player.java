@@ -1,6 +1,6 @@
-package be.kdg.arno.enrico.boterkaaseieren.domain.model.player;
+package be.kdg.arno.enrico.tictactoe.domain.model.player;
 
-import be.kdg.arno.enrico.boterkaaseieren.domain.model.Board;
+import be.kdg.arno.enrico.tictactoe.domain.model.Board;
 
 public interface Player {
 

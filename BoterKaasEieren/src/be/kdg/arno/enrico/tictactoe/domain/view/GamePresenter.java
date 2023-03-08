@@ -1,12 +1,9 @@
-package be.kdg.arno.enrico.boterkaaseieren.domain.view;
+package be.kdg.arno.enrico.tictactoe.domain.view;
 
 
-import be.kdg.arno.enrico.boterkaaseieren.domain.model.BoterKaasEieren;
+import be.kdg.arno.enrico.tictactoe.domain.model.TicTacToe;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.Alert;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Border;
 import javafx.scene.paint.Color;
 
@@ -16,10 +13,10 @@ import static javafx.application.Platform.exit;
 
 public class GamePresenter {
     private GameView view;
-    private BoterKaasEieren game;
-    private boolean doingMove = false;
+    private TicTacToe game;
 
-    public GamePresenter(BoterKaasEieren game, GameView view) {
+
+    public GamePresenter(TicTacToe game, GameView view) {
         this.view = view;
         this.game = game;
         addEventHandlers();
@@ -40,16 +37,21 @@ public class GamePresenter {
         view.getBtnNewGame().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+
                 for (int i = 0; i < game.getBoardSize(); i++) {
                     for (int j = 0; j < game.getBoardSize(); j++) {
-                        game.clearPlayers();
+
                         view.getBtnBoardSquares()[i][j].setText("");
-                        game.clearBoard();
+                        /*game.clearBoard();*/
                         view.getBtnBoardSquares()[i][j].setDisable(false);
                     }
                 }
+                game.reset();
+                game.twoPlayers(game.getPlayers()[0].getName(), game.getPlayers()[1].getName());
+                updateView();
                 System.out.println("Board and players cleared...");
                 System.out.println(game.getBoard().toString());
+               /*new GamePresenter(game,view);*/
             }
 
         });
@@ -62,11 +64,9 @@ public class GamePresenter {
                 view.getBtnBoardSquares()[i][j].setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent actionEvent) {
-
-                        game.playGame();
                         String playerXorO = game.getCurrentPlayer().getPlayer();
                         view.getBtnBoardSquares()[row][col].setText(playerXorO);
-                        game.addPieceOnBoard(row, col);
+                        game.playGame(row, col);
                         view.getBtnBoardSquares()[row][col].setDisable(true);
                         updateView();
                         if (game.hasWon()) {

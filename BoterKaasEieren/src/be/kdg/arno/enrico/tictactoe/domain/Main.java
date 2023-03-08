@@ -1,6 +1,8 @@
-package be.kdg.arno.enrico.boterkaaseieren.domain;
+package be.kdg.arno.enrico.tictactoe.domain;
 
-import be.kdg.arno.enrico.boterkaaseieren.domain.view.StartUpView;
+import be.kdg.arno.enrico.tictactoe.domain.model.TicTacToe;
+import be.kdg.arno.enrico.tictactoe.domain.view.StartUpPresenter;
+import be.kdg.arno.enrico.tictactoe.domain.view.StartUpView;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -14,11 +16,12 @@ public class Main extends Application {
     }
     @Override
     public void start(Stage stage) throws Exception {
-
-        StartUpView startupview = new StartUpView();
-        Scene startscene = new Scene(startupview);
+        TicTacToe game = new TicTacToe(3);
+        StartUpView startupView = new StartUpView();
+        StartUpPresenter presenter = new StartUpPresenter(game, startupView);
+        Scene startupScene = new Scene(startupView);
         stage.getIcons().add(new Image(new FileInputStream("resources/images/bke_logo.png")));
-        stage.setScene(startscene);
+        stage.setScene(startupScene);
         stage.setTitle("Boter, kaas & eieren");
         stage.setMinHeight(550);
         stage.setMinWidth(850);

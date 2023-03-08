@@ -1,4 +1,4 @@
-package be.kdg.arno.enrico.boterkaaseieren.domain.view;
+package be.kdg.arno.enrico.tictactoe.domain.view;
 
 
 import javafx.geometry.Insets;
