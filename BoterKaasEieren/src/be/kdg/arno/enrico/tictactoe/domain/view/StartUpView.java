@@ -33,9 +33,6 @@ public class StartUpView extends BorderPane {
     Button rules;
     Button exit;
 
-
-
-
     public StartUpView() {
         initialiseNodes();
         layoutNodes();

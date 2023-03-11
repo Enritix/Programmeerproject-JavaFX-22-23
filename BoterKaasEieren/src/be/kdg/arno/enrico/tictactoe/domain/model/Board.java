@@ -36,7 +36,7 @@ public class Board {
         for (int i = 0; i < tiles.length; i++) {
             for (int j = 0; j < tiles.length; j++) {
                 /*tiles[i][j].clear();*/
-                tiles[i][j] = "space";
+                tiles[i][j] = "";
             }
         }
     }

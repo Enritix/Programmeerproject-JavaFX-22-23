@@ -113,7 +113,7 @@ public class TicTacToe {
         System.out.println(board.toString());
     }*/
 
-    public void playGame(int rowNumber, int colNumber) {
+    public void addPieceOnBoard(int rowNumber, int colNumber) {
         Player currentPlayer = getCurrentPlayer();
         moveCounter++;
         if (board.addPiece(currentPlayer.getPlayer(), rowNumber, colNumber)) {
@@ -151,6 +151,14 @@ public class TicTacToe {
             return true;
         } else {
             return false;
+        }
+    }
+
+    public void initialisePlayers(String choice, String p1, String p2) {
+        if (choice.equals("1p")) {
+            onePlayerOneComputer(p1);
+        } else {
+            twoPlayers(p1, p2);
         }
     }
 }

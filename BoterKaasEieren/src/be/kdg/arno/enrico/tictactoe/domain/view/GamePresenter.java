@@ -23,13 +23,13 @@ public class GamePresenter {
     }
 
     private void addEventHandlers() {
-        Scanner sc = new Scanner(System.in);
+        /*Scanner sc = new Scanner(System.in);
         System.out.print("Player one (X), give your name: ");
         String player1 = sc.next();
         System.out.print("Player two (O), give your name: ");
         String player2 = sc.next();
         System.out.printf("%s, you're playing against %s. Good luck to the both of you!\n", player1, player2);
-        game.twoPlayers(player1, player2);
+        game.twoPlayers(player1, player2);*/
         view.getLblPlayer1().setText(game.getPlayers()[0].getName());
         view.getLblPlayer2().setText(game.getPlayers()[1].getName());
 
@@ -66,7 +66,7 @@ public class GamePresenter {
                     public void handle(ActionEvent actionEvent) {
                         String playerXorO = game.getCurrentPlayer().getPlayer();
                         view.getBtnBoardSquares()[row][col].setText(playerXorO);
-                        game.playGame(row, col);
+                        game.addPieceOnBoard(row, col);
                         view.getBtnBoardSquares()[row][col].setDisable(true);
                         updateView();
                         if (game.hasWon()) {
