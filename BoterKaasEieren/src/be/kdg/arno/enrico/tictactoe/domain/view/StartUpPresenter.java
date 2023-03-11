@@ -5,9 +5,10 @@ import be.kdg.arno.enrico.tictactoe.domain.model.TicTacToe;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.effect.BlurType;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.Shadow;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 
 import java.util.Scanner;
 
@@ -15,6 +16,7 @@ public class StartUpPresenter {
     private TicTacToe game;
     private StartUpView view;
     private Scanner sc;
+    private DropShadow dropShadow;
 
     public StartUpPresenter(TicTacToe game, StartUpView view) {
         this.game = game;
@@ -23,7 +25,7 @@ public class StartUpPresenter {
     }
 
     private void addEventHandlers() {
-        view.getPlay1v1().setOnAction(new EventHandler<ActionEvent>() {
+        view.getBtnPlay1v1().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 sc = new Scanner(System.in);
@@ -32,7 +34,7 @@ public class StartUpPresenter {
                 System.out.print("Player two (O), give your name: ");
                 String player2 = sc.next();
                 System.out.printf("%s, you're playing against %s. Good luck to the both of you!\n", player1, player2);
-                game.initialisePlayers("p2", player1, player2);
+                game.initialisePlayers("lblPlayer2", player1, player2);
                 GameView gameView = new GameView();
                 GamePresenter gamePresenter = new GamePresenter(game, gameView);
                 Scene scene = view.getScene();
@@ -41,19 +43,26 @@ public class StartUpPresenter {
                 scene.getWindow().setHeight(500);
             }
         });
-        view.getPlay1v1().setOnMouseEntered(new EventHandler<MouseEvent>() {
+        view.getBtnPlay1v1().setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                view.getPlay1v1().setEffect(new DropShadow());
+                dropShadow = new DropShadow();
+                dropShadow.setColor(Color.BLACK);
+                dropShadow.setBlurType(BlurType.GAUSSIAN);
+                dropShadow.setOffsetX(3);
+                dropShadow.setOffsetY(2);
+                view.getBtnPlay1v1().setEffect(dropShadow);
             }
         });
-        view.getPlay1v1().setOnMouseExited(new EventHandler<MouseEvent>() {
+        view.getBtnPlay1v1().setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                view.getPlay1v1().setEffect(new DropShadow(null));
+                dropShadow = new DropShadow();
+                dropShadow.setColor(Color.TRANSPARENT);
+                view.getBtnPlay1v1().setEffect(dropShadow);
             }
         });
-        view.getPlayComputer().setOnAction(new EventHandler<ActionEvent>() {
+        view.getBtnPlayComputer().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 sc = new Scanner(System.in);
@@ -66,6 +75,25 @@ public class StartUpPresenter {
                 scene.setRoot(gameView);
                 scene.getWindow().setHeight(500);
                 scene.getWindow().setHeight(500);
+            }
+        });
+        view.getBtnPlayComputer().setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                dropShadow = new DropShadow();
+                dropShadow.setColor(Color.BLACK);
+                dropShadow.setBlurType(BlurType.GAUSSIAN);
+                dropShadow.setOffsetX(3);
+                dropShadow.setOffsetY(2);
+                view.getBtnPlayComputer().setEffect(dropShadow);
+            }
+        });
+        view.getBtnPlayComputer().setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                dropShadow = new DropShadow();
+                dropShadow.setColor(Color.TRANSPARENT);
+                view.getBtnPlayComputer().setEffect(dropShadow);
             }
         });
     }

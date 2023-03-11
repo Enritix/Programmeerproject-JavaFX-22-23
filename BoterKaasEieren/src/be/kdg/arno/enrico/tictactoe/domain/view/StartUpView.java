@@ -4,6 +4,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
@@ -11,27 +13,30 @@ import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
 import javafx.scene.text.Font;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 public class StartUpView extends BorderPane {
 
-    private static final int BUTTONPREFWIDTH = 440;
-    private static final int BUTTONPREFHEIGHT = 20;
-    private static final int SCOREBOARDPREFWIDTH = 300;
-    private static final int SCOREBOARDPREFHEIGHT = 600;
+    private static final int BUTTON_PREFWIDTH = 440;
+    private static final int BUTTON_PREFHEIGHT = 20;
+    private static final int SCOREBOARD_PREFWIDTH = 300;
+    private static final int SCOREBOARD_PREFHEIGHT = 600;
 
 
-    Label scoreboardTitle;
-    Label title;
+    Label lblScoreboardTitle;
+    ImageView ivLogo;
 
-    Label p1 = new Label("p1");
-    Label p2 = new Label("p2");
-    Label p3 = new Label("p3");
-    Label p4 = new Label("p4");
-    Label p5 = new Label("p5");
+    Label lblPlayer1 = new Label("1. Player1");
+    Label lblPlayer2 = new Label("2. Player2");
+    Label lblPlayer3 = new Label("3. Player3");
+    Label lblPlayer4 = new Label("4. Player4");
+    Label lblPlayer5 = new Label("5. Player5");
 
-    Button play1v1;
-    Button playComputer;
-    Button rules;
-    Button exit;
+    Button btnPlay1v1;
+    Button btnPlayComputer;
+    Button btnRules;
+    Button btnExit;
 
     public StartUpView() {
         initialiseNodes();
@@ -40,57 +45,69 @@ public class StartUpView extends BorderPane {
 
     private void initialiseNodes() {
 
-        scoreboardTitle = new Label("Scoreboard");
-        scoreboardTitle.setFont(Font.font("Verdana", 35));
-        scoreboardTitle.setStyle("-fx-text-fill: #000000;");
+        try {
+            ivLogo = new ImageView(new Image(new FileInputStream("resources/images/logo_tictactoe.png")));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        ivLogo.setFitHeight(200);
+        ivLogo.setFitWidth(500);
 
-        p1.setFont(Font.font("Verdana", 30));
-        p1.setStyle("-fx-text-fill: #68C8FF;");
+        lblScoreboardTitle = new Label("Scoreboard");
+        lblScoreboardTitle.setFont(Font.font("Verdana", 35));
+        lblScoreboardTitle.setStyle("-fx-text-fill: #68C8FF; -fx-font-weight: bold");
 
-        p2.setFont(Font.font("Verdana", 30));
-        p2.setStyle("-fx-text-fill: #68C8FF;");
+        lblPlayer1.setFont(Font.font("Verdana", 30));
+        lblPlayer1.setStyle("-fx-text-fill: #68C8FF;");
 
-        p3.setFont(Font.font("Verdana", 30));
-        p3.setStyle("-fx-text-fill: #68C8FF;");
+        lblPlayer2.setFont(Font.font("Verdana", 30));
+        lblPlayer2.setStyle("-fx-text-fill: #68C8FF;");
 
-        p4.setFont(Font.font("Verdana", 30));
-        p4.setStyle("-fx-text-fill: #68C8FF;");
+        lblPlayer3.setFont(Font.font("Verdana", 30));
+        lblPlayer3.setStyle("-fx-text-fill: #68C8FF;");
 
-        p5.setFont(Font.font("Verdana", 30));
-        p5.setStyle("-fx-text-fill: #68C8FF;");
+        lblPlayer4.setFont(Font.font("Verdana", 30));
+        lblPlayer4.setStyle("-fx-text-fill: #68C8FF;");
+
+        lblPlayer5.setFont(Font.font("Verdana", 30));
+        lblPlayer5.setStyle("-fx-text-fill: #68C8FF;");
 
 
 
-        title = new Label("Boter, kaas & eieren");
+        /*title = new Label("Tic Tac Toe");
         title.setFont(Font.font("Lucida Calligraphy", 55));
-        title.setStyle("-fx-text-fill: #ed0202");
+        title.setStyle("-fx-text-fill: #ed0202");*/
 
-        play1v1 = new Button("Play 1 versus 1");
-        play1v1.setFont(Font.font("Verdana", 30));
-        play1v1.setStyle("-fx-background-color: #032056; -fx-text-fill: #68C8FF; -fx-background-radius: 5px");
-        play1v1.setPrefSize(BUTTONPREFWIDTH,BUTTONPREFHEIGHT);
+        btnPlay1v1 = new Button("Play 1 versus 1");
+        btnPlay1v1.setFont(Font.font("Verdana", 30));
+        btnPlay1v1.setStyle("-fx-background-color: #032056; -fx-text-fill: #68C8FF; -fx-background-radius: 5px");
+        btnPlay1v1.setPrefSize(BUTTON_PREFWIDTH, BUTTON_PREFHEIGHT);
+        btnPlay1v1.setMaxWidth(800);
 
-        playComputer = new Button("Play against the computer");
-        playComputer.setFont(Font.font("Verdana", 30));
-        playComputer.setStyle("-fx-background-color: #032056; -fx-text-fill: #68C8FF; -fx-background-radius: 5px");
-        playComputer.setPrefSize(BUTTONPREFWIDTH,BUTTONPREFHEIGHT);
+        btnPlayComputer = new Button("Play against the computer");
+        btnPlayComputer.setFont(Font.font("Verdana", 30));
+        btnPlayComputer.setStyle("-fx-background-color: #032056; -fx-text-fill: #68C8FF; -fx-background-radius: 5px");
+        btnPlayComputer.setPrefSize(BUTTON_PREFWIDTH, BUTTON_PREFHEIGHT);
+        btnPlayComputer.setMaxWidth(800);
 
-        rules = new Button("Rules");
-        rules.setFont(Font.font("Verdana", 30));
-        rules.setStyle("-fx-background-color: #032056; -fx-text-fill: #68C8FF; -fx-background-radius: 5px");
-        rules.setPrefSize(BUTTONPREFWIDTH,BUTTONPREFHEIGHT);
+        btnRules = new Button("Rules");
+        btnRules.setFont(Font.font("Verdana", 30));
+        btnRules.setStyle("-fx-background-color: #032056; -fx-text-fill: #68C8FF; -fx-background-radius: 5px");
+        btnRules.setPrefSize(BUTTON_PREFWIDTH, BUTTON_PREFHEIGHT);
+        btnRules.setMaxWidth(800);
 
-        exit = new Button("Exit the game");
-        exit.setFont(Font.font("Verdana", 30));
-        exit.setStyle("-fx-background-color: #032056; -fx-text-fill: #68C8FF; -fx-background-radius: 5px");
-        exit.setPrefSize(BUTTONPREFWIDTH,BUTTONPREFHEIGHT);
+        btnExit = new Button("Exit the game");
+        btnExit.setFont(Font.font("Verdana", 30));
+        btnExit.setStyle("-fx-background-color: #032056; -fx-text-fill: #68C8FF; -fx-background-radius: 5px");
+        btnExit.setPrefSize(BUTTON_PREFWIDTH, BUTTON_PREFHEIGHT);
+        btnExit.setMaxWidth(800);
 
     }
 
     private void layoutNodes() {
         VBox buttonbox = new VBox();
         buttonbox.setAlignment(Pos.CENTER);
-        buttonbox.getChildren().addAll(play1v1, playComputer, rules, exit);
+        buttonbox.getChildren().addAll(btnPlay1v1, btnPlayComputer, btnRules, btnExit);
         buttonbox.setSpacing(15);
         this.setCenter(buttonbox);
         VBox.setVgrow(buttonbox, Priority.ALWAYS);
@@ -105,41 +122,41 @@ public class StartUpView extends BorderPane {
         HBox hbox = new HBox();
         hbox.setAlignment(Pos.CENTER);
         this.setTop(hbox);
-        hbox.getChildren().add(title);
+        hbox.getChildren().add(ivLogo);
 
         VBox topPlayers = new VBox();
         topPlayers.setAlignment(Pos.TOP_LEFT);
-        topPlayers.setPrefSize(SCOREBOARDPREFWIDTH,SCOREBOARDPREFHEIGHT - 30);
-        topPlayers.getChildren().addAll(p1, p2, p3, p4, p5);
+        topPlayers.setPrefSize(SCOREBOARD_PREFWIDTH, SCOREBOARD_PREFHEIGHT - 30);
+        topPlayers.getChildren().addAll(lblPlayer1, lblPlayer2, lblPlayer3, lblPlayer4, lblPlayer5);
         topPlayers.setSpacing(20);
-        topPlayers.setStyle("-fx-background-color: #032056; -fx-background-radius: 5px, 50px, 5px, 50px");
+        topPlayers.setStyle("-fx-background-color: #0a3dd7; -fx-background-radius: 5px, 50px, 5px, 50px");
         VBox.setMargin(topPlayers, new Insets(15));
 
 
         VBox scorebox = new VBox();
         scorebox.setAlignment(Pos.CENTER);
-        scorebox.setPrefSize(SCOREBOARDPREFWIDTH, SCOREBOARDPREFHEIGHT);
-        scorebox.setStyle("-fx-background-color: #3902ed; -fx-background-radius: 5px, 50px, 5px, 50px");
-        scorebox.getChildren().addAll(scoreboardTitle, topPlayers);
+        scorebox.setPrefSize(SCOREBOARD_PREFWIDTH, SCOREBOARD_PREFHEIGHT);
+        scorebox.setStyle("-fx-background-color: #032056; -fx-background-radius: 5px, 50px, 5px, 50px");
+        scorebox.getChildren().addAll(lblScoreboardTitle, topPlayers);
         scorebox.setAlignment(Pos.CENTER);
         this.setRight(scorebox);
         BorderPane.setMargin(scorebox, new Insets(20));
     }
 
-    public Button getPlay1v1() {
-        return play1v1;
+    public Button getBtnPlay1v1() {
+        return btnPlay1v1;
     }
 
-    public Button getPlayComputer() {
-        return playComputer;
+    public Button getBtnPlayComputer() {
+        return btnPlayComputer;
     }
 
-    public Button getRules() {
-        return rules;
+    public Button getBtnRules() {
+        return btnRules;
     }
 
-    public Button getExit() {
-        return exit;
+    public Button getBtnExit() {
+        return btnExit;
     }
 }
 

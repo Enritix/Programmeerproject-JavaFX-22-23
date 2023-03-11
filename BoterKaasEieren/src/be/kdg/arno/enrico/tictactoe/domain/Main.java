@@ -22,7 +22,7 @@ public class Main extends Application {
         Scene startupScene = new Scene(startupView);
         stage.getIcons().add(new Image(new FileInputStream("resources/images/bke_logo.png")));
         stage.setScene(startupScene);
-        stage.setTitle("Boter, kaas & eieren");
+        stage.setTitle("Tic Tac Toe");
         stage.setMinHeight(550);
         stage.setMinWidth(850);
         stage.show();
