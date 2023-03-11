@@ -10,7 +10,7 @@ public class RulesView extends BorderPane {
     Label rulesTitle;
     Button homeButton;
 
-    public RulesView(){
+    public RulesView() {
         this.initialiseNodes();
         this.layoutNodes();
 
@@ -19,15 +19,15 @@ public class RulesView extends BorderPane {
 
     private void initialiseNodes(){
 
-            rulesTitle = new Label("Rules");
-            rulesTitle.setFont(Font.font("Lucida Calligraphy", 55));
-            rulesTitle.setStyle("-fx-text-fill: #ed0202");
-
-    }
-    private void layoutNodes(){
+        rulesTitle = new Label("Rules");
+        rulesTitle.setFont(Font.font("Lucida Calligraphy", 55));
+        rulesTitle.setStyle("-fx-text-fill: #ed0202");
 
     }
 
+    private void layoutNodes() {
+
+    }
 
 
 }

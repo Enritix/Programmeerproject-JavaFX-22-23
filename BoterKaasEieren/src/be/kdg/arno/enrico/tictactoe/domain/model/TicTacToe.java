@@ -15,7 +15,6 @@ public class TicTacToe {
     private int size;
 
 
-
     public TicTacToe(int size) {
         this.size = size;
         this.board = new Board(this.size);
@@ -33,16 +32,16 @@ public class TicTacToe {
     }
 
     /*public void playGame() {
-        *//*do {
+     *//*do {
             if (!board.isFull()) {
                 *//**//*players[0].play(board);*//**//*
-                *//**//*System.out.println(board.toString());*//**//*
+     *//**//*System.out.println(board.toString());*//**//*
                 winnaar = board.checkWin();
             }
             if (!winnaar) {
                 if (!board.isFull()) {
                     *//**//*players[1].play(board);*//**//*
-                    *//**//*System.out.println(board.toString());*//**//*
+     *//**//*System.out.println(board.toString());*//**//*
                     winnaar = board.checkWin();
                 }
             }

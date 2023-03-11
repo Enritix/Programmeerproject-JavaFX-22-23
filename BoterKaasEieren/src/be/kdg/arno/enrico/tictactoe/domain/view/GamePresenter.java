@@ -54,7 +54,7 @@ public class GamePresenter {
                 updateView();
                 System.out.println("Board and players cleared...");
                 System.out.println(game.getBoard().toString());
-               /*new GamePresenter(game,view);*/
+                /*new GamePresenter(game,view);*/
             }
 
         });
@@ -64,17 +64,17 @@ public class GamePresenter {
                 final int col = i;
                 final int row = j;
 
-                if (game.getCurrentPlayer() instanceof ComputerPlayer) {
-                    view.getBtnBoardSquares()[col][row].setText("O");
-                    game.addPieceOnBoard(col, row);
-                    view.getBtnBoardSquares()[col][row].setDisable(true);
-                }
+
                 view.getBtnBoardSquares()[i][j].setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent actionEvent) {
                         if (game.getCurrentPlayer() instanceof HumanPlayer) {
                             String playerXorO = game.getCurrentPlayer().getPlayer();
                             view.getBtnBoardSquares()[col][row].setText(playerXorO);
+                            game.addPieceOnBoard(col, row);
+                            view.getBtnBoardSquares()[col][row].setDisable(true);
+                        } else if (game.getCurrentPlayer() instanceof ComputerPlayer) {
+                            view.getBtnBoardSquares()[col][row].setText("O");
                             game.addPieceOnBoard(col, row);
                             view.getBtnBoardSquares()[col][row].setDisable(true);
                         }
@@ -87,12 +87,14 @@ public class GamePresenter {
                             alert.show();*/
                             GameView.showMessage(String.format("%s (%s) has won!",
                                     game.getCurrentPlayer().getName(), game.getCurrentPlayer().getPlayer()));
+                            updateView();
                         } else if (game.isDraw()) {
                             /*Alert alert = new Alert(Alert.AlertType.INFORMATION);
                             alert.setTitle("Tic Tac Toe");
                             alert.setContentText("Draw!");
                             alert.show();*/
                             GameView.showMessage("Draw!");
+                            updateView();
                         }
 
                     }
