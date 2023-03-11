@@ -4,7 +4,7 @@ import be.kdg.arno.enrico.tictactoe.domain.model.Board;
 
 public interface Player {
 
-    void play(Board board , int row, int col);
+    boolean play(Board board , int col, int row);
     String getName();
     void setName(String name);
     public String getPlayer();

@@ -15,7 +15,7 @@ public class HumanPlayer implements Player {
     }
 
     @Override
-    public void play(Board board, int row, int col) {
+    public boolean play(Board board, int row, int col) {
         boolean placed = false;
         do {
             /*System.out.printf("%n%s's turn: ", getName());
@@ -29,7 +29,7 @@ public class HumanPlayer implements Player {
             }
         } while (!placed);
         System.out.println();
-
+        return true;
     }
 
     @Override

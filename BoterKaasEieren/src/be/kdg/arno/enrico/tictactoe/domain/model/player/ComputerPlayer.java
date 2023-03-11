@@ -12,7 +12,7 @@ public class ComputerPlayer implements Player{
     }
 
     @Override
-    public void play(Board board, int row, int col) {
+    public boolean play(Board board, int row, int col) {
         boolean gelukt = false;
         Random r = new Random();
         do{
@@ -21,6 +21,7 @@ public class ComputerPlayer implements Player{
             gelukt = board.addPiece(this.player, row, col);
         } while (gelukt != true);
         System.out.println("\nComputer played: (" + row + "," + col + ")\n");
+        return true;
     }
 
     @Override

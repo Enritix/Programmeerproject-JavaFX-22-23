@@ -113,10 +113,10 @@ public class TicTacToe {
         System.out.println(board.toString());
     }*/
 
-    public void addPieceOnBoard(int rowNumber, int colNumber) {
+    public void addPieceOnBoard(int colNumber, int rowNumber) {
         Player currentPlayer = getCurrentPlayer();
-        moveCounter++;
-        if (board.addPiece(currentPlayer.getPlayer(), rowNumber, colNumber)) {
+        if (currentPlayer.play(board, colNumber, rowNumber)) { //board.addPiece(currentPlayer.getPlayer(), colNumber, rowNumber)
+            moveCounter++;
             System.out.println(board.toString());
             if (board.checkWin()) {
                 if (players[0].getPlayer().equals("X")) {
@@ -132,9 +132,9 @@ public class TicTacToe {
                 board.clearBoard();
                 draw = true;
             }
-        } else {
+        } /*else {
             System.out.println("Tile is already taken. Try again.");
-        }
+        }*/
     }
 
     public boolean hasWon() {

@@ -2,6 +2,9 @@ package be.kdg.arno.enrico.tictactoe.domain.view;
 
 
 import be.kdg.arno.enrico.tictactoe.domain.model.TicTacToe;
+import be.kdg.arno.enrico.tictactoe.domain.model.player.ComputerPlayer;
+import be.kdg.arno.enrico.tictactoe.domain.model.player.HumanPlayer;
+import be.kdg.arno.enrico.tictactoe.domain.model.player.Player;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.layout.Border;
@@ -58,16 +61,23 @@ public class GamePresenter {
 
         for (int i = 0; i < game.getBoardSize(); i++) {
             for (int j = 0; j < game.getBoardSize(); j++) {
-                final int row = i;
-                final int col = j;
+                final int col = i;
+                final int row = j;
 
+                if (game.getCurrentPlayer() instanceof ComputerPlayer) {
+                    view.getBtnBoardSquares()[col][row].setText("O");
+                    game.addPieceOnBoard(col, row);
+                    view.getBtnBoardSquares()[col][row].setDisable(true);
+                }
                 view.getBtnBoardSquares()[i][j].setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent actionEvent) {
-                        String playerXorO = game.getCurrentPlayer().getPlayer();
-                        view.getBtnBoardSquares()[row][col].setText(playerXorO);
-                        game.addPieceOnBoard(row, col);
-                        view.getBtnBoardSquares()[row][col].setDisable(true);
+                        if (game.getCurrentPlayer() instanceof HumanPlayer) {
+                            String playerXorO = game.getCurrentPlayer().getPlayer();
+                            view.getBtnBoardSquares()[col][row].setText(playerXorO);
+                            game.addPieceOnBoard(col, row);
+                            view.getBtnBoardSquares()[col][row].setDisable(true);
+                        }
                         updateView();
                         if (game.hasWon()) {
                             /*Alert alert = new Alert(Alert.AlertType.INFORMATION);
