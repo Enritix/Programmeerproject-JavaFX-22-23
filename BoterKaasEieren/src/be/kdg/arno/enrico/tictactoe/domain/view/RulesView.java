@@ -12,34 +12,42 @@ import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
 import javafx.scene.text.Font;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 public class RulesView extends BorderPane {
 
-    ImageView back;
+    private static final int BUTTON_PREFWIDTH = 200;
+    private static final int BUTTON_PREFHEIGHT = 70;
+
+    ImageView ivBack;
     Label rulesTitle;
-    Button homeButton;
+    Button btnBack;
 
     public RulesView() {
         initialiseNodes();
         layoutNodes();
-
-
     }
 
     private void initialiseNodes() {
 
         try {
-            back = new ImageView(new Image(new FileInputStream("resources/images/back.png")));
+            ivBack = new ImageView(new Image(new FileInputStream("resources/images/back.png")));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
 
+        ivBack.setFitHeight(BUTTON_PREFHEIGHT);
+        ivBack.setFitWidth(BUTTON_PREFWIDTH);
+
         rulesTitle = new Label("Rules");
         rulesTitle.setFont(Font.font("Lucida Calligraphy", 55));
         rulesTitle.setStyle("-fx-text-fill: #ed0202");
+
+        btnBack = new Button();
+        btnBack.setGraphic(ivBack);
+        btnBack.setBackground(null);
+
     }
 
     private void layoutNodes() {
@@ -52,12 +60,15 @@ public class RulesView extends BorderPane {
 
             HBox backbox = new HBox();
             backbox.setAlignment(Pos.BOTTOM_LEFT);
-            backbox.getChildren().addAll(back);
-            backbox.setSpacing(15);
+            backbox.getChildren().addAll(btnBack);
+            backbox.setMaxHeight(40);
             this.setBottom(backbox);
-            VBox.setVgrow(backbox, Priority.ALWAYS);
             BorderPane.setMargin(backbox, new Insets(20));
         }
+
+        public Button getBtnBack() {
+        return btnBack;
+    }
 
     }
 

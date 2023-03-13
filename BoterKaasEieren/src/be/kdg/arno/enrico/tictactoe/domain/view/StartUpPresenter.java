@@ -103,7 +103,7 @@ public class StartUpPresenter {
             @Override
             public void handle(ActionEvent actionEvent) {
                 RulesView rulesView = new RulesView();
-                RulesPresenter rulesPresenter = new RulesPresenter();
+                RulesPresenter rulesPresenter = new RulesPresenter(game, rulesView);
                 Scene scene = view.getScene();
                 scene.setRoot(rulesView);
                 scene.getWindow().setHeight(500);
