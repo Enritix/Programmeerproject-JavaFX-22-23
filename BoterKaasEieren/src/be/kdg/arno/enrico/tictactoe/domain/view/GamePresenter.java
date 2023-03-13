@@ -68,35 +68,69 @@ public class GamePresenter {
                 view.getBtnBoardSquares()[i][j].setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent actionEvent) {
-                        if (game.getCurrentPlayer() instanceof HumanPlayer) {
-                            String playerXorO = game.getCurrentPlayer().getPlayer();
+                        if (!game.getBoard().checkWin() || !game.isDraw()) {
+                            if (game.getCurrentPlayer() instanceof HumanPlayer) {
+                                String playerXorO = game.getCurrentPlayer().getPlayer();
+                                view.getBtnBoardSquares()[col][row].setText(playerXorO);
+                                game.addPieceOnBoard(col, row);
+                                view.getBtnBoardSquares()[col][row].setDisable(true);
+                                updateView();
+                            }
+                            if (game.getCurrentPlayer() instanceof ComputerPlayer) {
+                                int computerX = game.getPlayers()[1].getMove()[0];
+                                int computerY = game.getPlayers()[1].getMove()[1];
+                                view.getBtnBoardSquares()[computerX][computerY].setText("O");
+                                game.addPieceOnBoard(computerX, computerY);
+                                view.getBtnBoardSquares()[computerX][computerY].setDisable(true);
+                                updateView();
+                            }
+                            if (game.hasWon()) {
+                                GameView.showMessage(String.format("%s (%s) has won!",
+                                        game.getCurrentPlayer().getName(), game.getCurrentPlayer().getPlayer()));
+                                updateView();
+                            } else if (game.isDraw()) {
+                                GameView.showMessage("Draw!");
+                                updateView();
+                            }
+                        } else {
+                           view.getBtnBoardSquares()[col][row].setDisable(true);
+                        }
+                        /*if (!game.hasWon() && !game.isDraw()) {
+                            Player currentPlayer = game.getCurrentPlayer();
+                            String playerXorO = currentPlayer.getPlayer();
                             view.getBtnBoardSquares()[col][row].setText(playerXorO);
                             game.addPieceOnBoard(col, row);
                             view.getBtnBoardSquares()[col][row].setDisable(true);
-                        } else if (game.getCurrentPlayer() instanceof ComputerPlayer) {
-                            view.getBtnBoardSquares()[col][row].setText("O");
-                            game.addPieceOnBoard(col, row);
-                            view.getBtnBoardSquares()[col][row].setDisable(true);
-                        }
-                        updateView();
-                        if (game.hasWon()) {
-                            /*Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                            alert.setTitle("Tic Tac Toe");
-                            alert.setContentText(String.format("%s (%s) has won!",
-                                    game.getCurrentPlayer().getName(), game.getCurrentPlayer().getPlayer()));
-                            alert.show();*/
-                            GameView.showMessage(String.format("%s (%s) has won!",
-                                    game.getCurrentPlayer().getName(), game.getCurrentPlayer().getPlayer()));
                             updateView();
-                        } else if (game.isDraw()) {
-                            /*Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                            alert.setTitle("Tic Tac Toe");
-                            alert.setContentText("Draw!");
-                            alert.show();*/
-                            GameView.showMessage("Draw!");
-                            updateView();
-                        }
 
+                            if (game.hasWon()) {
+                                GameView.showMessage(String.format("%s (%s) has won!",
+                                        currentPlayer.getName(), playerXorO));
+                                updateView();
+                            } else if (game.isDraw()) {
+                                GameView.showMessage("Draw!");
+                                updateView();
+                            } else if (currentPlayer instanceof ComputerPlayer) {
+                                int[] computerMove = currentPlayer.getMove();
+                                int computerX = computerMove[0];
+                                int computerY = computerMove[1];
+                                view.getBtnBoardSquares()[computerX][computerY].setText("O");
+                                game.addPieceOnBoard(computerX, computerY);
+                                view.getBtnBoardSquares()[computerX][computerY].setDisable(true);
+                                updateView();
+
+                                if (game.hasWon()) {
+                                    GameView.showMessage(String.format("%s (%s) has won!",
+                                            currentPlayer.getName(), playerXorO));
+                                    updateView();
+                                } else if (game.isDraw()) {
+                                    GameView.showMessage("Draw!");
+                                    updateView();
+                                }
+                            }
+                        } else {
+                            view.getBtnBoardSquares()[col][row].setDisable(true);
+                        }*/
                     }
                 });
             }
@@ -118,14 +152,6 @@ public class GamePresenter {
             //border rond lblPlayer2
             view.getLblPlayer2().setBorder(Border.stroke(Color.RED));
             view.getLblPlayer1().setBorder(null);
-        }
-
-        if (game.getBoard().checkWin()) {
-            for (int i = 0; i < game.getBoardSize(); i++) {
-                for (int j = 0; j < game.getBoardSize(); j++) {
-                    view.getBtnBoardSquares()[i][j].setDisable(true);
-                }
-            }
         }
     }
 }

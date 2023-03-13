@@ -48,6 +48,16 @@ public class HumanPlayer implements Player {
         return this.player;
     }
 
+    @Override
+    public void setMove(int x, int y) {
+
+    }
+
+    @Override
+    public int[] getMove() {
+        return new int[0];
+    }
+
 
     @Override
     public String toString() {

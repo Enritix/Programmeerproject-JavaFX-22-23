@@ -118,7 +118,7 @@ public class TicTacToe {
             moveCounter++;
             System.out.println(board.toString());
             if (board.checkWin()) {
-                if (players[0].getPlayer().equals("X")) {
+                if (currentPlayer.getPlayer().equals("X")) {
                     System.out.println("\n" + players[0].getName() + " (X) wins!\n");
                     won = true;
                 } else {
@@ -131,9 +131,9 @@ public class TicTacToe {
                 board.clearBoard();
                 draw = true;
             }
-        } /*else {
+        } else {
             System.out.println("Tile is already taken. Try again.");
-        }*/
+        }
     }
 
     public boolean hasWon() {

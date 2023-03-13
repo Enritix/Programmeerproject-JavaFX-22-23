@@ -50,7 +50,7 @@ public class StartUpView extends BorderPane {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-        ivLogo.setFitHeight(200);
+        ivLogo.setFitHeight(160);
         ivLogo.setFitWidth(500);
 
         lblScoreboardTitle = new Label("Scoreboard");
@@ -143,19 +143,19 @@ public class StartUpView extends BorderPane {
         BorderPane.setMargin(scorebox, new Insets(20));
     }
 
-    public Button getBtnPlay1v1() {
+    Button getBtnPlay1v1() {
         return btnPlay1v1;
     }
 
-    public Button getBtnPlayComputer() {
+    Button getBtnPlayComputer() {
         return btnPlayComputer;
     }
 
-    public Button getBtnRules() {
+    Button getBtnRules() {
         return btnRules;
     }
 
-    public Button getBtnExit() {
+    Button getBtnExit() {
         return btnExit;
     }
 }

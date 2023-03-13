@@ -21,8 +21,8 @@ import java.io.FileNotFoundException;
 
 public class RulesView extends BorderPane {
 
-    private static final int BUTTON_PREFWIDTH = 200;
-    private static final int BUTTON_PREFHEIGHT = 70;
+    private static final int BUTTON_PREFWIDTH = 90;
+    private static final int BUTTON_PREFHEIGHT = 90;
 
     ImageView ivBack;
     Label rulesTitle;
@@ -38,7 +38,7 @@ public class RulesView extends BorderPane {
     private void initialiseNodes() {
 
         try {
-            ivBack = new ImageView(new Image(new FileInputStream("resources/images/back.png")));
+            ivBack = new ImageView(new Image(new FileInputStream("resources/images/arrow_back.png")));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -69,31 +69,30 @@ public class RulesView extends BorderPane {
                 new Stop(0, Color.web("#fdea16")),     //colors
                 new Stop(1, Color.web("#fd60e9")))));
 
-            HBox titlebox = new HBox();
-            titlebox.setAlignment(Pos.TOP_CENTER);
-            titlebox.getChildren().addAll(rulesTitle);
-            this.setTop(titlebox);
+        HBox titlebox = new HBox();
+        titlebox.setAlignment(Pos.TOP_CENTER);
+        titlebox.getChildren().addAll(rulesTitle);
+        this.setTop(titlebox);
 
-            HBox rulesbox = new HBox();
-            rulesbox.setAlignment(Pos.CENTER);
-            rulesbox.getChildren().addAll(rules);
-            this.setCenter(rulesbox);
+        HBox rulesbox = new HBox();
+        rulesbox.setAlignment(Pos.CENTER);
+        rulesbox.getChildren().addAll(rules);
+        this.setCenter(rulesbox);
 
-            HBox backbox = new HBox();
-            backbox.setAlignment(Pos.BOTTOM_LEFT);
-            backbox.getChildren().addAll(btnBack);
-            backbox.setMaxHeight(40);
-            this.setBottom(backbox);
-            BorderPane.setMargin(backbox, new Insets(20));
-
-
+        HBox backbox = new HBox();
+        backbox.setAlignment(Pos.BOTTOM_LEFT);
+        backbox.getChildren().addAll(btnBack);
+        backbox.setMaxHeight(40);
+        this.setBottom(backbox);
+        BorderPane.setMargin(backbox, new Insets(20));
 
 
-        }
 
-        public Button getBtnBack() {
+
+    }
+
+    public Button getBtnBack() {
         return btnBack;
     }
 
-    }
-
+}
