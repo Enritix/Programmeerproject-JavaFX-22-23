@@ -12,6 +12,8 @@ import javafx.scene.paint.Color;
 
 import java.util.Scanner;
 
+import static javafx.application.Platform.exit;
+
 public class StartUpPresenter {
     private TicTacToe game;
     private StartUpView view;
@@ -94,6 +96,63 @@ public class StartUpPresenter {
                 dropShadow = new DropShadow();
                 dropShadow.setColor(Color.TRANSPARENT);
                 view.getBtnPlayComputer().setEffect(dropShadow);
+            }
+        });
+
+        view.getBtnRules().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                RulesView rulesView = new RulesView();
+                RulesPresenter rulesPresenter = new RulesPresenter();
+                Scene scene = view.getScene();
+                scene.setRoot(rulesView);
+                scene.getWindow().setHeight(500);
+                scene.getWindow().setHeight(500);
+            }
+        });
+        view.getBtnRules().setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                dropShadow = new DropShadow();
+                dropShadow.setColor(Color.BLACK);
+                dropShadow.setBlurType(BlurType.GAUSSIAN);
+                dropShadow.setOffsetX(3);
+                dropShadow.setOffsetY(2);
+                view.getBtnRules().setEffect(dropShadow);
+            }
+        });
+        view.getBtnRules().setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                dropShadow = new DropShadow();
+                dropShadow.setColor(Color.TRANSPARENT);
+                view.getBtnRules().setEffect(dropShadow);
+            }
+        });
+
+        view.getBtnExit().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                exit();
+            }
+        });
+        view.getBtnExit().setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                dropShadow = new DropShadow();
+                dropShadow.setColor(Color.BLACK);
+                dropShadow.setBlurType(BlurType.GAUSSIAN);
+                dropShadow.setOffsetX(3);
+                dropShadow.setOffsetY(2);
+                view.getBtnExit().setEffect(dropShadow);
+            }
+        });
+        view.getBtnExit().setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                dropShadow = new DropShadow();
+                dropShadow.setColor(Color.TRANSPARENT);
+                view.getBtnExit().setEffect(dropShadow);
             }
         });
     }
