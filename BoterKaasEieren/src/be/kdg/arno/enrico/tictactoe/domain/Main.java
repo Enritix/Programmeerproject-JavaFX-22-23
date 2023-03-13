@@ -23,8 +23,10 @@ public class Main extends Application {
         stage.getIcons().add(new Image(new FileInputStream("resources/images/bke_logo.png")));
         stage.setScene(startupScene);
         stage.setTitle("Tic Tac Toe");
-        stage.setMinHeight(550);
+        stage.setMinHeight(620);
         stage.setMinWidth(850);
+        stage.setHeight(620);
+        stage.setWidth(850);
         stage.show();
 
 

@@ -6,12 +6,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
@@ -22,6 +26,8 @@ public class RulesView extends BorderPane {
 
     ImageView ivBack;
     Label rulesTitle;
+
+    Text rules;
     Button btnBack;
 
     public RulesView() {
@@ -44,6 +50,11 @@ public class RulesView extends BorderPane {
         rulesTitle.setFont(Font.font("Lucida Calligraphy", 55));
         rulesTitle.setStyle("-fx-text-fill: #ed0202");
 
+        rules = new Text("The game is played on a 3 by 3 grid of 9 empty squares.\n The two players alternate marking the empty squares, the first players marks Xs and the second player marks Os. \n If one player places three of the same marks in a straight line, that player wins. \n If all the squares are filled and there is no winner, the game ends in a draw.");
+        rules.setFont(Font.font("Lucida Calligraphy", 25));
+        rules.setStyle("-fx-text-fill: #ed0202");
+        rules.setWrappingWidth(700);
+
         btnBack = new Button();
         btnBack.setGraphic(ivBack);
         btnBack.setBackground(null);
@@ -58,12 +69,26 @@ public class RulesView extends BorderPane {
                 new Stop(0, Color.web("#fdea16")),     //colors
                 new Stop(1, Color.web("#fd60e9")))));
 
+            HBox titlebox = new HBox();
+            titlebox.setAlignment(Pos.TOP_CENTER);
+            titlebox.getChildren().addAll(rulesTitle);
+            this.setTop(titlebox);
+
+            HBox rulesbox = new HBox();
+            rulesbox.setAlignment(Pos.CENTER);
+            rulesbox.getChildren().addAll(rules);
+            this.setCenter(rulesbox);
+
             HBox backbox = new HBox();
             backbox.setAlignment(Pos.BOTTOM_LEFT);
             backbox.getChildren().addAll(btnBack);
             backbox.setMaxHeight(40);
             this.setBottom(backbox);
             BorderPane.setMargin(backbox, new Insets(20));
+
+
+
+
         }
 
         public Button getBtnBack() {
