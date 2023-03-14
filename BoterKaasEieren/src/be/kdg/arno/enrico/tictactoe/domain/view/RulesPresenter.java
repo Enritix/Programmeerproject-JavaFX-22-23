@@ -29,8 +29,8 @@ public class RulesPresenter {
                 StartUpPresenter startUpPresenter = new StartUpPresenter(game, startUpView);
                 Scene scene = view.getScene();
                 scene.setRoot(startUpView);
-                scene.getWindow().setHeight((view.getHeight()+37)); //grootte van het venster blijft hetzelfde
-                scene.getWindow().setWidth((view.getWidth()+14));
+                scene.getWindow().setHeight(view.getHeight()/*+37*/); //grootte van het venster blijft hetzelfde
+                scene.getWindow().setWidth(view.getWidth()/*+14*/);
             }
         });
         view.getBtnBack().setOnMouseEntered(new EventHandler<MouseEvent>() {

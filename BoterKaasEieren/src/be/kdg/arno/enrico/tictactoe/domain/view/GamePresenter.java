@@ -7,6 +7,7 @@ import be.kdg.arno.enrico.tictactoe.domain.model.player.HumanPlayer;
 import be.kdg.arno.enrico.tictactoe.domain.model.player.Player;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.layout.Border;
 import javafx.scene.paint.Color;
 
@@ -37,15 +38,14 @@ public class GamePresenter {
         view.getLblPlayer2().setText(game.getPlayers()[1].getName());
 
 
-        view.getBtnNewGame().setOnAction(new EventHandler<ActionEvent>() {
+        view.getBtnHome().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-
-                for (int i = 0; i < game.getBoardSize(); i++) {
+                /*for (int i = 0; i < game.getBoardSize(); i++) {
                     for (int j = 0; j < game.getBoardSize(); j++) {
 
                         view.getBtnBoardSquares()[i][j].setText("");
-                        /*game.clearBoard();*/
+                        game.clearBoard();
                         view.getBtnBoardSquares()[i][j].setDisable(false);
                     }
                 }
@@ -54,9 +54,14 @@ public class GamePresenter {
                 updateView();
                 System.out.println("Board and players cleared...");
                 System.out.println(game.getBoard().toString());
-                /*new GamePresenter(game,view);*/
+                new GamePresenter(game,view);*/
+                StartUpView startUpView = new StartUpView();
+                StartUpPresenter startUpPresenter = new StartUpPresenter(game, startUpView);
+                Scene scene = view.getScene();
+                scene.setRoot(startUpView);
+                scene.getWindow().setHeight(view.getHeight()/*+155*/); //grootte van het venster blijft hetzelfde
+                scene.getWindow().setWidth(view.getWidth()/*+14*/);
             }
-
         });
 
         for (int i = 0; i < game.getBoardSize(); i++) {
@@ -93,7 +98,7 @@ public class GamePresenter {
                                 updateView();
                             }
                         } else {
-                           view.getBtnBoardSquares()[col][row].setDisable(true);
+                            view.getBtnBoardSquares()[col][row].setDisable(true);
                         }
                         /*if (!game.hasWon() && !game.isDraw()) {
                             Player currentPlayer = game.getCurrentPlayer();

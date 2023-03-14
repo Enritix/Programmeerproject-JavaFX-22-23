@@ -47,8 +47,8 @@ public class StartUpPresenter {
                     GamePresenter gamePresenter = new GamePresenter(game, gameView);
                     Scene scene = view.getScene();
                     scene.setRoot(gameView);
-                    scene.getWindow().setHeight(500);
-                    scene.getWindow().setHeight(500);
+                    scene.getWindow().setHeight(view.getHeight());
+                    scene.getWindow().setWidth(view.getWidth());
                 }
             }
         });
@@ -73,8 +73,8 @@ public class StartUpPresenter {
                 GamePresenter gamePresenter = new GamePresenter(game, gameView);
                 Scene scene = view.getScene();
                 scene.setRoot(gameView);
-                scene.getWindow().setHeight(500);
-                scene.getWindow().setHeight(500);
+                scene.getWindow().setHeight(view.getHeight());
+                scene.getWindow().setWidth(view.getWidth());
             }
         });
         view.getBtnPlayComputer().setOnMouseEntered(new EventHandler<MouseEvent>() {
@@ -97,8 +97,8 @@ public class StartUpPresenter {
                 RulesPresenter rulesPresenter = new RulesPresenter(game, rulesView);
                 Scene scene = view.getScene();
                 scene.setRoot(rulesView);
-                scene.getWindow().setHeight(550);
-                scene.getWindow().setHeight(850);
+                scene.getWindow().setHeight(view.getHeight());
+                scene.getWindow().setWidth(view.getWidth());
             }
         });
         view.getBtnRules().setOnMouseEntered(new EventHandler<MouseEvent>() {
