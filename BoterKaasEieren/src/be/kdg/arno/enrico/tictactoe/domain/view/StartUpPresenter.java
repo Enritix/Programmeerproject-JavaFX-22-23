@@ -12,10 +12,8 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 
 import java.util.Optional;
-import java.util.Scanner;
 
 import static javafx.application.Platform.exit;
 
