@@ -11,7 +11,6 @@ import javafx.scene.paint.Color;
 
 public class RulesPresenter {
     private RulesView view;
-    private DropShadow dropShadow;
     private TicTacToe game;
 
 
@@ -33,25 +32,15 @@ public class RulesPresenter {
                 scene.getWindow().setWidth(view.getWidth()+14);
             }
         });
-        view.getBtnBack().setOnMouseEntered(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                dropShadow = new DropShadow();
-                dropShadow.setColor(Color.BLACK);
-                dropShadow.setBlurType(BlurType.GAUSSIAN);
-                dropShadow.setOffsetX(3);
-                dropShadow.setOffsetY(2);
-                view.getBtnBack().setEffect(dropShadow);
-            }
-        });
+        view.getBtnBack().setEffect(new DropShadow(UIConstants.DEFAULT_SHADOW, Color.BLACK));
+
         view.getBtnBack().setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                dropShadow = new DropShadow();
-                dropShadow.setColor(Color.TRANSPARENT);
-                view.getBtnBack().setEffect(dropShadow);
+                view.getBtnBack().setEffect(null);
             }
         });
+
     }
 
 

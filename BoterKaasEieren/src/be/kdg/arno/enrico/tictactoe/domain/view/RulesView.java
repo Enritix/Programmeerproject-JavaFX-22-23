@@ -24,11 +24,11 @@ public class RulesView extends BorderPane {
     private static final int BUTTON_PREFWIDTH = 90;
     private static final int BUTTON_PREFHEIGHT = 90;
 
-    ImageView ivBack;
-    Label rulesTitle;
+    private ImageView ivBack;
+    private Label rulesTitle;
 
-    Text rules;
-    Button btnBack;
+    private Text rules;
+    private Button btnBack;
 
     public RulesView() {
         initialiseNodes();

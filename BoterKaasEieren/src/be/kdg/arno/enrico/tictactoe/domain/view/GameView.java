@@ -6,12 +6,17 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
 import javafx.scene.text.Font;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 public class GameView extends BorderPane {
     public static final int FONT_SIZE = 30;
@@ -21,6 +26,8 @@ public class GameView extends BorderPane {
     private Button[][] btnBoardSquares = new Button[SIZE][SIZE]; //new Button[Board.SIZE][Board.SIZE];
     private Button btnNewGame;
     private Button btnQuit;
+    private Button btnBack;
+    private ImageView ivBack;
 
     public GameView() {
         initialiseNodes();
@@ -28,6 +35,20 @@ public class GameView extends BorderPane {
     }
 
     private void initialiseNodes() {
+
+        try {
+            ivBack = new ImageView(new Image(new FileInputStream("resources/images/arrow_back.png")));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        ivBack.setFitHeight(UIConstants.BUTTON_PREFHEIGHT);
+        ivBack.setFitWidth(UIConstants.BUTTON_PREFWIDTH);
+
+        btnBack = new Button();
+        btnBack.setGraphic(ivBack);
+        btnBack.setBackground(null);
+
         lblPlayer1 = new Label();
         lblPlayer1.setFont(Font.font("Verdana", FONT_SIZE));
         lblPlayer1.setStyle("-fx-background-color: #032056; -fx-text-fill: #68C8FF; -fx-background-radius: 15px"); //player 2 text colour
@@ -134,7 +155,8 @@ public class GameView extends BorderPane {
 
             // add HBox to bottom of BorderPane
             this.setBottom(hbBottom);
-            BorderPane.setMargin(hbBottom, new Insets(10));
+
+
         }
 
     public Button[][] getBtnBoardSquares() {
@@ -160,6 +182,7 @@ public class GameView extends BorderPane {
     public Label getLblPlayer2() {
         return lblPlayer2;
     }
+
     
     public static void showMessage(String text) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

@@ -6,6 +6,10 @@ import be.kdg.arno.enrico.tictactoe.domain.model.player.ComputerPlayer;
 import be.kdg.arno.enrico.tictactoe.domain.model.player.HumanPlayer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.effect.BlurType;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Border;
 import javafx.scene.paint.Color;
 
@@ -145,14 +149,57 @@ public class GamePresenter {
                         }*/
                     }
                 });
+
+                view.getBtnBoardSquares()[i][j].setOnMouseEntered(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        view.getBtnBoardSquares()[col][row].setEffect(new DropShadow(UIConstants.DEFAULT_SHADOW, Color.BLACK));
+                    }
+                });
+
+                view.getBtnBoardSquares()[i][j].setOnMouseExited(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        view.getBtnBoardSquares()[col][row].setEffect(null);
+                    }
+                });
+
             }
         }
+
         view.getBtnQuit().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 exit();
             }
         });
+
+        view.getBtnBack().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                StartUpView startUpView = new StartUpView();
+                StartUpPresenter startUpPresenter = new StartUpPresenter(game, startUpView);
+                Scene scene = view.getScene();
+                scene.setRoot(startUpView);
+                scene.getWindow().setHeight(view.getHeight()+37); //grootte van het venster blijft hetzelfde
+                scene.getWindow().setWidth(view.getWidth()+14);
+            }
+        });
+
+        view.getBtnBack().setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                view.getBtnBack().setEffect(new DropShadow(UIConstants.DEFAULT_SHADOW, Color.BLACK));
+            }
+        });
+
+        view.getBtnBack().setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                view.getBtnBack().setEffect(null);
+            }
+        });
+
     }
 
     private void updateView() {
