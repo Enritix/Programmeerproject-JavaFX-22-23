@@ -7,7 +7,6 @@ import be.kdg.arno.enrico.tictactoe.domain.model.player.HumanPlayer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.effect.BlurType;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Border;
@@ -70,6 +69,20 @@ public class GamePresenter {
                 scene.setRoot(startUpView);
                 scene.getWindow().setHeight(view.getHeight()*//*+155*//*); //grootte van het venster blijft hetzelfde
                 scene.getWindow().setWidth(view.getWidth()*//*+14*//*);*/
+            }
+        });
+
+        view.getBtnNewGame().setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                view.getBtnNewGame().setEffect(new DropShadow(UIConstants.DEFAULT_SHADOW, Color.BLACK));
+            }
+        });
+
+        view.getBtnNewGame().setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                view.getBtnNewGame().setEffect(null);
             }
         });
 
@@ -171,6 +184,20 @@ public class GamePresenter {
             @Override
             public void handle(ActionEvent actionEvent) {
                 exit();
+            }
+        });
+
+        view.getBtnQuit().setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                view.getBtnQuit().setEffect(new DropShadow(UIConstants.DEFAULT_SHADOW, Color.BLACK));
+            }
+        });
+
+        view.getBtnQuit().setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                view.getBtnQuit().setEffect(null);
             }
         });
 
