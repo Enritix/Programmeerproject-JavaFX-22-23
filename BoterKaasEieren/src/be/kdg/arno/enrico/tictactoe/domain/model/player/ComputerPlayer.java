@@ -33,7 +33,9 @@ public class ComputerPlayer implements Player{
 
 
     public void setMove(int x, int y) {
-        this.move = new int[]{x, y};
+        /*this.move = new int[]{x, y};*/
+        this.move[0] = x;
+        this.move[1] = y;
     }
 
     public int[] getMove() {

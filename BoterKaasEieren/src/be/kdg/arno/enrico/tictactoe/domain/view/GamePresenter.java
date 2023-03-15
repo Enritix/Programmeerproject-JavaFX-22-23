@@ -88,7 +88,8 @@ public class GamePresenter {
                                 game.addPieceOnBoard(col, row);
                                 view.getBtnBoardSquares()[col][row].setDisable(true);
                                 updateView();
-                            } else if (game.getCurrentPlayer() instanceof ComputerPlayer) {
+                            }
+                            if (game.getCurrentPlayer() instanceof ComputerPlayer) {
                                 int computerX = game.getPlayers()[1].getMove()[0];
                                 int computerY = game.getPlayers()[1].getMove()[1];
                                 view.getBtnBoardSquares()[computerX][computerY].setText("O");
