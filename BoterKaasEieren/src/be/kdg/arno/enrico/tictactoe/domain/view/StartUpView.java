@@ -50,7 +50,7 @@ public class StartUpView extends BorderPane {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-        ivLogo.setFitHeight(160);
+        ivLogo.setFitHeight(180);
         ivLogo.setFitWidth(500);
 
         lblScoreboardTitle = new Label("Scoreboard");

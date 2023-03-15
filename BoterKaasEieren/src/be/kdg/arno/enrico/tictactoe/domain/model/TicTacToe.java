@@ -25,7 +25,6 @@ public class TicTacToe {
 
     public void reset() {
         this.board = new Board(this.size);
-        clearBoard();
         this.moveCounter = 0;
         this.won = false;
         this.draw = false;

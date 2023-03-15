@@ -41,6 +41,14 @@ public class GamePresenter {
         view.getBtnHome().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                game.reset();
+                for (int i = 0; i < game.getBoardSize(); i++) {
+                    for (int j = 0; j < game.getBoardSize(); j++) {
+
+                        view.getBtnBoardSquares()[i][j].setText("");
+                        view.getBtnBoardSquares()[i][j].setDisable(false);
+                    }
+                }
                 /*for (int i = 0; i < game.getBoardSize(); i++) {
                     for (int j = 0; j < game.getBoardSize(); j++) {
 
@@ -55,12 +63,12 @@ public class GamePresenter {
                 System.out.println("Board and players cleared...");
                 System.out.println(game.getBoard().toString());
                 new GamePresenter(game,view);*/
-                StartUpView startUpView = new StartUpView();
+                /*StartUpView startUpView = new StartUpView();
                 StartUpPresenter startUpPresenter = new StartUpPresenter(game, startUpView);
                 Scene scene = view.getScene();
                 scene.setRoot(startUpView);
-                scene.getWindow().setHeight(view.getHeight()/*+155*/); //grootte van het venster blijft hetzelfde
-                scene.getWindow().setWidth(view.getWidth()/*+14*/);
+                scene.getWindow().setHeight(view.getHeight()*//*+155*//*); //grootte van het venster blijft hetzelfde
+                scene.getWindow().setWidth(view.getWidth()*//*+14*//*);*/
             }
         });
 
@@ -80,8 +88,7 @@ public class GamePresenter {
                                 game.addPieceOnBoard(col, row);
                                 view.getBtnBoardSquares()[col][row].setDisable(true);
                                 updateView();
-                            }
-                            if (game.getCurrentPlayer() instanceof ComputerPlayer) {
+                            } else if (game.getCurrentPlayer() instanceof ComputerPlayer) {
                                 int computerX = game.getPlayers()[1].getMove()[0];
                                 int computerY = game.getPlayers()[1].getMove()[1];
                                 view.getBtnBoardSquares()[computerX][computerY].setText("O");

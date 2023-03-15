@@ -1,5 +1,6 @@
 package be.kdg.arno.enrico.tictactoe.domain.model;
 
+
 public class Board {
     private int size;
     private String[][] tiles;

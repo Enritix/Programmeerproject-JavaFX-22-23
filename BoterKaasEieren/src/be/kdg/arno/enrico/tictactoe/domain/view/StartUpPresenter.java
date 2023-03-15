@@ -47,8 +47,8 @@ public class StartUpPresenter {
                     GamePresenter gamePresenter = new GamePresenter(game, gameView);
                     Scene scene = view.getScene();
                     scene.setRoot(gameView);
-                    scene.getWindow().setHeight(view.getHeight());
-                    scene.getWindow().setWidth(view.getWidth());
+                    scene.getWindow().setHeight(view.getHeight()+37);
+                    scene.getWindow().setWidth(view.getWidth()+14);
                 }
             }
         });
@@ -67,14 +67,17 @@ public class StartUpPresenter {
         view.getBtnPlayComputer().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                game.reset();
                 String player1 = showMessage(0);
-                game.initialisePlayers("1p", player1, "Computer");
-                GameView gameView = new GameView();
-                GamePresenter gamePresenter = new GamePresenter(game, gameView);
-                Scene scene = view.getScene();
-                scene.setRoot(gameView);
-                scene.getWindow().setHeight(view.getHeight());
-                scene.getWindow().setWidth(view.getWidth());
+                if (player1 != null) {
+                    game.initialisePlayers("1p", player1, "Computer");
+                    GameView gameView = new GameView();
+                    GamePresenter gamePresenter = new GamePresenter(game, gameView);
+                    Scene scene = view.getScene();
+                    scene.setRoot(gameView);
+                    scene.getWindow().setHeight(view.getHeight());
+                    scene.getWindow().setWidth(view.getWidth());
+                }
             }
         });
         view.getBtnPlayComputer().setOnMouseEntered(new EventHandler<MouseEvent>() {
@@ -97,8 +100,8 @@ public class StartUpPresenter {
                 RulesPresenter rulesPresenter = new RulesPresenter(game, rulesView);
                 Scene scene = view.getScene();
                 scene.setRoot(rulesView);
-                scene.getWindow().setHeight(view.getHeight());
-                scene.getWindow().setWidth(view.getWidth());
+                scene.getWindow().setHeight(view.getHeight()+37);
+                scene.getWindow().setWidth(view.getWidth()+14);
             }
         });
         view.getBtnRules().setOnMouseEntered(new EventHandler<MouseEvent>() {
