@@ -20,6 +20,7 @@ public class GamePresenter {
         this.view = view;
         this.game = game;
         addEventHandlers();
+        updateView();
     }
 
     private void addEventHandlers() {
@@ -34,7 +35,7 @@ public class GamePresenter {
         view.getLblPlayer2().setText(game.getPlayers()[1].getName());
 
 
-        view.getBtnHome().setOnAction(new EventHandler<ActionEvent>() {
+        view.getBtnNewGame().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 game.reset();
@@ -86,19 +87,21 @@ public class GamePresenter {
                                 updateView();
                             }
                             if (game.getCurrentPlayer() instanceof ComputerPlayer) {
-                                int computerX = game.getPlayers()[1].getMove()[0];
-                                int computerY = game.getPlayers()[1].getMove()[1];
-                                view.getBtnBoardSquares()[computerX][computerY].setText("O");
-                                game.addPieceOnBoard(computerX, computerY);
-                                view.getBtnBoardSquares()[computerX][computerY].setDisable(true);
+                                game.getPlayers()[1].setX();
+                                game.getPlayers()[1].setY();
+                                game.addPieceOnBoard(game.getPlayers()[1].getX(), game.getPlayers()[1].getY());
+                                view.getBtnBoardSquares()[game.getPlayers()[1].getY()][game.getPlayers()[1].getX()].setText("O");
+                                view.getBtnBoardSquares()[game.getPlayers()[1].getY()][game.getPlayers()[1].getX()].setDisable(true);
                                 updateView();
                             }
                             if (game.hasWon()) {
                                 GameView.showMessage(String.format("%s (%s) has won!",
                                         game.getCurrentPlayer().getName(), game.getCurrentPlayer().getPlayer()));
+                                disableBoard();
                                 updateView();
                             } else if (game.isDraw()) {
                                 GameView.showMessage("Draw!");
+                                disableBoard();
                                 updateView();
                             }
                         } else {
@@ -161,6 +164,14 @@ public class GamePresenter {
             //border rond lblPlayer2
             view.getLblPlayer2().setBorder(Border.stroke(Color.RED));
             view.getLblPlayer1().setBorder(null);
+        }
+    }
+
+    public void disableBoard() {
+        for (int i = 0; i < game.getBoardSize(); i++) {
+            for (int j = 0; j < game.getBoardSize(); j++) {
+                view.getBtnBoardSquares()[i][j].setDisable(true);
+            }
         }
     }
 }

@@ -58,6 +58,26 @@ public class HumanPlayer implements Player {
         return new int[0];
     }
 
+    @Override
+    public void setX() {
+
+    }
+
+    @Override
+    public void setY() {
+
+    }
+
+    @Override
+    public int getX() {
+        return 0;
+    }
+
+    @Override
+    public int getY() {
+        return 0;
+    }
+
 
     @Override
     public String toString() {

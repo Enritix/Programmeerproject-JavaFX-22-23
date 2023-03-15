@@ -31,6 +31,7 @@ public class StartUpPresenter {
         view.getBtnPlay1v1().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                game.reset();
                 /*sc = new Scanner(System.in);
                 System.out.print("Player one (X), give your name: ");
                 String player1 = sc.next();

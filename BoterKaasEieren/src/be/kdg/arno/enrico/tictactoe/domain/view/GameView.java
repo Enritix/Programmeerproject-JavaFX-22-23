@@ -19,7 +19,7 @@ public class GameView extends BorderPane {
     private Label lblPlayer1;
     private Label lblPlayer2;
     private Button[][] btnBoardSquares = new Button[SIZE][SIZE]; //new Button[Board.SIZE][Board.SIZE];
-    private Button btnHome;
+    private Button btnNewGame;
     private Button btnQuit;
 
     public GameView() {
@@ -40,12 +40,12 @@ public class GameView extends BorderPane {
         /*lblPlayer2.setBackground(new Background(
                 new BackgroundFill(
                         Color.rgb(3,32,86), null, null)));*/
-        btnHome = new Button("Home");
-        btnHome.setFont(Font.font("Verdana", FONT_SIZE));
+        btnNewGame = new Button("New Game");
+        btnNewGame.setFont(Font.font("Verdana", FONT_SIZE));
         /*btnNewGame.setBackground(new Background(
                 new BackgroundFill(
                         Color.rgb(3,32,86), null, null))); //new game button bg*/
-        btnHome.setStyle("-fx-background-color: #032056; -fx-text-fill: #68C8FF; -fx-background-radius: 15px"); //new game button text colour --> bold: -fx-font-weight: bold;
+        btnNewGame.setStyle("-fx-background-color: #032056; -fx-text-fill: #68C8FF; -fx-background-radius: 15px"); //new game button text colour --> bold: -fx-font-weight: bold;
         btnQuit = new Button("Quit");
         btnQuit.setFont(Font.font("Verdana", FONT_SIZE));
         btnQuit.setStyle("-fx-background-color: #032056; -fx-text-fill: #68C8FF; -fx-background-radius: 15px"); //quit button text colour --> bold: -fx-font-weight: bold;
@@ -98,14 +98,39 @@ public class GameView extends BorderPane {
             this.setTop(hbTop);
             BorderPane.setMargin(gpBoard, new Insets(10));
             BorderPane.setMargin(hbTop, new Insets(10));
-            this.setBottom(btnHome);
-            BorderPane.setAlignment(btnHome, Pos.BOTTOM_LEFT);
-            BorderPane.setMargin(btnHome, new Insets(10));
+            this.setBottom(btnNewGame);
+            BorderPane.setAlignment(btnNewGame, Pos.BOTTOM_LEFT);
+            BorderPane.setMargin(btnNewGame, new Insets(10));
 
-            HBox hbBottom = new HBox(btnHome, btnQuit);
-            hbBottom.setSpacing(20);
-            hbBottom.setAlignment(Pos.CENTER);
-            hbBottom.setPadding(new Insets(10));
+
+            HBox hbBottomLeft = new HBox(btnBack);
+            hbBottomLeft.setSpacing(20);
+            hbBottomLeft.setAlignment(Pos.CENTER);
+            hbBottomLeft.setPadding(new Insets(10));
+            HBox.setHgrow(hbBottomLeft,Priority.ALWAYS);
+            BorderPane.setMargin(hbBottomLeft, new Insets(10));
+
+            HBox hbBottomCenter = new HBox(btnNewGame, btnQuit);
+            hbBottomCenter.setSpacing(20);
+            hbBottomCenter.setAlignment(Pos.CENTER);
+            hbBottomCenter.setPadding(new Insets(10));
+            HBox.setHgrow(hbBottomCenter,Priority.ALWAYS);
+            BorderPane.setMargin(hbBottomCenter, new Insets(10));
+
+            HBox hbBottomRight = new HBox();
+            hbBottomRight.setSpacing(20);
+            hbBottomRight.setAlignment(Pos.CENTER);
+            hbBottomRight.setPadding(new Insets(10));
+            HBox.setHgrow(hbBottomRight,Priority.ALWAYS);
+            BorderPane.setMargin(hbBottomRight, new Insets(10));
+
+
+            HBox hbBottom = new HBox();
+            hbBottom.getChildren().addAll(hbBottomLeft,hbBottomCenter,hbBottomRight);
+
+
+
+
 
             // add HBox to bottom of BorderPane
             this.setBottom(hbBottom);
@@ -116,8 +141,12 @@ public class GameView extends BorderPane {
         return btnBoardSquares;
     }
 
-    public Button getBtnHome() {
-        return btnHome;
+    public Button getBtnBack(){
+        return btnBack;
+    }
+
+    public Button getBtnNewGame() {
+        return btnNewGame;
     }
 
     public Button getBtnQuit() {

@@ -8,7 +8,10 @@ public class ComputerPlayer implements Player{
     private String player;
     private int x;
     private int y;
+    int newRow;
+    int newCol;
     private int[] move;
+    Random r = new Random();
 
     public ComputerPlayer(String player) {
         this.player = player;
@@ -16,17 +19,20 @@ public class ComputerPlayer implements Player{
     }
 
     @Override
-    public boolean play(Board board, int row, int col) {
-        boolean gelukt = false;
-        Random r = new Random();
-        do{
-            row = r.nextInt(3);
-            x = row;
-            col = r.nextInt(3);
-            y = col;
-            gelukt = board.addPiece(this.player, row, col);
-        } while (gelukt != true);
-        System.out.println("\nComputer played: (" + row + "," + col + ")\n");
+    public boolean play(Board board, int col, int row) {
+
+        if (board.isSquareEmpty(col, row)) {
+            board.addPiece(this.player, row, col);
+        } else {
+            do {
+                setX();
+                setY();
+                col = getX();
+                row = getY();
+            } while (!board.isSquareEmpty(col, row));
+            board.addPiece(this.player, col, row);
+        }
+        System.out.println("\nComputer played: (" + col + "," + row + ")\n");
         setMove(x,y);
         return true;
     }
@@ -40,6 +46,22 @@ public class ComputerPlayer implements Player{
 
     public int[] getMove() {
         return move;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setX() {
+        this.x = r.nextInt(3);;
+    }
+
+    public void setY() {
+        this.y = r.nextInt(3);;
     }
 
     @Override

@@ -33,6 +33,10 @@ public class Board {
         }
     }
 
+    public boolean isSquareEmpty(int col, int row) {
+        return tiles[col][row] == null || tiles[col][row].isEmpty();
+    }
+
     public void clearBoard() {
         for (int i = 0; i < tiles.length; i++) {
             for (int j = 0; j < tiles.length; j++) {

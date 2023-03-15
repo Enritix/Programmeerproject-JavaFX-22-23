@@ -8,8 +8,6 @@ public class TicTacToe {
     private Board board;
     private Player[] players;
     private int moveCounter = 0;
-    private String currentPlayer;
-    private boolean winnaar = false;
     private boolean won;
     private boolean draw;
     private int size;
@@ -20,7 +18,6 @@ public class TicTacToe {
         this.board = new Board(this.size);
         board.toString();
         this.players = new Player[2];
-        currentPlayer = "X";
     }
 
     public void reset() {
@@ -152,11 +149,11 @@ public class TicTacToe {
         }
     }
 
-    public void initialisePlayers(String choice, String p1, String p2) {
+    public void initialisePlayers(String choice, String player1, String player2) {
         if (choice.equals("1p")) {
-            onePlayerOneComputer(p1);
+            onePlayerOneComputer(player1);
         } else {
-            twoPlayers(p1, p2);
+            twoPlayers(player1, player2);
         }
     }
 }

@@ -10,5 +10,13 @@ public interface Player {
     public String getPlayer();
     public void setMove(int x, int y);
     public int[] getMove();
+
+    void setX();
+
+    void setY();
+
+    int getX();
+
+    int getY();
 }
 
