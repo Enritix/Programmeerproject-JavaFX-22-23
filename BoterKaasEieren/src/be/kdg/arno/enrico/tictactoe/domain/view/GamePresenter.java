@@ -4,14 +4,10 @@ package be.kdg.arno.enrico.tictactoe.domain.view;
 import be.kdg.arno.enrico.tictactoe.domain.model.TicTacToe;
 import be.kdg.arno.enrico.tictactoe.domain.model.player.ComputerPlayer;
 import be.kdg.arno.enrico.tictactoe.domain.model.player.HumanPlayer;
-import be.kdg.arno.enrico.tictactoe.domain.model.player.Player;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.scene.layout.Border;
 import javafx.scene.paint.Color;
-
-import java.util.Scanner;
 
 import static javafx.application.Platform.exit;
 
