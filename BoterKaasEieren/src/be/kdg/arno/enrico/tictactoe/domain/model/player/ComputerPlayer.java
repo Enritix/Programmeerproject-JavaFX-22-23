@@ -27,13 +27,13 @@ public class ComputerPlayer implements Player{
             do {
                 setX();
                 setY();
-                col = getX();
-                row = getY();
+                col = getY();
+                row = getX();
             } while (!board.isSquareEmpty(col, row));
-            board.addPiece(this.player, col, row);
+            board.addPiece(this.player, row, col);
         }
         System.out.println("\nComputer played: (" + col + "," + row + ")\n");
-        setMove(x,y);
+        /*setMove(x,y);*/
         return true;
     }
 

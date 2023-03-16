@@ -14,7 +14,7 @@ public class Board {
         this.pieceCounter = 0;
     }
 
-    public boolean addPiece(String player, int rowNumber, int colNumber) {
+    public boolean addPiece(String player, int colNumber, int rowNumber) {
         if (this.tiles[colNumber][rowNumber] == null) {
             this.pieceCounter++;
             /*tiles[colNumber][rowNumber].add(player);*/

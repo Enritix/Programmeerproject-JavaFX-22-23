@@ -10,7 +10,12 @@ import javafx.scene.Scene;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Border;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
+
+import java.io.File;
+import java.util.ArrayList;
 
 import static javafx.application.Platform.exit;
 
@@ -37,10 +42,14 @@ public class GamePresenter {
         view.getLblPlayer1().setText(game.getPlayers()[0].getName());
         view.getLblPlayer2().setText(game.getPlayers()[1].getName());
 
-
+        File soundFile = new File("C:/KdG/Programmeren/Programmeerproject-JavaFX-22-23/resources/sounds/new_game.mp3");
+        Media sound = new Media(soundFile.toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(sound);
         view.getBtnNewGame().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                mediaPlayer.play();
+
                 game.reset();
                 for (int i = 0; i < game.getBoardSize(); i++) {
                     for (int j = 0; j < game.getBoardSize(); j++) {
@@ -103,17 +112,24 @@ public class GamePresenter {
                                 view.getBtnBoardSquares()[col][row].setDisable(true);
                                 updateView();
                             }
-                            if (game.getCurrentPlayer() instanceof ComputerPlayer) {
-                                game.getPlayers()[1].setX();
-                                game.getPlayers()[1].setY();
-                                game.addPieceOnBoard(game.getPlayers()[1].getX(), game.getPlayers()[1].getY());
-                                view.getBtnBoardSquares()[game.getPlayers()[1].getY()][game.getPlayers()[1].getX()].setText("O");
-                                view.getBtnBoardSquares()[game.getPlayers()[1].getY()][game.getPlayers()[1].getX()].setDisable(true);
-                                updateView();
+                            if (!game.getBoard().checkWin() || !game.isDraw()) {
+                                if (game.getCurrentPlayer() instanceof ComputerPlayer) {
+                                    game.getPlayers()[1].setY();
+                                    game.getPlayers()[1].setX();
+                                    game.addPieceOnBoard(game.getPlayers()[1].getX(), game.getPlayers()[1].getY());
+                                    view.getBtnBoardSquares()[game.getPlayers()[1].getX()][game.getPlayers()[1].getY()].setText("O");
+                                    view.getBtnBoardSquares()[game.getPlayers()[1].getX()][game.getPlayers()[1].getY()].setDisable(true);
+                                    updateView();
+                                }
                             }
-                            if (game.hasWon()) {
+                            if (game.hasPlayerXWon()) {
                                 GameView.showMessage(String.format("%s (%s) has won!",
-                                        game.getCurrentPlayer().getName(), game.getCurrentPlayer().getPlayer()));
+                                        game.getPlayers()[0].getName(), game.getPlayers()[0].getPlayer()));
+                                disableBoard();
+                                updateView();
+                            } else if (game.hasPlayerOWon()) {
+                                GameView.showMessage(String.format("%s (%s) has won!",
+                                        game.getPlayers()[1].getName(), game.getPlayers()[1].getPlayer()));
                                 disableBoard();
                                 updateView();
                             } else if (game.isDraw()) {

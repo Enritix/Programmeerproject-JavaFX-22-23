@@ -11,6 +11,8 @@ public class TicTacToe {
     private boolean won;
     private boolean draw;
     private int size;
+    public boolean playerX = false;
+    public boolean playerO = false;
 
 
     public TicTacToe(int size) {
@@ -25,6 +27,8 @@ public class TicTacToe {
         this.moveCounter = 0;
         this.won = false;
         this.draw = false;
+        this.playerX = false;
+        this.playerO = false;
     }
 
     /*public void playGame() {
@@ -71,12 +75,6 @@ public class TicTacToe {
         players[1] = new ComputerPlayer("O");
     }
 
-    public void clearPlayers() {
-        for (int i = 0; i < players.length; i++) {
-            players[i] = null;
-        }
-    }
-
     public void clearBoard() {
         board.clearBoard();
     }
@@ -117,9 +115,11 @@ public class TicTacToe {
                 if (currentPlayer.getPlayer().equals("X")) {
                     System.out.println("\n" + players[0].getName() + " (X) wins!\n");
                     won = true;
+                    playerX = true;
                 } else {
                     System.out.println("\n" + players[1].getName() + " (O) wins!\n");
                     won = true;
+                    playerO = true;
                 }
                 board.clearBoard();
             } else if (board.isFull()) {
@@ -155,5 +155,13 @@ public class TicTacToe {
         } else {
             twoPlayers(player1, player2);
         }
+    }
+
+    public boolean hasPlayerXWon() {
+        return playerX;
+    }
+
+    public boolean hasPlayerOWon() {
+        return playerO;
     }
 }
