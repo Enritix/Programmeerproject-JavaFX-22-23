@@ -125,37 +125,28 @@ public class GameView extends BorderPane {
 
 
             HBox hbBottomLeft = new HBox(btnBack);
-            hbBottomLeft.setSpacing(20);
-            hbBottomLeft.setAlignment(Pos.CENTER);
-            hbBottomLeft.setPadding(new Insets(10));
+            hbBottomLeft.setAlignment(Pos.CENTER_LEFT);
+            hbBottomLeft.setMaxWidth(UIConstants.BUTTON_PREFWIDTH*2);
             HBox.setHgrow(hbBottomLeft,Priority.ALWAYS);
-            BorderPane.setMargin(hbBottomLeft, new Insets(10));
 
             HBox hbBottomCenter = new HBox(btnNewGame, btnQuit);
             hbBottomCenter.setSpacing(20);
             hbBottomCenter.setAlignment(Pos.CENTER);
             hbBottomCenter.setPadding(new Insets(10));
-            HBox.setHgrow(hbBottomCenter,Priority.ALWAYS);
+            HBox.setHgrow(hbBottomCenter,Priority.SOMETIMES);
             BorderPane.setMargin(hbBottomCenter, new Insets(10));
 
             HBox hbBottomRight = new HBox();
-            hbBottomRight.setSpacing(20);
             hbBottomRight.setAlignment(Pos.CENTER);
-            hbBottomRight.setPadding(new Insets(10));
+            hbBottomRight.setMaxWidth(UIConstants.BUTTON_PREFWIDTH*2);
             HBox.setHgrow(hbBottomRight,Priority.ALWAYS);
-            BorderPane.setMargin(hbBottomRight, new Insets(10));
 
 
             HBox hbBottom = new HBox();
             hbBottom.getChildren().addAll(hbBottomLeft,hbBottomCenter,hbBottomRight);
 
-
-
-
-
             // add HBox to bottom of BorderPane
             this.setBottom(hbBottom);
-
 
         }
 
