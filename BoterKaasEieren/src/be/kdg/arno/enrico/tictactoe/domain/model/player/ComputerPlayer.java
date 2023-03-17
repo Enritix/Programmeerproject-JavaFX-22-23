@@ -20,8 +20,7 @@ public class ComputerPlayer implements Player{
 
     @Override
     public boolean play(Board board, int col, int row) {
-
-        if (board.isSquareEmpty(col, row)) {
+        if (board.isSquareEmpty(row, col)) {
             board.addPiece(this.player, row, col);
         } else {
             do {
@@ -29,10 +28,10 @@ public class ComputerPlayer implements Player{
                 setY();
                 col = getY();
                 row = getX();
-            } while (!board.isSquareEmpty(col, row));
+            } while (!board.isSquareEmpty(row, col));
             board.addPiece(this.player, row, col);
         }
-        System.out.println("\nComputer played: (" + col + "," + row + ")\n");
+        System.out.println("\nComputer played: (" + row + "," + col + ")\n");
         /*setMove(x,y);*/
         return true;
     }

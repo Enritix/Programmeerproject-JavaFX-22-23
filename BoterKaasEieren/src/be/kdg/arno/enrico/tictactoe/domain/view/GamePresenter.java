@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Border;
+import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
@@ -42,13 +43,16 @@ public class GamePresenter {
         view.getLblPlayer1().setText(game.getPlayers()[0].getName());
         view.getLblPlayer2().setText(game.getPlayers()[1].getName());
 
-        File soundFile = new File("C:/KdG/Programmeren/Programmeerproject-JavaFX-22-23/resources/sounds/new_game.mp3");
+        /*File soundFile = new File("BoterKaasEieren/resources/sounds/new_game.mp3");
         Media sound = new Media(soundFile.toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        MediaPlayer mediaPlayer = new MediaPlayer(sound);*/
         view.getBtnNewGame().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                mediaPlayer.play();
+                /*mediaPlayer.play();*/
+                String url = "BoterKaasEieren/resources/sounds/new_game.mp3";
+                AudioClip newGame = new AudioClip(new File(url).toURI().toString());
+                newGame.play();
 
                 game.reset();
                 for (int i = 0; i < game.getBoardSize(); i++) {
@@ -58,26 +62,6 @@ public class GamePresenter {
                         view.getBtnBoardSquares()[i][j].setDisable(false);
                     }
                 }
-                /*for (int i = 0; i < game.getBoardSize(); i++) {
-                    for (int j = 0; j < game.getBoardSize(); j++) {
-
-                        view.getBtnBoardSquares()[i][j].setText("");
-                        game.clearBoard();
-                        view.getBtnBoardSquares()[i][j].setDisable(false);
-                    }
-                }
-                game.reset();
-                game.twoPlayers(game.getPlayers()[0].getName(), game.getPlayers()[1].getName());
-                updateView();
-                System.out.println("Board and players cleared...");
-                System.out.println(game.getBoard().toString());
-                new GamePresenter(game,view);*/
-                /*StartUpView startUpView = new StartUpView();
-                StartUpPresenter startUpPresenter = new StartUpPresenter(game, startUpView);
-                Scene scene = view.getScene();
-                scene.setRoot(startUpView);
-                scene.getWindow().setHeight(view.getHeight()*//*+155*//*); //grootte van het venster blijft hetzelfde
-                scene.getWindow().setWidth(view.getWidth()*//*+14*//*);*/
             }
         });
 
@@ -117,23 +101,25 @@ public class GamePresenter {
                                     game.getPlayers()[1].setY();
                                     game.getPlayers()[1].setX();
                                     game.addPieceOnBoard(game.getPlayers()[1].getX(), game.getPlayers()[1].getY());
-                                    view.getBtnBoardSquares()[game.getPlayers()[1].getX()][game.getPlayers()[1].getY()].setText("O");
-                                    view.getBtnBoardSquares()[game.getPlayers()[1].getX()][game.getPlayers()[1].getY()].setDisable(true);
+                                    if (game.getBoard().isSquareEmpty(game.getPlayers()[1].getX(), game.getPlayers()[1].getY())) {
+                                        view.getBtnBoardSquares()[game.getPlayers()[1].getX()][game.getPlayers()[1].getY()].setText("O");
+                                        view.getBtnBoardSquares()[game.getPlayers()[1].getX()][game.getPlayers()[1].getY()].setDisable(true);
+                                    }
                                     updateView();
                                 }
                             }
                             if (game.hasPlayerXWon()) {
-                                GameView.showMessage(String.format("%s (%s) has won!",
+                                GameView.showMessage(String.format("%s (%s) has won!%nTo play again, press on 'New Game'",
                                         game.getPlayers()[0].getName(), game.getPlayers()[0].getPlayer()));
                                 disableBoard();
                                 updateView();
                             } else if (game.hasPlayerOWon()) {
-                                GameView.showMessage(String.format("%s (%s) has won!",
+                                GameView.showMessage(String.format("%s (%s) has won!%nTo play again, press on 'New Game'",
                                         game.getPlayers()[1].getName(), game.getPlayers()[1].getPlayer()));
                                 disableBoard();
                                 updateView();
                             } else if (game.isDraw()) {
-                                GameView.showMessage("Draw!");
+                                GameView.showMessage("Draw!\nTo play again, press on 'New Game'");
                                 disableBoard();
                                 updateView();
                             }
@@ -224,8 +210,8 @@ public class GamePresenter {
                 StartUpPresenter startUpPresenter = new StartUpPresenter(game, startUpView);
                 Scene scene = view.getScene();
                 scene.setRoot(startUpView);
-                scene.getWindow().setHeight(view.getHeight()+37); //grootte van het venster blijft hetzelfde
-                scene.getWindow().setWidth(view.getWidth()+14);
+                scene.getWindow().setHeight(view.getHeight() + 37); //grootte van het venster blijft hetzelfde
+                scene.getWindow().setWidth(view.getWidth() + 14);
             }
         });
 

@@ -20,7 +20,7 @@ public class Main extends Application {
         StartUpView startupView = new StartUpView();
         StartUpPresenter presenter = new StartUpPresenter(game, startupView);
         Scene startupScene = new Scene(startupView);
-        stage.getIcons().add(new Image(new FileInputStream("resources/images/application_logo.png")));
+        stage.getIcons().add(new Image(new FileInputStream("BoterKaasEieren/resources/images/application_logo.png")));
         stage.setScene(startupScene);
         stage.setTitle("Tic Tac Toe");
         stage.setMinHeight(620);

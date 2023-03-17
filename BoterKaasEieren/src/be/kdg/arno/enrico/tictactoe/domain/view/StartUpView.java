@@ -46,7 +46,7 @@ public class StartUpView extends BorderPane {
     private void initialiseNodes() {
 
         try {
-            ivLogo = new ImageView(new Image(new FileInputStream("resources/images/logo_tictactoe.png")));
+            ivLogo = new ImageView(new Image(new FileInputStream("BoterKaasEieren/resources/images/logo_tictactoe.png")));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

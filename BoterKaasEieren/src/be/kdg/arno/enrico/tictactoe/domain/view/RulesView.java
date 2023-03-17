@@ -38,7 +38,7 @@ public class RulesView extends BorderPane {
     private void initialiseNodes() {
 
         try {
-            ivBack = new ImageView(new Image(new FileInputStream("resources/images/arrow_back.png")));
+            ivBack = new ImageView(new Image(new FileInputStream("BoterKaasEieren/resources/images/arrow_back.png")));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

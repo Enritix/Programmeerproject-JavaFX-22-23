@@ -37,7 +37,7 @@ public class GameView extends BorderPane {
     private void initialiseNodes() {
 
         try {
-            ivBack = new ImageView(new Image(new FileInputStream("resources/images/arrow_back.png")));
+            ivBack = new ImageView(new Image(new FileInputStream("BoterKaasEieren/resources/images/arrow_back.png")));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -177,7 +177,9 @@ public class GameView extends BorderPane {
     
     public static void showMessage(String text) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setHeaderText((String) null);
+        alert.setTitle(null);
+        /*alert.setGraphic(new ImageView(new Image("![](../../../../../../../../resources/images/application_logo.png)")));*/
+        alert.setHeaderText(null);
         alert.setContentText(text);
         alert.showAndWait();
     }
