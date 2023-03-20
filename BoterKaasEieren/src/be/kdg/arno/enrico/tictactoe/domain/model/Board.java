@@ -12,10 +12,11 @@ public class Board {
         this.tiles = new String[size][size];
         /*this.tiles = new ArrayList[size][size];*/
         this.pieceCounter = 0;
+        clearBoard();
     }
 
     public boolean addPiece(String player, int colNumber, int rowNumber) {
-        if (this.tiles[colNumber][rowNumber] == null) {
+        if (this.tiles[colNumber][rowNumber].equals("")) {
             this.pieceCounter++;
             /*tiles[colNumber][rowNumber].add(player);*/
             tiles[colNumber][rowNumber] = player;
@@ -34,7 +35,7 @@ public class Board {
     }
 
     public boolean isSquareEmpty(int col, int row) {
-        return tiles[col][row] == null || tiles[col][row].isEmpty();
+        return tiles[col][row].equals("") || tiles[col][row].isEmpty();
     }
 
     public void clearBoard() {

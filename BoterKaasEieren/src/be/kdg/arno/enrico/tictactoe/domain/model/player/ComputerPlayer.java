@@ -26,8 +26,8 @@ public class ComputerPlayer implements Player{
             do {
                 setX();
                 setY();
-                col = getY();
-                row = getX();
+                col = getX();
+                row = getY();
             } while (!board.isSquareEmpty(row, col));
             board.addPiece(this.player, row, col);
         }

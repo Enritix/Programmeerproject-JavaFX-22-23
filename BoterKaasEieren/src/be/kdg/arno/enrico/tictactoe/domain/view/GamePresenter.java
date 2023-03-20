@@ -88,12 +88,12 @@ public class GamePresenter {
                 view.getBtnBoardSquares()[i][j].setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent actionEvent) {
-                        if (!game.getBoard().checkWin() || !game.isDraw()) {
+                        if ((!game.getBoard().checkWin() || !game.isDraw()) && view.getBtnBoardSquares()[col][row].getText().equals("")) {
                             if (game.getCurrentPlayer() instanceof HumanPlayer) {
                                 String playerXorO = game.getCurrentPlayer().getPlayer();
                                 view.getBtnBoardSquares()[col][row].setText(playerXorO);
                                 game.addPieceOnBoard(col, row);
-                                view.getBtnBoardSquares()[col][row].setDisable(true);
+                                /*view.getBtnBoardSquares()[col][row].setDisable(true);*/
                                 updateView();
                             }
                             if (!game.getBoard().checkWin() || !game.isDraw()) {
@@ -101,10 +101,9 @@ public class GamePresenter {
                                     game.getPlayers()[1].setY();
                                     game.getPlayers()[1].setX();
                                     game.addPieceOnBoard(game.getPlayers()[1].getX(), game.getPlayers()[1].getY());
-                                    if (game.getBoard().isSquareEmpty(game.getPlayers()[1].getX(), game.getPlayers()[1].getY())) {
-                                        view.getBtnBoardSquares()[game.getPlayers()[1].getX()][game.getPlayers()[1].getY()].setText("O");
-                                        view.getBtnBoardSquares()[game.getPlayers()[1].getX()][game.getPlayers()[1].getY()].setDisable(true);
-                                    }
+                                    view.getBtnBoardSquares()[game.getPlayers()[1].getX()][game.getPlayers()[1].getY()].setText("O");
+                                    /*view.getBtnBoardSquares()[game.getPlayers()[1].getX()][game.getPlayers()[1].getY()].setDisable(true);*/
+
                                     updateView();
                                 }
                             }
@@ -124,7 +123,7 @@ public class GamePresenter {
                                 updateView();
                             }
                         } else {
-                            view.getBtnBoardSquares()[col][row].setDisable(true);
+                            GameView.showMessage("This tile is not empty!\nTry again.");
                         }
                         /*if (!game.hasWon() && !game.isDraw()) {
                             Player currentPlayer = game.getCurrentPlayer();
@@ -228,10 +227,18 @@ public class GamePresenter {
                 view.getBtnBack().setEffect(null);
             }
         });
-
     }
 
     private void updateView() {
+        for (int i = 0; i < game.getBoardSize(); i++) {
+            for (int j = 0; j < game.getBoardSize(); j++) {
+                final int col = i;
+                final int row = j;
+                if (view.getBtnBoardSquares()[i][j].isDisabled()) {
+                    view.getBtnBoardSquares()[i][j].setStyle("-fx-background-color: #032056; -fx-background-radius: 15px; -fx-text-fill: white");
+                }
+            }
+        }
         if (game.getCurrentPlayer().getPlayer().equals("X")) {
             //border rond lblPlayer1
             view.getLblPlayer1().setBorder(Border.stroke(Color.RED));

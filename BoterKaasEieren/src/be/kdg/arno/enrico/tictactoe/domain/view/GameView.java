@@ -74,7 +74,8 @@ public class GameView extends BorderPane {
             for (int j = 0; j < SIZE; j++) {
                 btnBoardSquares[i][j] = new Button();
                 btnBoardSquares[i][j].setMaxSize(250, 250);
-                btnBoardSquares[i][j].setStyle("-fx-background-color: #032056; -fx-background-radius: 15px; -fx-text-fill: black"); //board squares background
+                btnBoardSquares[i][j].setMinSize(UIConstants.BUTTON_PREFSIZE, UIConstants.BUTTON_PREFSIZE);
+                btnBoardSquares[i][j].setStyle("-fx-background-color: #032056; -fx-background-radius: 15px; -fx-text-fill: #68C8FF"); //board squares background
                 btnBoardSquares[i][j].setFont(Font.font("Verdana", FONT_SIZE));
             }
         }

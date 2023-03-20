@@ -13,6 +13,8 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Optional;
 
 import static javafx.application.Platform.exit;
@@ -45,6 +47,7 @@ public class StartUpPresenter {
                     GameView gameView = new GameView();
                     GamePresenter gamePresenter = new GamePresenter(game, gameView);
                     Scene scene = view.getScene();
+                    /*scene.getStylesheets().add(0, "/application.css");*/
                     scene.setRoot(gameView);
                     scene.getWindow().setHeight(view.getHeight()+37);
                     scene.getWindow().setWidth(view.getWidth()+14);

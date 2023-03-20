@@ -4,4 +4,5 @@ public interface UIConstants {
     int DEFAULT_SHADOW = 15;
     int BUTTON_PREFWIDTH = 90;
     int BUTTON_PREFHEIGHT = 90;
+    int BUTTON_PREFSIZE = 90;
 }
