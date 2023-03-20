@@ -1,6 +1,8 @@
 package be.kdg.arno.enrico.tictactoe.domain.model;
 
 
+import be.kdg.arno.enrico.tictactoe.domain.view.UIConstants;
+
 public class Board {
     private int size;
     private String[][] tiles;
@@ -9,7 +11,7 @@ public class Board {
 
     public Board(int size) {
         this.size = size;
-        this.tiles = new String[size][size];
+        this.tiles = new String[UIConstants.BOARD_SIZE][UIConstants.BOARD_SIZE]; /*new String[size][size];*/
         /*this.tiles = new ArrayList[size][size];*/
         this.pieceCounter = 0;
         clearBoard();
@@ -83,7 +85,7 @@ public class Board {
 
     public boolean checkWin() {
         if (size == 3) {
-            if ((tiles[0][0] + tiles[0][1] + tiles[0][2]).equals("XXX") || (tiles[0][0] + tiles[0][1] + tiles[0][2]).equals("OOO")) {  //bovenste rij (horizontaal)
+            /*if ((tiles[0][0] + tiles[0][1] + tiles[0][2]).equals("XXX") || (tiles[0][0] + tiles[0][1] + tiles[0][2]).equals("OOO")) {  //bovenste rij (horizontaal)
                 return true;
             } else if ((tiles[1][0] + tiles[1][1] + tiles[1][2]).equals("XXX") || (tiles[1][0] + tiles[1][1] + tiles[1][2]).equals("OOO")) {    //middelste rij (horizontaal)
                 return true;
@@ -99,38 +101,138 @@ public class Board {
                 return true;
             }else if ((tiles[0][2] + tiles[1][2] + tiles[2][2]).equals("XXX") || (tiles[0][2] + tiles[1][2] + tiles[2][2]).equals("OOO")) {    //rechtse kolom (verticaal)
                 return true;
-            }
-            /*// Check horizontal lines
-            for (int row = 0; row < 3; row++) {
-                if (tiles[row][0].equals("X") && tiles[row][1].equals("X") && tiles[row][2].equals("X") ||
-                        tiles[row][0].equals("O") && tiles[row][1].equals("O") && tiles[row][2].equals("O")) {
+            }*/
+            for (int i = 0; i < size; i++) {
+                if (tiles[i][0].equals(tiles[i][1]) && tiles[i][1].equals(tiles[i][2]) && !tiles[i][0].equals("")) {
                     return true;
+                }
+                if (tiles[0][i].equals(tiles[1][i]) && tiles[1][i].equals(tiles[2][i]) && !tiles[0][i].equals("")) {
+                    return true;
+                }
+            }
+            if (tiles[0][0].equals(tiles[1][1]) && tiles[1][1].equals(tiles[2][2]) && !tiles[0][0].equals("")) {
+                return true;
+            }
+            if (tiles[0][2].equals(tiles[1][1]) && tiles[1][1].equals(tiles[2][0]) && !tiles[0][2].equals("")) {
+                return true;
+            }
+            /*We're first using two loops to check for wins on the horizontal and vertical axes,
+            then checking for the diagonal wins individually with an `if` statement at the end.
+            We're also checking if the tiles are not empty before checking for a win to avoid unnecessary comparisons.*/
+        }
+        if (size == 5) {
+            /*// Check horizontal lines
+            for (int row = 0; row < size; row++) {
+                for (int col = 0; col <= size - 4; col++) {
+                    if (tiles[row][col].equals("X") && tiles[row][col + 1].equals("X") && tiles[row][col + 2].equals("X") && tiles[row][col + 3].equals("X") ||
+                            tiles[row][col].equals("O") && tiles[row][col + 1].equals("O") && tiles[row][col + 2].equals("O") && tiles[row][col + 3].equals("O")) {
+                        return true;
+                    }
                 }
             }
 
             // Check vertical lines
-            for (int col = 0; col < 3; col++) {
-                if (tiles[0][col].equals("X") && tiles[1][col].equals("X") && tiles[2][col].equals("X") ||
-                        tiles[0][col].equals("O") && tiles[1][col].equals("O") && tiles[2][col].equals("O")) {
-                    return true;
+            for (int col = 0; col < size; col++) {
+                for (int row = 0; row <= size - 4; row++) {
+                    if (tiles[row][col].equals("X") && tiles[row + 1][col].equals("X") && tiles[row + 2][col].equals("X") && tiles[row + 3][col].equals("X") ||
+                            tiles[row][col].equals("O") && tiles[row + 1][col].equals("O") && tiles[row + 2][col].equals("O") && tiles[row + 3][col].equals("O")) {
+                        return true;
+                    }
                 }
             }
 
             // Check diagonal lines
-            if (tiles[0][0].equals("X") && tiles[1][1].equals("X") && tiles[2][2].equals("X") ||
-                    tiles[0][0].equals("O") && tiles[1][1].equals("O") && tiles[2][2].equals("O")) {
-                return true;
+            for (int row = 0; row <= size - 4; row++) {
+                for (int col = 0; col <= size - 4; col++) {
+                    if (tiles[row][col].equals("X") && tiles[row + 1][col + 1].equals("X") && tiles[row + 2][col + 2].equals("X") && tiles[row + 3][col + 3].equals("X") ||
+                            tiles[row][col].equals("O") && tiles[row + 1][col + 1].equals("O") && tiles[row + 2][col + 2].equals("O") && tiles[row + 3][col + 3].equals("O")) {
+                        return true;
+                    }
+                }
             }
 
-            if (tiles[0][2].equals("X") && tiles[1][1].equals("X") && tiles[2][0].equals("X") ||
-                    (tiles[0][2].equals("O") && tiles[1][1].equals("O") && tiles[2][0].equals("O"))) {
+            for (int row = 0; row <= size - 4; row++) {
+                for (int col = 3; col < size; col++) {
+                    if (tiles[row][col].equals("X") && tiles[row + 1][col - 1].equals("X") && tiles[row + 2][col - 2].equals("X") && tiles[row + 3][col - 3].equals("X") ||
+                            tiles[row][col].equals("O") && tiles[row + 1][col - 1].equals("O") && tiles[row + 2][col - 2].equals("O") && tiles[row + 3][col - 3].equals("O")) {
+                        return true;
+                    }
+                }
+            }*/
+            for (int i = 0; i < size; i++) {
+                if (tiles[i][0].equals(tiles[i][1]) && tiles[i][1].equals(tiles[i][2]) && tiles[i][2].equals(tiles[i][3]) && !tiles[i][0].equals("")) {
+                    return true;
+                }
+                if (tiles[i][1].equals(tiles[i][2]) && tiles[i][2].equals(tiles[i][3]) && tiles[i][3].equals(tiles[i][4]) && !tiles[i][1].equals("")) {
+                    return true;
+                }
+                if (tiles[0][i].equals(tiles[1][i]) && tiles[1][i].equals(tiles[2][i]) && tiles[2][i].equals(tiles[3][i]) && !tiles[0][i].equals("")) {
+                    return true;
+                }
+                if (tiles[1][i].equals(tiles[2][i]) && tiles[2][i].equals(tiles[3][i]) && tiles[3][i].equals(tiles[4][i]) && !tiles[1][i].equals("")) {
+                    return true;
+                }
+            }
+            if (tiles[0][0].equals(tiles[1][1]) && tiles[1][1].equals(tiles[2][2]) && tiles[2][2].equals(tiles[3][3]) && !tiles[0][0].equals("")) {
                 return true;
             }
-
-            // No win found
-            return false;*/
+            if (tiles[1][1].equals(tiles[2][2]) && tiles[2][2].equals(tiles[3][3]) && tiles[3][3].equals(tiles[4][4]) && !tiles[1][1].equals("")) {
+                return true;
+            }
+            if (tiles[0][4].equals(tiles[1][3]) && tiles[1][3].equals(tiles[2][2]) && tiles[2][2].equals(tiles[3][1]) && !tiles[0][4].equals("")) {
+                return true;
+            }
+            if (tiles[1][3].equals(tiles[2][2]) && tiles[2][2].equals(tiles[3][1]) && tiles[3][1].equals(tiles[4][0]) && !tiles[1][3].equals("")) {
+                return true;
+            }
         }
-        //TODO: size 5 en 7
+        if (size == 7) {
+            for (int i = 0; i < size; i++) {
+                if (tiles[i][0].equals(tiles[i][1]) && tiles[i][1].equals(tiles[i][2]) && tiles[i][2].equals(tiles[i][3])
+                        && !tiles[i][0].equals("")) {
+                    return true;
+                }
+                if (tiles[i][1].equals(tiles[i][2]) && tiles[i][2].equals(tiles[i][3]) && tiles[i][3].equals(tiles[i][4])
+                        && !tiles[i][1].equals("")) {
+                    return true;
+                }
+                if (tiles[i][2].equals(tiles[i][3]) && tiles[i][3].equals(tiles[i][4]) && tiles[i][4].equals(tiles[i][5])
+                        && !tiles[i][2].equals("")) {
+                    return true;
+                }
+                if (tiles[i][3].equals(tiles[i][4]) && tiles[i][4].equals(tiles[i][5]) && tiles[i][5].equals(tiles[i][6])
+                        && !tiles[i][3].equals("")) {
+                    return true;
+                }
+
+                if (tiles[0][i].equals(tiles[1][i]) && tiles[1][i].equals(tiles[2][i]) && tiles[2][i].equals(tiles[3][i])
+                        && !tiles[0][i].equals("")) {
+                    return true;
+                }
+                if (tiles[1][i].equals(tiles[2][i]) && tiles[2][i].equals(tiles[3][i]) && tiles[3][i].equals(tiles[4][i])
+                        && !tiles[1][i].equals("")) {
+                    return true;
+                }
+                if (tiles[2][i].equals(tiles[3][i]) && tiles[3][i].equals(tiles[4][i]) && tiles[4][i].equals(tiles[5][i])
+                        && !tiles[2][i].equals("")) {
+                    return true;
+                }
+                if (tiles[3][i].equals(tiles[4][i]) && tiles[4][i].equals(tiles[5][i]) && tiles[5][i].equals(tiles[6][i])
+                        && !tiles[3][i].equals("")) {
+                    return true;
+                }
+            }
+            for (int i = 0; i < size - 3; i++) {
+                if (tiles[i][i].equals(tiles[i + 1][i + 1]) && tiles[i + 1][i + 1].equals(tiles[i + 2][i + 2])
+                        && tiles[i + 2][i + 2].equals(tiles[i + 3][i + 3]) && !tiles[i][i].equals("")) {
+                    return true;
+                }
+                if (tiles[i][6 - i].equals(tiles[i + 1][5 - i]) && tiles[i + 1][5 - i].equals(tiles[i + 2][4 - i])
+                        && tiles[i + 2][4 - i].equals(tiles[i + 3][3 - i]) && !tiles[i][6 - i].equals("")) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 

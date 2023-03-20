@@ -20,10 +20,9 @@ import java.io.FileNotFoundException;
 
 public class GameView extends BorderPane {
     public static final int FONT_SIZE = 30;
-    public static final int SIZE = 3;
     private Label lblPlayer1;
     private Label lblPlayer2;
-    private Button[][] btnBoardSquares = new Button[SIZE][SIZE]; //new Button[Board.SIZE][Board.SIZE];
+    private Button[][] btnBoardSquares = new Button[UIConstants.BOARD_SIZE][UIConstants.BOARD_SIZE]; //new Button[Board.SIZE][Board.SIZE];
     private Button btnNewGame;
     private Button btnQuit;
     private Button btnBack;
@@ -70,8 +69,8 @@ public class GameView extends BorderPane {
         btnQuit = new Button("Quit");
         btnQuit.setFont(Font.font("Verdana", FONT_SIZE));
         btnQuit.setStyle("-fx-background-color: #032056; -fx-text-fill: #68C8FF; -fx-background-radius: 15px"); //quit button text colour --> bold: -fx-font-weight: bold;
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
+        for (int i = 0; i < UIConstants.BOARD_SIZE; i++) {
+            for (int j = 0; j < UIConstants.BOARD_SIZE; j++) {
                 btnBoardSquares[i][j] = new Button();
                 btnBoardSquares[i][j].setMaxSize(250, 250);
                 btnBoardSquares[i][j].setMinSize(UIConstants.BUTTON_PREFSIZE, UIConstants.BUTTON_PREFSIZE);
@@ -92,8 +91,8 @@ public class GameView extends BorderPane {
                     new Stop(1, Color.web("#fd60e9"))))
             );
         GridPane gpBoard = new GridPane();
-            for (int i = 0; i < SIZE; i++) {
-                for (int j = 0; j < SIZE; j++) {
+            for (int i = 0; i < UIConstants.BOARD_SIZE; i++) {
+                for (int j = 0; j < UIConstants.BOARD_SIZE; j++) {
                     gpBoard.add(btnBoardSquares[i][j], i, j);
                     GridPane.setVgrow(btnBoardSquares[i][j], Priority.ALWAYS);
                     GridPane.setHgrow(btnBoardSquares[i][j], Priority.ALWAYS);

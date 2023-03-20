@@ -3,6 +3,7 @@ package be.kdg.arno.enrico.tictactoe.domain;
 import be.kdg.arno.enrico.tictactoe.domain.model.TicTacToe;
 import be.kdg.arno.enrico.tictactoe.domain.view.StartUpPresenter;
 import be.kdg.arno.enrico.tictactoe.domain.view.StartUpView;
+import be.kdg.arno.enrico.tictactoe.domain.view.UIConstants;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -16,7 +17,7 @@ public class Main extends Application {
     }
     @Override
     public void start(Stage stage) throws Exception {
-        TicTacToe game = new TicTacToe(3);
+        TicTacToe game = new TicTacToe(UIConstants.BOARD_SIZE);
         StartUpView startupView = new StartUpView();
         StartUpPresenter presenter = new StartUpPresenter(game, startupView);
         Scene startupScene = new Scene(startupView);

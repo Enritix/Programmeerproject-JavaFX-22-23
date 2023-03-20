@@ -5,4 +5,5 @@ public interface UIConstants {
     int BUTTON_PREFWIDTH = 90;
     int BUTTON_PREFHEIGHT = 90;
     int BUTTON_PREFSIZE = 90;
+    int BOARD_SIZE = 5;
 }

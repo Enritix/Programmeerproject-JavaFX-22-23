@@ -2,11 +2,16 @@ package be.kdg.arno.enrico.tictactoe.domain.view;
 
 
 import be.kdg.arno.enrico.tictactoe.domain.model.TicTacToe;
+import be.kdg.arno.enrico.tictactoe.domain.model.exceptions.TileNotEmptyException;
 import be.kdg.arno.enrico.tictactoe.domain.model.player.ComputerPlayer;
 import be.kdg.arno.enrico.tictactoe.domain.model.player.HumanPlayer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Border;
@@ -17,6 +22,7 @@ import javafx.scene.paint.Color;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Optional;
 
 import static javafx.application.Platform.exit;
 
@@ -55,6 +61,7 @@ public class GamePresenter {
                 newGame.play();
 
                 game.reset();
+                updateView();
                 for (int i = 0; i < game.getBoardSize(); i++) {
                     for (int j = 0; j < game.getBoardSize(); j++) {
 
@@ -123,7 +130,11 @@ public class GamePresenter {
                                 updateView();
                             }
                         } else {
-                            GameView.showMessage("This tile is not empty!\nTry again.");
+                            try {
+                                throw new TileNotEmptyException("This tile is not empty!\nTry again.");
+                            } catch (TileNotEmptyException e) {
+                                GameView.showMessage(e.getMessage());
+                            }
                         }
                         /*if (!game.hasWon() && !game.isDraw()) {
                             Player currentPlayer = game.getCurrentPlayer();
@@ -184,7 +195,15 @@ public class GamePresenter {
         view.getBtnQuit().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                exit();
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Quit");
+                alert.setHeaderText(null);
+                alert.setContentText("Are you sure you want to quit?");
+                alert.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO);
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.isPresent() && result.get() == ButtonType.YES) {
+                    exit();
+                }
             }
         });
 
@@ -205,12 +224,20 @@ public class GamePresenter {
         view.getBtnBack().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                StartUpView startUpView = new StartUpView();
-                StartUpPresenter startUpPresenter = new StartUpPresenter(game, startUpView);
-                Scene scene = view.getScene();
-                scene.setRoot(startUpView);
-                scene.getWindow().setHeight(view.getHeight() + 37); //grootte van het venster blijft hetzelfde
-                scene.getWindow().setWidth(view.getWidth() + 14);
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Quit");
+                alert.setHeaderText(null);
+                alert.setContentText("Are you sure you want to quit?");
+                alert.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO);
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.isPresent() && result.get() == ButtonType.YES) {
+                    StartUpView startUpView = new StartUpView();
+                    StartUpPresenter startUpPresenter = new StartUpPresenter(game, startUpView);
+                    Scene scene = view.getScene();
+                    scene.setRoot(startUpView);
+                    scene.getWindow().setHeight(view.getHeight() + 37);
+                    scene.getWindow().setWidth(view.getWidth() + 14);
+                }
             }
         });
 
@@ -230,23 +257,18 @@ public class GamePresenter {
     }
 
     private void updateView() {
-        for (int i = 0; i < game.getBoardSize(); i++) {
-            for (int j = 0; j < game.getBoardSize(); j++) {
-                final int col = i;
-                final int row = j;
-                if (view.getBtnBoardSquares()[i][j].isDisabled()) {
-                    view.getBtnBoardSquares()[i][j].setStyle("-fx-background-color: #032056; -fx-background-radius: 15px; -fx-text-fill: white");
-                }
-            }
-        }
         if (game.getCurrentPlayer().getPlayer().equals("X")) {
             //border rond lblPlayer1
-            view.getLblPlayer1().setBorder(Border.stroke(Color.RED));
-            view.getLblPlayer2().setBorder(null);
+            /*view.getLblPlayer1().setBorder(Border.stroke(Color.RED));
+            view.getLblPlayer2().setBorder(null);*/
+            view.getLblPlayer1().setStyle("-fx-background-color: #032056; -fx-text-fill: #68C8FF; -fx-background-radius: 15px; " +
+                    "-fx-border-color: red; -fx-border-radius: 14px; -fx-border-width: 3px");
+            view.getLblPlayer2().setStyle("-fx-background-color: #032056; -fx-text-fill: #68C8FF; -fx-background-radius: 15px; -fx-border-color: transparent");
         } else {
             //border rond lblPlayer2
-            view.getLblPlayer2().setBorder(Border.stroke(Color.RED));
-            view.getLblPlayer1().setBorder(null);
+            view.getLblPlayer2().setStyle("-fx-background-color: #032056; -fx-text-fill: #68C8FF; -fx-background-radius: 15px; " +
+                    "-fx-border-color: red; -fx-border-radius: 14px; -fx-border-width: 3px");
+            view.getLblPlayer1().setStyle("-fx-background-color: #032056; -fx-text-fill: #68C8FF; -fx-background-radius: 15px; -fx-border-color: transparent");
         }
     }
 

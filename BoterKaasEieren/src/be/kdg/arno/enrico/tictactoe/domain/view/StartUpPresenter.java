@@ -139,7 +139,7 @@ public class StartUpPresenter {
         });
     }
     public String showMessage(int player) {
-        //TODO: beter maken
+        /*//TODO: beter maken
         TextInputDialog dialog = new TextInputDialog();
         dialog.setHeaderText(null);
         dialog.setContentText("Name of player " + (player == 0 ? "X" : "O") + ": ");
@@ -174,6 +174,27 @@ public class StartUpPresenter {
         } while (result.isPresent());
 
         // If the result is not present, the dialog was closed without a name being entered.
-        return null;
+        return null;*/
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setHeaderText(null);
+        dialog.setContentText("Name of player " + (player == 0 ? "X" : "O") + ": ");
+
+        while (true) {
+            Optional<String> result = dialog.showAndWait();
+            if (!result.isPresent()) {
+                // If the result is not present, the dialog was closed without a name being entered.
+                return null;
+            }
+
+            String name = result.get().trim();
+            if (!name.isEmpty()) {
+                player++;
+                return name;
+            }
+
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Please enter a valid name.", ButtonType.OK);
+            alert.setHeaderText("Invalid Name");
+            alert.showAndWait();
+        }
     }
 }
