@@ -120,7 +120,7 @@ public class InitialiseComputerPresenter {
     public void setBoardSize() {
         if (view.getCbDifficulty().getValue().equals("Easy: 3x3 - 3 in a row")) {
             game.setSize(3);
-        } else if (view.getCbDifficulty().getValue().equals("Medium: 5x5 - 4 in a row")){
+        } else if (view.getCbDifficulty().getValue().equals("Medium: 5x5 - 4 in a row")) {
             game.setSize(5);
         } else {
             game.setSize(7);

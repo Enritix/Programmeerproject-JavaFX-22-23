@@ -124,14 +124,14 @@ public class InitialisePresenter {
         alert.setTitle("Warning");
         alert.setHeaderText(null);
         if (name1 && name2) {
-            alert.setContentText("Both the names of the players aren't correct.\nThe names cant't contain any numbers or special characters and need to be" +
-                    "longer than 1 character!");
+            alert.setContentText("Both the names of the players aren't correct.\nThe names cant't contain any numbers or special characters\n" +
+                    "and need to be longer than 1 character!");
         } else if (name1) {
-            alert.setContentText("The name of player X isn't correct.\nThe name cant't contain any numbers or special characters and needs to be" +
-                    "longer than 1 character!");
+            alert.setContentText("The name of player X isn't correct.\nThe name cant't contain any numbers or special characters\n" +
+                    "and needs to be longer than 1 character!");
         } else if (name2) {
-            alert.setContentText("The name of player O isn't correct.\nThe name cant't contain any numbers or special characters and need to be" +
-                    "longer than 1 character!");
+            alert.setContentText("The name of player O isn't correct.\nThe name cant't contain any numbers or special characters\n" +
+                    "and need to be longer than 1 character!");
         } else {
             alert.setContentText("You need to fill in all the boxes!");
         }
@@ -142,7 +142,7 @@ public class InitialisePresenter {
     public void setBoardSize() {
         if (view.getCbDifficulty().getValue().equals("Easy: 3x3 - 3 in a row")) {
             game.setSize(3);
-        } else if (view.getCbDifficulty().getValue().equals("Medium: 5x5 - 4 in a row")){
+        } else if (view.getCbDifficulty().getValue().equals("Medium: 5x5 - 4 in a row")) {
             game.setSize(5);
         } else {
             game.setSize(7);

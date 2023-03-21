@@ -44,7 +44,6 @@ public class StartUpView extends BorderPane {
     }
 
     private void initialiseNodes() {
-
         try {
             ivLogo = new ImageView(new Image(new FileInputStream("BoterKaasEieren/resources/images/logo_tictactoe.png")));
         } catch (FileNotFoundException e) {
@@ -71,12 +70,6 @@ public class StartUpView extends BorderPane {
 
         lblPlayer5.setFont(Font.font("Verdana", 30));
         lblPlayer5.setStyle("-fx-text-fill: #68C8FF;");
-
-
-
-        /*title = new Label("Tic Tac Toe");
-        title.setFont(Font.font("Lucida Calligraphy", 55));
-        title.setStyle("-fx-text-fill: #ed0202");*/
 
         btnPlay1v1 = new Button("Play 1 versus 1");
         btnPlay1v1.setFont(Font.font("Verdana", 30));
@@ -113,8 +106,7 @@ public class StartUpView extends BorderPane {
         VBox.setVgrow(buttonbox, Priority.ALWAYS);
         BorderPane.setMargin(buttonbox, new Insets(20));
 
-        this.setBackground(Background.fill(new LinearGradient(
-                0, 0, 1, 1, true,                      //sizing
+        this.setBackground(Background.fill(new LinearGradient(0, 0, 1, 1, true,                      //sizing
                 CycleMethod.NO_CYCLE,                  //cycling
                 new Stop(0, Color.web("#fdea16")),     //colors
                 new Stop(1, Color.web("#fd60e9")))));

@@ -6,13 +6,11 @@ import be.kdg.arno.enrico.tictactoe.domain.view.UIConstants;
 public class Board {
     private int size;
     private String[][] tiles;
-    /*private ArrayList<String>[][] tiles;*/
     private int pieceCounter;
 
     public Board(int size) {
         this.size = size;
         createBoard();
-        /*this.tiles = new ArrayList[size][size];*/
         this.pieceCounter = 0;
         clearBoard();
     }
@@ -20,7 +18,6 @@ public class Board {
     public boolean addPiece(String player, int colNumber, int rowNumber) {
         if (this.tiles[colNumber][rowNumber].equals("")) {
             this.pieceCounter++;
-            /*tiles[colNumber][rowNumber].add(player);*/
             tiles[colNumber][rowNumber] = player;
             return true;
         } else {
@@ -43,7 +40,6 @@ public class Board {
     public void clearBoard() {
         for (int i = 0; i < tiles.length; i++) {
             for (int j = 0; j < tiles.length; j++) {
-                /*tiles[i][j].clear();*/
                 tiles[i][j] = "";
             }
         }
@@ -121,44 +117,6 @@ public class Board {
             We're also checking if the tiles are not empty before checking for a win to avoid unnecessary comparisons.*/
         }
         if (getSize() == 5) {
-            /*// Check horizontal lines
-            for (int row = 0; row < size; row++) {
-                for (int col = 0; col <= size - 4; col++) {
-                    if (tiles[row][col].equals("X") && tiles[row][col + 1].equals("X") && tiles[row][col + 2].equals("X") && tiles[row][col + 3].equals("X") ||
-                            tiles[row][col].equals("O") && tiles[row][col + 1].equals("O") && tiles[row][col + 2].equals("O") && tiles[row][col + 3].equals("O")) {
-                        return true;
-                    }
-                }
-            }
-
-            // Check vertical lines
-            for (int col = 0; col < size; col++) {
-                for (int row = 0; row <= size - 4; row++) {
-                    if (tiles[row][col].equals("X") && tiles[row + 1][col].equals("X") && tiles[row + 2][col].equals("X") && tiles[row + 3][col].equals("X") ||
-                            tiles[row][col].equals("O") && tiles[row + 1][col].equals("O") && tiles[row + 2][col].equals("O") && tiles[row + 3][col].equals("O")) {
-                        return true;
-                    }
-                }
-            }
-
-            // Check diagonal lines
-            for (int row = 0; row <= size - 4; row++) {
-                for (int col = 0; col <= size - 4; col++) {
-                    if (tiles[row][col].equals("X") && tiles[row + 1][col + 1].equals("X") && tiles[row + 2][col + 2].equals("X") && tiles[row + 3][col + 3].equals("X") ||
-                            tiles[row][col].equals("O") && tiles[row + 1][col + 1].equals("O") && tiles[row + 2][col + 2].equals("O") && tiles[row + 3][col + 3].equals("O")) {
-                        return true;
-                    }
-                }
-            }
-
-            for (int row = 0; row <= size - 4; row++) {
-                for (int col = 3; col < size; col++) {
-                    if (tiles[row][col].equals("X") && tiles[row + 1][col - 1].equals("X") && tiles[row + 2][col - 2].equals("X") && tiles[row + 3][col - 3].equals("X") ||
-                            tiles[row][col].equals("O") && tiles[row + 1][col - 1].equals("O") && tiles[row + 2][col - 2].equals("O") && tiles[row + 3][col - 3].equals("O")) {
-                        return true;
-                    }
-                }
-            }*/
             for (int i = 0; i < size; i++) {
                 if (tiles[i][0].equals(tiles[i][1]) && tiles[i][1].equals(tiles[i][2]) && tiles[i][2].equals(tiles[i][3]) && !tiles[i][0].equals("")) {
                     return true;
@@ -237,17 +195,11 @@ public class Board {
     }
 
     public int getSize() {
-        /*return size;*/
         return UIConstants.getBoardSize();
     }
 
     public void createBoard() {
         this.tiles = new String[UIConstants.boardSize][UIConstants.boardSize];
-        for (int i = 0; i < tiles.length; i++) {
-            for (int j = 0; j < tiles.length; j++) {
-                /*tiles[i][j].clear();*/
-                tiles[i][j] = "";
-            }
-        }
+        clearBoard();
     }
 }

@@ -86,8 +86,6 @@ public class RulesView extends BorderPane {
         BorderPane.setMargin(backbox, new Insets(20));
 
 
-
-
     }
 
     public Button getBtnBack() {

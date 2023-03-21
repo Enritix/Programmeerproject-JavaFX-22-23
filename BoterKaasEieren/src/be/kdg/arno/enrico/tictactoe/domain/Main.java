@@ -15,6 +15,7 @@ public class Main extends Application {
     public static void main(String[] args) {
         Application.launch(args);
     }
+
     @Override
     public void start(Stage stage) throws Exception {
         UIConstants.setBoardSize(3);
@@ -30,21 +31,5 @@ public class Main extends Application {
         stage.setHeight(620);
         stage.setWidth(850);
         stage.show();
-
-
-
-
-
-/*
-        GameView view = new GameView();
-        Scene scene = new Scene(view);
-        stage.getIcons().add(new Image(new FileInputStream("resources/images/bke_logo.png")));
-        stage.setScene(scene);
-        stage.setTitle("Boter, kaas & eieren");
-        stage.setMinHeight(500);
-        stage.setMinWidth(500);
-        stage.show();
-*/
-
     }
 }

@@ -4,12 +4,13 @@ import be.kdg.arno.enrico.tictactoe.domain.model.Board;
 
 public interface Player {
 
-    boolean play(Board board , int col, int row);
+    boolean play(Board board, int col, int row);
+
     String getName();
+
     void setName(String name);
+
     public String getPlayer();
-    public void setMove(int x, int y);
-    public int[] getMove();
 
     void setX();
 

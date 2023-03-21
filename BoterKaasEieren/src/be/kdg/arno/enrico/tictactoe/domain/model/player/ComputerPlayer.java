@@ -1,15 +1,14 @@
 package be.kdg.arno.enrico.tictactoe.domain.model.player;
 
 import be.kdg.arno.enrico.tictactoe.domain.model.Board;
+import be.kdg.arno.enrico.tictactoe.domain.view.UIConstants;
 
 import java.util.Random;
 
-public class ComputerPlayer implements Player{
+public class ComputerPlayer implements Player {
     private String player;
     private int x;
     private int y;
-    int newRow;
-    int newCol;
     private int[] move;
     Random r = new Random();
 
@@ -32,19 +31,7 @@ public class ComputerPlayer implements Player{
             board.addPiece(this.player, row, col);
         }
         System.out.println("\nComputer played: (" + row + "," + col + ")\n");
-        /*setMove(x,y);*/
         return true;
-    }
-
-
-    public void setMove(int x, int y) {
-        /*this.move = new int[]{x, y};*/
-        this.move[0] = x;
-        this.move[1] = y;
-    }
-
-    public int[] getMove() {
-        return move;
     }
 
     public int getX() {
@@ -56,11 +43,11 @@ public class ComputerPlayer implements Player{
     }
 
     public void setX() {
-        this.x = r.nextInt(3);;
+        this.x = r.nextInt(UIConstants.getBoardSize());
     }
 
     public void setY() {
-        this.y = r.nextInt(3);;
+        this.y = r.nextInt(UIConstants.getBoardSize());
     }
 
     @Override

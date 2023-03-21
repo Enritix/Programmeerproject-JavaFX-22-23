@@ -7,21 +7,13 @@ import be.kdg.arno.enrico.tictactoe.domain.model.player.ComputerPlayer;
 import be.kdg.arno.enrico.tictactoe.domain.model.player.HumanPlayer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Border;
-import javafx.scene.media.AudioClip;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.Optional;
 
 import static javafx.application.Platform.exit;
@@ -39,26 +31,15 @@ public class GamePresenter {
     }
 
     private void addEventHandlers() {
-        /*Scanner sc = new Scanner(System.in);
-        System.out.print("Player one (X), give your name: ");
-        String player1 = sc.next();
-        System.out.print("Player two (O), give your name: ");
-        String player2 = sc.next();
-        System.out.printf("%s, you're playing against %s. Good luck to the both of you!\n", player1, player2);
-        game.twoPlayers(player1, player2);*/
         view.getLblPlayer1().setText(game.getPlayers()[0].getName());
         view.getLblPlayer2().setText(game.getPlayers()[1].getName());
 
-        /*File soundFile = new File("BoterKaasEieren/resources/sounds/new_game.mp3");
-        Media sound = new Media(soundFile.toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(sound);*/
         view.getBtnNewGame().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                /*mediaPlayer.play();*/
-                String url = "BoterKaasEieren/resources/sounds/new_game.mp3";
+                /*String url = "/new_game.mp3";
                 AudioClip newGame = new AudioClip(new File(url).toURI().toString());
-                newGame.play();
+                newGame.play();*/
 
                 game.reset();
                 updateView();
@@ -110,7 +91,6 @@ public class GamePresenter {
                                     game.addPieceOnBoard(game.getPlayers()[1].getX(), game.getPlayers()[1].getY());
                                     view.getBtnBoardSquares()[game.getPlayers()[1].getX()][game.getPlayers()[1].getY()].setText("O");
                                     /*view.getBtnBoardSquares()[game.getPlayers()[1].getX()][game.getPlayers()[1].getY()].setDisable(true);*/
-
                                     updateView();
                                 }
                             }
@@ -136,42 +116,6 @@ public class GamePresenter {
                                 GameView.showMessage(e.getMessage());
                             }
                         }
-                        /*if (!game.hasWon() && !game.isDraw()) {
-                            Player currentPlayer = game.getCurrentPlayer();
-                            String playerXorO = currentPlayer.getPlayer();
-                            view.getBtnBoardSquares()[col][row].setText(playerXorO);
-                            game.addPieceOnBoard(col, row);
-                            view.getBtnBoardSquares()[col][row].setDisable(true);
-                            updateView();
-
-                            if (game.hasWon()) {
-                                GameView.showMessage(String.format("%s (%s) has won!",
-                                        currentPlayer.getName(), playerXorO));
-                                updateView();
-                            } else if (game.isDraw()) {
-                                GameView.showMessage("Draw!");
-                                updateView();
-                            } else if (currentPlayer instanceof ComputerPlayer) {
-                                int[] computerMove = currentPlayer.getMove();
-                                int computerX = computerMove[0];
-                                int computerY = computerMove[1];
-                                view.getBtnBoardSquares()[computerX][computerY].setText("O");
-                                game.addPieceOnBoard(computerX, computerY);
-                                view.getBtnBoardSquares()[computerX][computerY].setDisable(true);
-                                updateView();
-
-                                if (game.hasWon()) {
-                                    GameView.showMessage(String.format("%s (%s) has won!",
-                                            currentPlayer.getName(), playerXorO));
-                                    updateView();
-                                } else if (game.isDraw()) {
-                                    GameView.showMessage("Draw!");
-                                    updateView();
-                                }
-                            }
-                        } else {
-                            view.getBtnBoardSquares()[col][row].setDisable(true);
-                        }*/
                     }
                 });
 
@@ -188,7 +132,6 @@ public class GamePresenter {
                         view.getBtnBoardSquares()[col][row].setEffect(null);
                     }
                 });
-
             }
         }
 
@@ -258,9 +201,6 @@ public class GamePresenter {
 
     private void updateView() {
         if (game.getCurrentPlayer().getPlayer().equals("X")) {
-            //border rond lblPlayer1
-            /*view.getLblPlayer1().setBorder(Border.stroke(Color.RED));
-            view.getLblPlayer2().setBorder(null);*/
             view.getLblPlayer1().setStyle("-fx-background-color: #032056; -fx-text-fill: #68C8FF; -fx-background-radius: 15px; " +
                     "-fx-border-color: red; -fx-border-radius: 14px; -fx-border-width: 3px");
             view.getLblPlayer2().setStyle("-fx-background-color: #032056; -fx-text-fill: #68C8FF; -fx-background-radius: 15px; -fx-border-color: transparent");

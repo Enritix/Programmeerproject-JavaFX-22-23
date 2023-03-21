@@ -69,7 +69,7 @@ public class InitialiseComputerView extends BorderPane {
 
         HBox hbNameP1 = new HBox(lblNameP1, tfNameP1);
         hbNameP1.setEffect(new DropShadow(UIConstants.DEFAULT_SHADOW, Color.BLACK));
-        hbNameP1.setPadding(new Insets(0,10,0,10));
+        hbNameP1.setPadding(new Insets(0, 10, 0, 10));
         HBox.setHgrow(tfNameP1, Priority.ALWAYS);
         hbNameP1.setSpacing(10);
 
@@ -78,7 +78,7 @@ public class InitialiseComputerView extends BorderPane {
 
         HBox hbBoard = new HBox(lblDifficulty, cbDifficulty);
         hbBoard.setEffect(new DropShadow(UIConstants.DEFAULT_SHADOW, Color.BLACK));
-        hbBoard.setPadding(new Insets(0,10,0,10));
+        hbBoard.setPadding(new Insets(0, 10, 0, 10));
         hbBoard.setSpacing(10);
 
         cbDifficulty.setMaxWidth(Double.MAX_VALUE);
@@ -111,9 +111,9 @@ public class InitialiseComputerView extends BorderPane {
         vbForm.setStyle("-fx-background-color: #032056");
         super.setCenter(vbForm);
         super.setBottom(buttonBox);
-        btnPlay.setMinSize(80,40);
+        btnPlay.setMinSize(80, 40);
         BorderPane.setMargin(vbForm, new Insets(10));
-        BorderPane.setMargin(btnPlay, new Insets(0,10,10,10));
+        BorderPane.setMargin(btnPlay, new Insets(0, 10, 10, 10));
         BorderPane.setAlignment(btnPlay, Pos.BOTTOM_RIGHT);
     }
 

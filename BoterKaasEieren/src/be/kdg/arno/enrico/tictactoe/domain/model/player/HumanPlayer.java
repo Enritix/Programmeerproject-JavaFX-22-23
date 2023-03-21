@@ -16,18 +16,6 @@ public class HumanPlayer implements Player {
 
     @Override
     public boolean play(Board board, int col, int row) {
-        /*boolean placed = false;
-        do {
-            System.out.printf("%n%s's turn: ", getName());
-            System.out.print("\n↪Enter a column number (0, 1 or 2) -> ");
-            int column = sc.nextInt();
-            System.out.print("↪Enter a row number (0, 1 or 2) -> ");
-            int row = sc.nextInt();
-            placed = board.addPiece(this.player, row, col);
-            if (!placed) {
-                System.out.println("\nThis tile is not empty! Try again...");
-            }
-        } while (!placed);*/
         board.addPiece(this.player, row, col);
         System.out.println();
         return true;
@@ -49,23 +37,11 @@ public class HumanPlayer implements Player {
     }
 
     @Override
-    public void setMove(int x, int y) {
-
-    }
-
-    @Override
-    public int[] getMove() {
-        return new int[0];
-    }
-
-    @Override
     public void setX() {
-
     }
 
     @Override
     public void setY() {
-
     }
 
     @Override

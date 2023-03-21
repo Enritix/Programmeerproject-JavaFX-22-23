@@ -1,18 +1,12 @@
 package be.kdg.arno.enrico.tictactoe.domain.view;
 
-
 import be.kdg.arno.enrico.tictactoe.domain.model.TicTacToe;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextInputDialog;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-
-import java.util.Optional;
 
 import static javafx.application.Platform.exit;
 
@@ -32,31 +26,13 @@ public class StartUpPresenter {
             public void handle(ActionEvent actionEvent) {
                 /*UIConstants.setBoardSize(3);*/
                 game.reset();
-                /*sc = new Scanner(System.in);
-                System.out.print("Player one (X), give your name: ");
-                String player1 = sc.next();
-                System.out.print("Player two (O), give your name: ");
-                String player2 = sc.next();
-                System.out.printf("%s, you're playing against %s. Good luck to the both of you!\n", player1, player2);*/
-                /*String player1 = showMessage(0);
-                String player2 = showMessage(1);
-                if (player1 != null && player2 != null) {
-                    game.initialisePlayers("2p", player1, player2);
-                    GameView gameView = new GameView();
-                    GamePresenter gamePresenter = new GamePresenter(game, gameView);
-                    Scene scene = view.getScene();
-                    *//*scene.getStylesheets().add(0, "/application.css");*//*
-                    scene.setRoot(gameView);
-                    scene.getWindow().setHeight(view.getHeight()+37);
-                    scene.getWindow().setWidth(view.getWidth()+14);
-                }*/
                 InitialiseView initialiseView = new InitialiseView();
                 InitialisePresenter initialisePresenter = new InitialisePresenter(game, initialiseView);
                 Scene scene = view.getScene();
                 scene.getStylesheets().add(0, "/application.css");
                 scene.setRoot(initialiseView);
-                scene.getWindow().setHeight(view.getHeight()+37);
-                scene.getWindow().setWidth(view.getWidth()+14);
+                scene.getWindow().setHeight(view.getHeight() + 37);
+                scene.getWindow().setWidth(view.getWidth() + 14);
             }
         });
         view.getBtnPlay1v1().setOnMouseEntered(new EventHandler<MouseEvent>() {
@@ -75,24 +51,14 @@ public class StartUpPresenter {
             @Override
             public void handle(ActionEvent actionEvent) {
                 /*UIConstants.setBoardSize(3);*/
-                /*game.reset();*/
-                /*String player1 = showMessage(0);
-                if (player1 != null) {
-                    game.initialisePlayers("1p", player1, "Computer");
-                    GameView gameView = new GameView();
-                    GamePresenter gamePresenter = new GamePresenter(game, gameView);
-                    Scene scene = view.getScene();
-                    scene.setRoot(gameView);
-                    scene.getWindow().setHeight(view.getHeight());
-                    scene.getWindow().setWidth(view.getWidth());
-                }*/
+                game.reset();
                 InitialiseComputerView initialiseComputerView = new InitialiseComputerView();
                 InitialiseComputerPresenter initialiseComputerPresenter = new InitialiseComputerPresenter(game, initialiseComputerView);
                 Scene scene = view.getScene();
                 scene.getStylesheets().add(0, "/application.css");
                 scene.setRoot(initialiseComputerView);
-                scene.getWindow().setHeight(view.getHeight()+37);
-                scene.getWindow().setWidth(view.getWidth()+14);
+                scene.getWindow().setHeight(view.getHeight() + 37);
+                scene.getWindow().setWidth(view.getWidth() + 14);
             }
         });
         view.getBtnPlayComputer().setOnMouseEntered(new EventHandler<MouseEvent>() {
@@ -115,8 +81,8 @@ public class StartUpPresenter {
                 RulesPresenter rulesPresenter = new RulesPresenter(game, rulesView);
                 Scene scene = view.getScene();
                 scene.setRoot(rulesView);
-                scene.getWindow().setHeight(view.getHeight()+37);
-                scene.getWindow().setWidth(view.getWidth()+14);
+                scene.getWindow().setHeight(view.getHeight() + 37);
+                scene.getWindow().setWidth(view.getWidth() + 14);
             }
         });
         view.getBtnRules().setOnMouseEntered(new EventHandler<MouseEvent>() {
@@ -150,64 +116,5 @@ public class StartUpPresenter {
                 view.getBtnExit().setEffect(null);
             }
         });
-    }
-    public String showMessage(int player) {
-        /*//TODO: beter maken
-        TextInputDialog dialog = new TextInputDialog();
-        dialog.setHeaderText(null);
-        dialog.setContentText("Name of player " + (player == 0 ? "X" : "O") + ": ");
-
-        Button cancelButton = (Button) dialog.getDialogPane().lookupButton(ButtonType.CANCEL);
-        cancelButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                dialog.close();
-            }
-        });
-
-        Optional<String> result;
-        do {
-            result = dialog.showAndWait();
-            if (result.isPresent()) {
-                String name = result.get().trim();
-                if (!name.isEmpty()) {
-                    player++;
-                    return name;
-                } else {
-                    Alert alert = new Alert(
-                            Alert.AlertType.WARNING,
-                            "Invalid name",
-                            ButtonType.OK
-                    );
-                    alert.setHeaderText("Invalid Name");
-                    alert.setContentText("Please enter a valid name.");
-                    alert.showAndWait();
-                }
-            }
-        } while (result.isPresent());
-
-        // If the result is not present, the dialog was closed without a name being entered.
-        return null;*/
-        TextInputDialog dialog = new TextInputDialog();
-        dialog.setHeaderText(null);
-        dialog.setContentText("Name of player " + (player == 0 ? "X" : "O") + ": ");
-
-        while (true) {
-            Optional<String> result = dialog.showAndWait();
-            if (!result.isPresent()) {
-                // If the result is not present, the dialog was closed without a name being entered.
-                return null;
-            }
-
-            String name = result.get().trim();
-            if (!name.isEmpty()) {
-                player++;
-                return name;
-            }
-
-            Alert alert = new Alert(Alert.AlertType.WARNING, "Please enter a valid name.", ButtonType.OK);
-            alert.setHeaderText("Invalid Name");
-            alert.showAndWait();
-        }
     }
 }
