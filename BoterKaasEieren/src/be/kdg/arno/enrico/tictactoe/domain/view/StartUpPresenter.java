@@ -6,15 +6,12 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Optional;
 
 import static javafx.application.Platform.exit;
@@ -33,6 +30,7 @@ public class StartUpPresenter {
         view.getBtnPlay1v1().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                /*UIConstants.setBoardSize(3);*/
                 game.reset();
                 /*sc = new Scanner(System.in);
                 System.out.print("Player one (X), give your name: ");
@@ -40,18 +38,25 @@ public class StartUpPresenter {
                 System.out.print("Player two (O), give your name: ");
                 String player2 = sc.next();
                 System.out.printf("%s, you're playing against %s. Good luck to the both of you!\n", player1, player2);*/
-                String player1 = showMessage(0);
+                /*String player1 = showMessage(0);
                 String player2 = showMessage(1);
                 if (player1 != null && player2 != null) {
                     game.initialisePlayers("2p", player1, player2);
                     GameView gameView = new GameView();
                     GamePresenter gamePresenter = new GamePresenter(game, gameView);
                     Scene scene = view.getScene();
-                    /*scene.getStylesheets().add(0, "/application.css");*/
+                    *//*scene.getStylesheets().add(0, "/application.css");*//*
                     scene.setRoot(gameView);
                     scene.getWindow().setHeight(view.getHeight()+37);
                     scene.getWindow().setWidth(view.getWidth()+14);
-                }
+                }*/
+                InitialiseView initialiseView = new InitialiseView();
+                InitialisePresenter initialisePresenter = new InitialisePresenter(game, initialiseView);
+                Scene scene = view.getScene();
+                scene.getStylesheets().add(0, "/application.css");
+                scene.setRoot(initialiseView);
+                scene.getWindow().setHeight(view.getHeight()+37);
+                scene.getWindow().setWidth(view.getWidth()+14);
             }
         });
         view.getBtnPlay1v1().setOnMouseEntered(new EventHandler<MouseEvent>() {
@@ -69,8 +74,9 @@ public class StartUpPresenter {
         view.getBtnPlayComputer().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                game.reset();
-                String player1 = showMessage(0);
+                /*UIConstants.setBoardSize(3);*/
+                /*game.reset();*/
+                /*String player1 = showMessage(0);
                 if (player1 != null) {
                     game.initialisePlayers("1p", player1, "Computer");
                     GameView gameView = new GameView();
@@ -79,7 +85,14 @@ public class StartUpPresenter {
                     scene.setRoot(gameView);
                     scene.getWindow().setHeight(view.getHeight());
                     scene.getWindow().setWidth(view.getWidth());
-                }
+                }*/
+                InitialiseComputerView initialiseComputerView = new InitialiseComputerView();
+                InitialiseComputerPresenter initialiseComputerPresenter = new InitialiseComputerPresenter(game, initialiseComputerView);
+                Scene scene = view.getScene();
+                scene.getStylesheets().add(0, "/application.css");
+                scene.setRoot(initialiseComputerView);
+                scene.getWindow().setHeight(view.getHeight()+37);
+                scene.getWindow().setWidth(view.getWidth()+14);
             }
         });
         view.getBtnPlayComputer().setOnMouseEntered(new EventHandler<MouseEvent>() {

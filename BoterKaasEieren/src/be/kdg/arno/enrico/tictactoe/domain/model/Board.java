@@ -11,7 +11,7 @@ public class Board {
 
     public Board(int size) {
         this.size = size;
-        this.tiles = new String[UIConstants.BOARD_SIZE][UIConstants.BOARD_SIZE]; /*new String[size][size];*/
+        createBoard();
         /*this.tiles = new ArrayList[size][size];*/
         this.pieceCounter = 0;
         clearBoard();
@@ -29,7 +29,7 @@ public class Board {
     }
 
     public boolean isFull() {
-        if (pieceCounter == size * size) {
+        if (pieceCounter == UIConstants.getBoardSize() * UIConstants.getBoardSize()) {
             return true;
         } else {
             return false;
@@ -84,7 +84,7 @@ public class Board {
     }
 
     public boolean checkWin() {
-        if (size == 3) {
+        if (getSize() == 3) {
             /*if ((tiles[0][0] + tiles[0][1] + tiles[0][2]).equals("XXX") || (tiles[0][0] + tiles[0][1] + tiles[0][2]).equals("OOO")) {  //bovenste rij (horizontaal)
                 return true;
             } else if ((tiles[1][0] + tiles[1][1] + tiles[1][2]).equals("XXX") || (tiles[1][0] + tiles[1][1] + tiles[1][2]).equals("OOO")) {    //middelste rij (horizontaal)
@@ -120,7 +120,7 @@ public class Board {
             then checking for the diagonal wins individually with an `if` statement at the end.
             We're also checking if the tiles are not empty before checking for a win to avoid unnecessary comparisons.*/
         }
-        if (size == 5) {
+        if (getSize() == 5) {
             /*// Check horizontal lines
             for (int row = 0; row < size; row++) {
                 for (int col = 0; col <= size - 4; col++) {
@@ -186,7 +186,7 @@ public class Board {
                 return true;
             }
         }
-        if (size == 7) {
+        if (getSize() == 7) {
             for (int i = 0; i < size; i++) {
                 if (tiles[i][0].equals(tiles[i][1]) && tiles[i][1].equals(tiles[i][2]) && tiles[i][2].equals(tiles[i][3])
                         && !tiles[i][0].equals("")) {
@@ -237,6 +237,17 @@ public class Board {
     }
 
     public int getSize() {
-        return size;
+        /*return size;*/
+        return UIConstants.getBoardSize();
+    }
+
+    public void createBoard() {
+        this.tiles = new String[UIConstants.boardSize][UIConstants.boardSize];
+        for (int i = 0; i < tiles.length; i++) {
+            for (int j = 0; j < tiles.length; j++) {
+                /*tiles[i][j].clear();*/
+                tiles[i][j] = "";
+            }
+        }
     }
 }

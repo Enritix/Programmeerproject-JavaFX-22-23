@@ -17,7 +17,8 @@ public class Main extends Application {
     }
     @Override
     public void start(Stage stage) throws Exception {
-        TicTacToe game = new TicTacToe(UIConstants.BOARD_SIZE);
+        UIConstants.setBoardSize(3);
+        TicTacToe game = new TicTacToe(3);
         StartUpView startupView = new StartUpView();
         StartUpPresenter presenter = new StartUpPresenter(game, startupView);
         Scene startupScene = new Scene(startupView);

@@ -1,0 +1,16 @@
+.button{
+    -fx-font-family: Verdana;
+    -fx-font-size: 30;
+    -fx-background-color: #032056;
+    -fx-background-radius: 15px;
+    -fx-text-fill: #68C8FF;
+}
+
+.label {
+    -fx-font-family: Verdana;
+    -fx-font-size: 30;
+    -fx-background-color: #032056;
+    -fx-text-fill: #68C8FF;
+    -fx-background-radius: 8px;
+    -fx-background-position: center;
+}

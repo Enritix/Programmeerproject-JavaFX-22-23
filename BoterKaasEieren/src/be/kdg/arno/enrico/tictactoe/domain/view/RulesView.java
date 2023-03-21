@@ -55,9 +55,8 @@ public class RulesView extends BorderPane {
         rules.setStyle("-fx-text-fill: #ed0202");
         rules.setWrappingWidth(700);
 
-        btnBack = new Button();
-        btnBack.setGraphic(ivBack);
-        btnBack.setBackground(null);
+        btnBack = new Button("", ivBack);
+        btnBack.setStyle("-fx-background-color: transparent");
 
     }
 

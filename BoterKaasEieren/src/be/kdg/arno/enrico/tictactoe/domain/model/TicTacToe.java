@@ -3,6 +3,7 @@ package be.kdg.arno.enrico.tictactoe.domain.model;
 import be.kdg.arno.enrico.tictactoe.domain.model.player.ComputerPlayer;
 import be.kdg.arno.enrico.tictactoe.domain.model.player.HumanPlayer;
 import be.kdg.arno.enrico.tictactoe.domain.model.player.Player;
+import be.kdg.arno.enrico.tictactoe.domain.view.UIConstants;
 
 public class TicTacToe {
     private Board board;
@@ -23,7 +24,8 @@ public class TicTacToe {
     }
 
     public void reset() {
-        this.board = new Board(this.size);
+        setSize(UIConstants.getBoardSize());
+        this.board = new Board(UIConstants.boardSize);
         this.moveCounter = 0;
         this.won = false;
         this.draw = false;
@@ -95,8 +97,16 @@ public class TicTacToe {
         return players;
     }
 
+    public void createBoard() {
+        board.createBoard();
+    }
+
     public Board getBoard() {
         return board;
+    }
+
+    public void setSize(int size) {
+        UIConstants.setBoardSize(size);
     }
 
     /*public void addPieceOnBoard(int rowNumber, int colNumber) {
