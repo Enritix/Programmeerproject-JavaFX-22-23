@@ -26,9 +26,11 @@ public class InitialiseComputerView extends BorderPane {
 
     private TextField tfNameP1;
     private ComboBox<String> cbDifficulty;
+    private TextField tfCustom;
     private ImageView ivBack;
     private Button btnBack;
     private Button btnPlay;
+    private HBox hbCustom;
 
     public InitialiseComputerView() {
         initialiseNodes();
@@ -37,8 +39,9 @@ public class InitialiseComputerView extends BorderPane {
 
     private void initialiseNodes() {
         tfNameP1 = new TextField();
-        cbDifficulty = new ComboBox<>(FXCollections.observableArrayList("Easy: 3x3 - 3 in a row", "Medium: 5x5 - 4 in a row", "Hard: 7x7 - 4 in a row"));
+        cbDifficulty = new ComboBox<>(FXCollections.observableArrayList("Easy: 3x3 - 3 in a row", "Medium: 5x5 - 4 in a row", "Hard: 7x7 - 4 in a row", "Custom"));
         cbDifficulty.setValue("Easy: 3x3 - 3 in a row");
+        tfCustom = new TextField();
         try {
             ivBack = new ImageView(new Image(new FileInputStream("BoterKaasEieren/resources/images/arrow_back.png")));
         } catch (FileNotFoundException e) {
@@ -76,16 +79,30 @@ public class InitialiseComputerView extends BorderPane {
         lblDifficulty.setPrefWidth(300);
         lblDifficulty.setId("mainLabel");
 
-        HBox hbBoard = new HBox(lblDifficulty, cbDifficulty);
-        hbBoard.setEffect(new DropShadow(UIConstants.DEFAULT_SHADOW, Color.BLACK));
-        hbBoard.setPadding(new Insets(0, 10, 0, 10));
-        hbBoard.setSpacing(10);
+        HBox hbDifficulty = new HBox(lblDifficulty, cbDifficulty);
+        hbDifficulty.setEffect(new DropShadow(UIConstants.DEFAULT_SHADOW, Color.BLACK));
+        hbDifficulty.setPadding(new Insets(0, 10, 0, 10));
+        hbDifficulty.setSpacing(10);
 
         cbDifficulty.setMaxWidth(Double.MAX_VALUE);
         cbDifficulty.setPrefHeight(40);
         HBox.setHgrow(cbDifficulty, Priority.ALWAYS);
 
-        VBox vbForm = new VBox(hbNameP1, hbBoard);
+        Label lblCustom = new Label(" Custom:");
+        lblCustom.setPrefWidth(300);
+        lblCustom.setId("mainLabel");
+
+        hbCustom = new HBox(lblCustom, tfCustom);
+        hbCustom.setEffect(new DropShadow(UIConstants.DEFAULT_SHADOW, Color.BLACK));
+        hbCustom.setPadding(new Insets(0, 10, 0, 10));
+        hbCustom.setSpacing(10);
+        hbCustom.setVisible(false);
+
+        tfCustom.setMaxWidth(Double.MAX_VALUE);
+        tfCustom.setPrefHeight(40);
+        HBox.setHgrow(tfCustom, Priority.ALWAYS);
+
+        VBox vbForm = new VBox(hbNameP1, hbDifficulty, hbCustom);
         vbForm.setSpacing(10);
 
         HBox buttonBox = new HBox();
@@ -131,5 +148,12 @@ public class InitialiseComputerView extends BorderPane {
 
     public Button getBtnBack() {
         return btnBack;
+    }
+
+    public TextField getTfCustom() {
+        return tfCustom;
+    }
+    public void setCustom(boolean input) {
+        hbCustom.setVisible(input);
     }
 }

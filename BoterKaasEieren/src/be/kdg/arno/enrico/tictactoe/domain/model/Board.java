@@ -80,12 +80,6 @@ public class Board {
     }
 
 
-
-
-
-
-
-
     public boolean checkWin() {
         if (getSize() == 3) {
             for (int i = 0; i < getSize(); i++) {
@@ -121,7 +115,7 @@ public class Board {
             }
             for (int i = 0; i < getSize() - 3; i++) {   //diagonaal
                 for (int j = 0; j < getSize() - 3; j++) {
-                    if(i + j < getSize() - 3){
+                    if (i + j < getSize() - 3) {
 
                         //linksboven naar rechtsonder
                         if (tiles[i + j][i].equals(tiles[i + 1 + j][i + 1]) && tiles[i + 1 + j][i + 1].equals(tiles[i + 2 + j][i + 2]) && tiles[i + 2 + j][i + 2].equals(tiles[i + 3 + j][i + 3])
@@ -146,14 +140,6 @@ public class Board {
         }
         return false;
     }
-
-
-
-
-
-
-
-
 
 
     public int getSize() {

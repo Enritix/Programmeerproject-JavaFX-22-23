@@ -101,6 +101,17 @@ public class InitialiseComputerPresenter {
                 view.getBtnPlay().setEffect(null);
             }
         });
+
+        view.getCbDifficulty().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                if (view.getCbDifficulty().getValue().equals("Custom")) {
+                    view.setCustom(true);
+                } else {
+                    view.setCustom(false);
+                }
+            }
+        });
     }
 
     public void showMessage() {
@@ -122,8 +133,10 @@ public class InitialiseComputerPresenter {
             game.setSize(3);
         } else if (view.getCbDifficulty().getValue().equals("Medium: 5x5 - 4 in a row")) {
             game.setSize(5);
-        } else {
+        } else if (view.getCbDifficulty().getValue().equals("Hard: 7x7 - 4 in a row")) {
             game.setSize(7);
+        } else {
+            game.setSize(Integer.parseInt(view.getTfCustom().getText()));
         }
     }
 }
