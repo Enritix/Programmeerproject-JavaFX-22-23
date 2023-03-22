@@ -79,6 +79,13 @@ public class Board {
         return sb.toString();
     }
 
+
+
+
+
+
+
+
     public boolean checkWin() {
         if (getSize() == 3) {
             for (int i = 0; i < getSize(); i++) {
@@ -99,7 +106,7 @@ public class Board {
             then checking for the diagonal wins individually with an `if` statement at the end.
             We're also checking if the tiles are not empty before checking for a win to avoid unnecessary comparisons.*/
         }
-        if (getSize() == 5) {
+        if (getSize() == 5 || getSize() == 7) {
             for (int i = 0; i < getSize(); i++) {
                 for (int j = 0; j < getSize() - 3; j++) {
                     if (tiles[i][j].equals(tiles[i][j + 1]) && tiles[i][j + 1].equals(tiles[i][j + 2]) && tiles[i][j + 2].equals(tiles[i][j + 3])   //horizontal
@@ -113,41 +120,41 @@ public class Board {
                 }
             }
             for (int i = 0; i < getSize() - 3; i++) {   //diagonaal
-                if (tiles[i][i].equals(tiles[i + 1][i + 1]) && tiles[i + 1][i + 1].equals(tiles[i + 2][i + 2]) && tiles[i + 2][i + 2].equals(tiles[i + 3][i + 3])
-                        && !tiles[i][i].equals("")) {
-                    return true;
-                }
-                if (tiles[0 + i][4 - i].equals(tiles[1 + i][3 - i]) && tiles[1 + i][3 - i].equals(tiles[2 + i][2 - i]) && tiles[2 + i][2 - i].equals(tiles[3][1]) && !tiles[0 + i][4 - i].equals("")) {
-                    return true;
-                }
-            }
-        }
-        if (getSize() == 7) {
-            for (int i = 0; i < getSize(); i++) {
                 for (int j = 0; j < getSize() - 3; j++) {
-                    if (tiles[i][j].equals(tiles[i][j + 1]) && tiles[i][j + 1].equals(tiles[i][j + 2]) && tiles[i][j + 2].equals(tiles[i][j + 3])   //horizontaal
-                            && !tiles[i][j].equals("")) {
-                        return true;
+                    if(i + j < getSize() - 3){
+
+                        //linksboven naar rechtsonder
+                        if (tiles[i + j][i].equals(tiles[i + 1 + j][i + 1]) && tiles[i + 1 + j][i + 1].equals(tiles[i + 2 + j][i + 2]) && tiles[i + 2 + j][i + 2].equals(tiles[i + 3 + j][i + 3])
+                                && !tiles[i + j][i].equals("")) {
+                            return true;
+                        }
+                        if (tiles[i][i + j].equals(tiles[i + 1][i + 1 + j]) && tiles[i + 1][i + 1 + j].equals(tiles[i + 2][i + 2 + j]) && tiles[i + 2][i + 2 + j].equals(tiles[i + 3][i + 3 + j])
+                                && !tiles[i][i + j].equals("")) {
+                            return true;
+                        }
+
+                        //linksonder naar rechtsboven
+                        if (tiles[getSize() - 1 - i - j][0 + i].equals(tiles[getSize() - 2 - i - j][1 + i]) && tiles[getSize() - 2 - i - j][1 + i].equals(tiles[getSize() - 3 - i - j][2 + i]) && tiles[getSize() - 3 - i - j][2 + i].equals(tiles[getSize() - 4 - i - j][3 + i]) && !tiles[getSize() - 1 - i - j][0 + i].equals("")) {
+                            return true;
+                        }
+                        if (tiles[getSize() - 1 - i][0 + i + j].equals(tiles[getSize() - 2 - i][1 + i + j]) && tiles[getSize() - 2 - i][1 + i + j].equals(tiles[getSize() - 3 - i][2 + i + j]) && tiles[getSize() - 3 - i][2 + i + j].equals(tiles[getSize() - 4 - i][3 + i + j]) && !tiles[getSize() - 1 - i][0 + i + j].equals("")) {
+                            return true;
+                        }
                     }
-                    if (tiles[j][i].equals(tiles[j + 1][i]) && tiles[j + 1][i].equals(tiles[j + 2][i]) && tiles[j + 2][i].equals(tiles[j + 3][i])   //verticaal
-                            && !tiles[j][i].equals("")) {
-                        return true;
-                    }
-                }
-            }
-            for (int i = 0; i < getSize() - 3; i++) {   //diagonaal
-                if (tiles[i][i].equals(tiles[i + 1][i + 1]) && tiles[i + 1][i + 1].equals(tiles[i + 2][i + 2])
-                        && tiles[i + 2][i + 2].equals(tiles[i + 3][i + 3]) && !tiles[i][i].equals("")) {
-                    return true;
-                }
-                if (tiles[i][6 - i].equals(tiles[i + 1][5 - i]) && tiles[i + 1][5 - i].equals(tiles[i + 2][4 - i])
-                        && tiles[i + 2][4 - i].equals(tiles[i + 3][3 - i]) && !tiles[i][6 - i].equals("")) {
-                    return true;
                 }
             }
         }
         return false;
     }
+
+
+
+
+
+
+
+
+
 
     public int getSize() {
         return UIConstants.getBoardSize();
