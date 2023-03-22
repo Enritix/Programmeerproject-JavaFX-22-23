@@ -91,7 +91,6 @@ public class InitialisePresenter {
                         GameView gameView = new GameView();
                         GamePresenter gamePresenter = new GamePresenter(game, gameView);
                         Scene scene = view.getScene();
-                        /*scene.getStylesheets().add(0, "/application.css");*/
                         scene.setRoot(gameView);
                         scene.getWindow().setHeight(view.getHeight() + 37);
                         scene.getWindow().setWidth(view.getWidth() + 14);

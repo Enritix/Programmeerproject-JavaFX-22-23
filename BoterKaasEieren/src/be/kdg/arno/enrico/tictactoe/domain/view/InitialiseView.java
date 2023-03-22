@@ -63,11 +63,13 @@ public class InitialiseView extends BorderPane {
 
         Label lblNameP1 = new Label(" Name of player X:");
         lblNameP1.setPrefWidth(300);
+        lblNameP1.setId("mainLabel");
         tfNameP1.setMaxWidth(Double.MAX_VALUE);
         tfNameP1.setPrefHeight(40);
 
         Label lblNameP2 = new Label(" Name of player O:");
         lblNameP2.setPrefWidth(300);
+        lblNameP2.setId("mainLabel");
         tfNameP2.setMaxWidth(Double.MAX_VALUE);
         tfNameP2.setPrefHeight(40);
 
@@ -85,6 +87,7 @@ public class InitialiseView extends BorderPane {
 
         Label lblDifficulty = new Label(" Difficulty:");
         lblDifficulty.setPrefWidth(300);
+        lblDifficulty.setId("mainLabel");
 
         HBox hbBoard = new HBox(lblDifficulty, cbDifficulty);
         hbBoard.setEffect(new DropShadow(UIConstants.DEFAULT_SHADOW, Color.BLACK));

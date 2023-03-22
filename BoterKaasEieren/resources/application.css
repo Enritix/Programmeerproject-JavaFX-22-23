@@ -6,11 +6,17 @@
     -fx-text-fill: #68C8FF;
 }
 
-.label {
+#mainLabel {
     -fx-font-family: Verdana;
     -fx-font-size: 30;
     -fx-background-color: #032056;
     -fx-text-fill: #68C8FF;
     -fx-background-radius: 8px;
     -fx-background-position: center;
+}
+
+#lblRules {
+    -fx-text-fill: #ed0202;
+    -fx-font-family: 'Lucida Calligraphy';
+    -fx-font-size: 55
 }

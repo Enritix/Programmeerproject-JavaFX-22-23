@@ -25,9 +25,9 @@ public class RulesView extends BorderPane {
     private static final int BUTTON_PREFHEIGHT = 90;
 
     private ImageView ivBack;
-    private Label rulesTitle;
+    private Label lblRulesTitle;
 
-    private Text rules;
+    private Text txtRules;
     private Button btnBack;
 
     public RulesView() {
@@ -46,14 +46,13 @@ public class RulesView extends BorderPane {
         ivBack.setFitHeight(BUTTON_PREFHEIGHT);
         ivBack.setFitWidth(BUTTON_PREFWIDTH);
 
-        rulesTitle = new Label("Rules");
-        rulesTitle.setFont(Font.font("Lucida Calligraphy", 55));
-        rulesTitle.setStyle("-fx-text-fill: #ed0202");
+        lblRulesTitle = new Label("Rules");
+        lblRulesTitle.setId("lblRules");
 
-        rules = new Text("The game is played on a 3 by 3 grid of 9 empty squares.\n The two players alternate marking the empty squares, the first players marks Xs and the second player marks Os. \n If one player places three of the same marks in a straight line, that player wins. \n If all the squares are filled and there is no winner, the game ends in a draw.");
-        rules.setFont(Font.font("Lucida Calligraphy", 25));
-        rules.setStyle("-fx-text-fill: #ed0202");
-        rules.setWrappingWidth(700);
+        txtRules = new Text("The game is played on a 3 by 3 grid of 9 empty squares.\n The two players alternate marking the empty squares, the first players marks Xs and the second player marks Os. \n If one player places three of the same marks in a straight line, that player wins. \n If all the squares are filled and there is no winner, the game ends in a draw.");
+        txtRules.setFont(Font.font("Lucida Calligraphy", 25));
+        txtRules.setStyle("-fx-text-fill: #ed0202");
+        txtRules.setWrappingWidth(700);
 
         btnBack = new Button("", ivBack);
         btnBack.setStyle("-fx-background-color: transparent");
@@ -70,12 +69,12 @@ public class RulesView extends BorderPane {
 
         HBox titlebox = new HBox();
         titlebox.setAlignment(Pos.TOP_CENTER);
-        titlebox.getChildren().addAll(rulesTitle);
+        titlebox.getChildren().addAll(lblRulesTitle);
         this.setTop(titlebox);
 
         HBox rulesbox = new HBox();
         rulesbox.setAlignment(Pos.CENTER);
-        rulesbox.getChildren().addAll(rules);
+        rulesbox.getChildren().addAll(txtRules);
         this.setCenter(rulesbox);
 
         HBox backbox = new HBox();
