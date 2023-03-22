@@ -27,11 +27,11 @@ public class StartUpView extends BorderPane {
     Label lblScoreboardTitle;
     ImageView ivLogo;
 
-    Label lblPlayer1 = new Label("1. Player1");
-    Label lblPlayer2 = new Label("2. Player2");
-    Label lblPlayer3 = new Label("3. Player3");
-    Label lblPlayer4 = new Label("4. Player4");
-    Label lblPlayer5 = new Label("5. Player5");
+    Label lblPlayer1 = new Label("1. Enrico - 55");
+    Label lblPlayer2 = new Label("2. Arno - 28");
+    Label lblPlayer3 = new Label("3. Jonas - 16");
+    Label lblPlayer4 = new Label("4. Seppe - 12");
+    Label lblPlayer5 = new Label("5. Djaro - 3");
 
     Button btnPlay1v1;
     Button btnPlayComputer;
