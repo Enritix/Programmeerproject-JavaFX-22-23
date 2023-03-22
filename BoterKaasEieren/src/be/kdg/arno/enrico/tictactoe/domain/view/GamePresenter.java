@@ -4,6 +4,7 @@ package be.kdg.arno.enrico.tictactoe.domain.view;
 import be.kdg.arno.enrico.tictactoe.domain.model.TicTacToe;
 import be.kdg.arno.enrico.tictactoe.domain.model.exceptions.TileNotEmptyException;
 import be.kdg.arno.enrico.tictactoe.domain.model.player.ComputerPlayer;
+import be.kdg.arno.enrico.tictactoe.domain.model.player.DelayedPlayerMoveTimer;
 import be.kdg.arno.enrico.tictactoe.domain.model.player.HumanPlayer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -21,6 +22,7 @@ import static javafx.application.Platform.exit;
 public class GamePresenter {
     private GameView view;
     private TicTacToe game;
+    DelayedPlayerMoveTimer timer = new DelayedPlayerMoveTimer(1500000000);
 
 
     public GamePresenter(TicTacToe game, GameView view) {
@@ -89,6 +91,7 @@ public class GamePresenter {
                                     game.getPlayers()[1].setY();
                                     game.getPlayers()[1].setX();
                                     game.addPieceOnBoard(game.getPlayers()[1].getX(), game.getPlayers()[1].getY());
+                                    timer.reset();
                                     view.getBtnBoardSquares()[game.getPlayers()[1].getX()][game.getPlayers()[1].getY()].setText("O");
                                     /*view.getBtnBoardSquares()[game.getPlayers()[1].getX()][game.getPlayers()[1].getY()].setDisable(true);*/
                                     updateView();
