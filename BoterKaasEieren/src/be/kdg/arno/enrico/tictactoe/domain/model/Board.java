@@ -106,7 +106,7 @@ public class Board {
             then checking for the diagonal wins individually with an `if` statement at the end.
             We're also checking if the tiles are not empty before checking for a win to avoid unnecessary comparisons.*/
         }
-        if (getSize() == 5 || getSize() == 7) {
+        if (getSize() > 3) {
             for (int i = 0; i < getSize(); i++) {
                 for (int j = 0; j < getSize() - 3; j++) {
                     if (tiles[i][j].equals(tiles[i][j + 1]) && tiles[i][j + 1].equals(tiles[i][j + 2]) && tiles[i][j + 2].equals(tiles[i][j + 3])   //horizontal
