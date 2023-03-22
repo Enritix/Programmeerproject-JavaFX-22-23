@@ -27,11 +27,11 @@ public class StartUpView extends BorderPane {
     Label lblScoreboardTitle;
     ImageView ivLogo;
 
-    Label lblPlayer1 = new Label("1. Enrico - 55");
-    Label lblPlayer2 = new Label("2. Arno - 28");
-    Label lblPlayer3 = new Label("3. Jonas - 16");
-    Label lblPlayer4 = new Label("4. Seppe - 12");
-    Label lblPlayer5 = new Label("5. Djaro - 3");
+    Label lblPlayer1 = new Label("1. Hans - 69");
+    Label lblPlayer2 = new Label("2. Enrico - 55");
+    Label lblPlayer3 = new Label("3. Arno - 28");
+    Label lblPlayer4 = new Label("4. Jonas - 16");
+    Label lblPlayer5 = new Label("5. Seppe - 12");
 
     Button btnPlay1v1;
     Button btnPlayComputer;
@@ -71,13 +71,13 @@ public class StartUpView extends BorderPane {
         lblPlayer5.setFont(Font.font("Verdana", 30));
         lblPlayer5.setStyle("-fx-text-fill: #68C8FF;");
 
-        btnPlay1v1 = new Button("Play 1 versus 1");
+        btnPlay1v1 = new Button("Play 1 VS 1");
         btnPlay1v1.setFont(Font.font("Verdana", 30));
         btnPlay1v1.setStyle("-fx-background-color: #032056; -fx-text-fill: #68C8FF; -fx-background-radius: 5px");
         btnPlay1v1.setPrefSize(BUTTON_PREFWIDTH, BUTTON_PREFHEIGHT);
         btnPlay1v1.setMaxWidth(800);
 
-        btnPlayComputer = new Button("Play against the computer");
+        btnPlayComputer = new Button("Play VS Computer");
         btnPlayComputer.setFont(Font.font("Verdana", 30));
         btnPlayComputer.setStyle("-fx-background-color: #032056; -fx-text-fill: #68C8FF; -fx-background-radius: 5px");
         btnPlayComputer.setPrefSize(BUTTON_PREFWIDTH, BUTTON_PREFHEIGHT);
