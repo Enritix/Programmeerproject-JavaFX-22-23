@@ -26,6 +26,7 @@ public class GamePresenter {
     public GamePresenter(TicTacToe game, GameView view) {
         this.view = view;
         this.game = game;
+        game.reset();
         addEventHandlers();
         updateView();
     }
@@ -40,7 +41,6 @@ public class GamePresenter {
                 /*String url = "/new_game.mp3";
                 AudioClip newGame = new AudioClip(new File(url).toURI().toString());
                 newGame.play();*/
-
                 game.reset();
                 updateView();
                 for (int i = 0; i < game.getBoardSize(); i++) {

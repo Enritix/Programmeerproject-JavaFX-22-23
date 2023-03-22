@@ -80,7 +80,7 @@ public class InitialisePresenter {
         view.getBtnPlay().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                /*game.reset();*/
+                game.reset();
                 if (!name1 && !name2) {
                     String player1 = view.getTfNameP1().getText();
                     String player2 = view.getTfNameP2().getText();

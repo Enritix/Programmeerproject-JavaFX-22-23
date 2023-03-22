@@ -81,24 +81,7 @@ public class Board {
 
     public boolean checkWin() {
         if (getSize() == 3) {
-            /*if ((tiles[0][0] + tiles[0][1] + tiles[0][2]).equals("XXX") || (tiles[0][0] + tiles[0][1] + tiles[0][2]).equals("OOO")) {  //bovenste rij (horizontaal)
-                return true;
-            } else if ((tiles[1][0] + tiles[1][1] + tiles[1][2]).equals("XXX") || (tiles[1][0] + tiles[1][1] + tiles[1][2]).equals("OOO")) {    //middelste rij (horizontaal)
-                return true;
-            } else if ((tiles[2][0] + tiles[2][1] + tiles[2][2]).equals("XXX") || (tiles[2][0] + tiles[2][1] + tiles[2][2]).equals("OOO")) {    //onderste rij (horizontaal)
-                return true;
-            } else if ((tiles[0][0] + tiles[1][1] + tiles[2][2]).equals("XXX") || (tiles[0][0] + tiles[1][1] + tiles[2][2]).equals("OOO")) {    //linksboven naar rechtsonder (diagonaal)
-                return true;
-            } else if ((tiles[2][0] + tiles[1][1] + tiles[0][2]).equals("XXX") || (tiles[2][0] + tiles[1][1] + tiles[0][2]).equals("OOO")) {    //linksonder naar rechtsboven (diagonaal)
-                return true;
-            }else if ((tiles[0][0] + tiles[1][0] + tiles[2][0]).equals("XXX") || (tiles[0][0] + tiles[1][0] + tiles[2][0]).equals("OOO")) {    //linkse kolom (verticaal)
-                return true;
-            }else if ((tiles[0][1] + tiles[1][1] + tiles[2][1]).equals("XXX") || (tiles[0][1] + tiles[1][1] + tiles[2][1]).equals("OOO")) {    //middelste kolom (verticaal)
-                return true;
-            }else if ((tiles[0][2] + tiles[1][2] + tiles[2][2]).equals("XXX") || (tiles[0][2] + tiles[1][2] + tiles[2][2]).equals("OOO")) {    //rechtse kolom (verticaal)
-                return true;
-            }*/
-            for (int i = 0; i < size; i++) {
+            for (int i = 0; i < getSize(); i++) {
                 if (tiles[i][0].equals(tiles[i][1]) && tiles[i][1].equals(tiles[i][2]) && !tiles[i][0].equals("")) {
                     return true;
                 }
@@ -117,7 +100,7 @@ public class Board {
             We're also checking if the tiles are not empty before checking for a win to avoid unnecessary comparisons.*/
         }
         if (getSize() == 5) {
-            for (int i = 0; i < size; i++) {
+            for (int i = 0; i < getSize(); i++) {
                 if (tiles[i][0].equals(tiles[i][1]) && tiles[i][1].equals(tiles[i][2]) && tiles[i][2].equals(tiles[i][3]) && !tiles[i][0].equals("")) {
                     return true;
                 }
@@ -145,7 +128,7 @@ public class Board {
             }
         }
         if (getSize() == 7) {
-            for (int i = 0; i < size; i++) {
+            for (int i = 0; i < getSize(); i++) {
                 if (tiles[i][0].equals(tiles[i][1]) && tiles[i][1].equals(tiles[i][2]) && tiles[i][2].equals(tiles[i][3])
                         && !tiles[i][0].equals("")) {
                     return true;
@@ -180,7 +163,7 @@ public class Board {
                     return true;
                 }
             }
-            for (int i = 0; i < size - 3; i++) {
+            for (int i = 0; i < getSize() - 3; i++) {
                 if (tiles[i][i].equals(tiles[i + 1][i + 1]) && tiles[i + 1][i + 1].equals(tiles[i + 2][i + 2])
                         && tiles[i + 2][i + 2].equals(tiles[i + 3][i + 3]) && !tiles[i][i].equals("")) {
                     return true;
