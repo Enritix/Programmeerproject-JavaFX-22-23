@@ -90,7 +90,7 @@ public class InitialisePresenter {
                     String player1 = view.getTfNameP1().getText();
                     String player2 = view.getTfNameP2().getText();
                     String customSize = view.getTfCustom().getText();
-                    if ((view.getLblCustom().isVisible() && !customSize.isEmpty()) && !player1.isEmpty() && !player2.isEmpty()) {
+                    if (view.getHbCustom().isVisible() && !customSize.equals("") && !player1.isEmpty() && !player2.isEmpty() || !player1.isEmpty() && !player2.isEmpty() && !view.getHbCustom().isVisible()) {
                         setBoardSize();
                         game.createBoard();
                         game.initialisePlayers("2p", view.getTfNameP1().getText(), view.getTfNameP2().getText());
@@ -101,32 +101,13 @@ public class InitialisePresenter {
                         scene.getWindow().setHeight(view.getHeight() + 37);
                         scene.getWindow().setWidth(view.getWidth() + 14);
                     }
-                    if (player1.isEmpty() && view.getLblCustom().isVisible() && customSize.isEmpty() || player2.isEmpty() && view.getLblCustom().isVisible() && customSize.isEmpty()
-                            || player1.isEmpty() && player2.isEmpty() && view.getLblCustom().isVisible() && customSize.isEmpty() || view.getLblCustom().isVisible() && customSize.isEmpty())
+                    else if ((player1.isEmpty() && customSize.equals("") || player2.isEmpty() && customSize.equals("")
+                            || player1.isEmpty() && !player2.isEmpty() && !customSize.equals("") || !player1.isEmpty() && player2.isEmpty() && !customSize.equals("")
+                            || player1.isEmpty() && player2.isEmpty() && customSize.equals("") || customSize.equals("")) && view.getHbCustom().isVisible())
                         showMessage();
                 } else {
                     showMessage();
                 }
-                /*if (!name1 && !custom) {
-                    String player1 = view.getTfNameP1().getText();
-                    String customSize = view.getTfCustom().getText();
-                    if ((view.getLblCustom().isVisible() && !customSize.isEmpty()) && !player1.isEmpty()) {
-                        setBoardSize();
-                        game.createBoard();
-                        game.initialisePlayers("1p", view.getTfNameP1().getText(), "Computer");
-                        GameView gameView = new GameView();
-                        GamePresenter gamePresenter = new GamePresenter(game, gameView);
-                        Scene scene = view.getScene();
-                        scene.setRoot(gameView);
-                        scene.getWindow().setHeight(view.getHeight() + 37);
-                        scene.getWindow().setWidth(view.getWidth() + 14);
-                    }
-                    if (player1.isEmpty() && view.getLblCustom().isVisible() && customSize.isEmpty()
-                            || view.getLblCustom().isVisible() && customSize.isEmpty())
-                        showMessage();
-                } else {
-                    showMessage();
-                }*/
             }
         });
 

@@ -73,6 +73,32 @@ public class StartUpPresenter {
                 view.getBtnPlayComputer().setEffect(null);
             }
         });
+        view.getBtnPlayedGames().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                /*UIConstants.setBoardSize(3);*/
+                game.reset();
+                PlayedGamesView playedGamesView = new PlayedGamesView();
+                PlayedGamesPresenter playedGamesPresenter = new PlayedGamesPresenter(game, playedGamesView);
+                Scene scene = view.getScene();
+                scene.getStylesheets().add(0, "/application.css");
+                scene.setRoot(playedGamesView);
+                scene.getWindow().setHeight(view.getHeight() + 37);
+                scene.getWindow().setWidth(view.getWidth() + 14);
+            }
+        });
+        view.getBtnPlayedGames().setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                view.getBtnPlayedGames().setEffect(new DropShadow(UIConstants.DEFAULT_SHADOW, Color.BLACK));
+            }
+        });
+        view.getBtnPlayedGames().setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                view.getBtnPlayedGames().setEffect(null);
+            }
+        });
 
         view.getBtnRules().setOnAction(new EventHandler<ActionEvent>() {
             @Override

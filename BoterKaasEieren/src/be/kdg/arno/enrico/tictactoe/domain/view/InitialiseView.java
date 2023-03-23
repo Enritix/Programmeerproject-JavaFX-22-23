@@ -196,6 +196,7 @@ public class InitialiseView extends BorderPane {
 
     public void setCustom(boolean input) {
         hbCustom.setVisible(input);
+        tfCustom.setText("");
     }
 
     public Tooltip getTtName() {
@@ -216,5 +217,9 @@ public class InitialiseView extends BorderPane {
 
     public Tooltip getTtCustom() {
         return ttCustom;
+    }
+
+    public HBox getHbCustom() {
+        return hbCustom;
     }
 }

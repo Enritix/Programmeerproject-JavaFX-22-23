@@ -3,6 +3,7 @@ package be.kdg.arno.enrico.tictactoe.domain.model;
 import be.kdg.arno.enrico.tictactoe.domain.model.player.ComputerPlayer;
 import be.kdg.arno.enrico.tictactoe.domain.model.player.HumanPlayer;
 import be.kdg.arno.enrico.tictactoe.domain.model.player.Player;
+import be.kdg.arno.enrico.tictactoe.domain.view.PlayedGamesPresenter;
 import be.kdg.arno.enrico.tictactoe.domain.view.UIConstants;
 
 public class TicTacToe {
@@ -81,19 +82,23 @@ public class TicTacToe {
         if (currentPlayer.play(board, colNumber, rowNumber)) {
             moveCounter++;
             System.out.println(board.toString());
+            PlayedGames playedGames = new PlayedGames();
             if (board.checkWin()) {
                 if (currentPlayer.getPlayer().equals("X")) {
                     System.out.println("\n" + players[0].getName() + " (X) wins!\n");
                     playerX = true;
+                    playedGames.save(getPlayers()[0], getPlayers()[1], UIConstants.getBoardSize(),getPlayers()[0].getName() + " won");
                 } else {
                     System.out.println("\n" + players[1].getName() + " (O) wins!\n");
                     playerO = true;
+                    playedGames.save(getPlayers()[0], getPlayers()[1],UIConstants.getBoardSize(), getPlayers()[1].getName() + " won");
                 }
                 board.clearBoard();
             } else if (board.isFull()) {
                 System.out.println("\nDraw!\n");
                 board.clearBoard();
                 draw = true;
+                playedGames.save(getPlayers()[0], getPlayers()[1], UIConstants.getBoardSize(),  "Draw");
             }
         } else {
             System.out.println("Tile is already taken. Try again.");

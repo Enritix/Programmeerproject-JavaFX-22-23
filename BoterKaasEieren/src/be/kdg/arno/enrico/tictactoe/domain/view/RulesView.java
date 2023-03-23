@@ -21,8 +21,6 @@ import java.io.FileNotFoundException;
 
 public class RulesView extends BorderPane {
 
-    private static final int BUTTON_PREFWIDTH = 90;
-    private static final int BUTTON_PREFHEIGHT = 90;
 
     private ImageView ivBack;
     private Label lblRulesTitle;
@@ -43,8 +41,8 @@ public class RulesView extends BorderPane {
             throw new RuntimeException(e);
         }
 
-        ivBack.setFitHeight(BUTTON_PREFHEIGHT);
-        ivBack.setFitWidth(BUTTON_PREFWIDTH);
+        ivBack.setFitHeight(UIConstants.BUTTON_PREFHEIGHT);
+        ivBack.setFitWidth(UIConstants.BUTTON_PREFWIDTH);
 
         lblRulesTitle = new Label("Rules");
         lblRulesTitle.setId("lblRules");
@@ -67,22 +65,22 @@ public class RulesView extends BorderPane {
                 new Stop(0, Color.web("#fdea16")),     //colors
                 new Stop(1, Color.web("#fd60e9")))));
 
-        HBox titlebox = new HBox();
-        titlebox.setAlignment(Pos.TOP_CENTER);
-        titlebox.getChildren().addAll(lblRulesTitle);
-        this.setTop(titlebox);
+        HBox hbTitleBox = new HBox();
+        hbTitleBox.setAlignment(Pos.TOP_CENTER);
+        hbTitleBox.getChildren().addAll(lblRulesTitle);
+        this.setTop(hbTitleBox);
 
-        HBox rulesbox = new HBox();
-        rulesbox.setAlignment(Pos.CENTER);
-        rulesbox.getChildren().addAll(txtRules);
-        this.setCenter(rulesbox);
+        HBox hbRulesBox = new HBox();
+        hbRulesBox.setAlignment(Pos.CENTER);
+        hbRulesBox.getChildren().addAll(txtRules);
+        this.setCenter(hbRulesBox);
 
-        HBox backbox = new HBox();
-        backbox.setAlignment(Pos.BOTTOM_LEFT);
-        backbox.getChildren().addAll(btnBack);
-        backbox.setMaxHeight(40);
-        this.setBottom(backbox);
-        BorderPane.setMargin(backbox, new Insets(20));
+        HBox hbBackBox = new HBox();
+        hbBackBox.setAlignment(Pos.BOTTOM_LEFT);
+        hbBackBox.getChildren().addAll(btnBack);
+        hbBackBox.setMaxHeight(40);
+        this.setBottom(hbBackBox);
+        BorderPane.setMargin(hbBackBox, new Insets(20));
 
 
     }

@@ -35,6 +35,7 @@ public class StartUpView extends BorderPane {
 
     Button btnPlay1v1;
     Button btnPlayComputer;
+    Button btnPlayedGames;
     Button btnRules;
     Button btnExit;
 
@@ -83,6 +84,12 @@ public class StartUpView extends BorderPane {
         btnPlayComputer.setPrefSize(BUTTON_PREFWIDTH, BUTTON_PREFHEIGHT);
         btnPlayComputer.setMaxWidth(800);
 
+        btnPlayedGames = new Button("Played Games");
+        btnPlayedGames.setFont(Font.font("Verdana", 30));
+        btnPlayedGames.setStyle("-fx-background-color: #032056; -fx-text-fill: #68C8FF; -fx-background-radius: 5px");
+        btnPlayedGames.setPrefSize(BUTTON_PREFWIDTH, BUTTON_PREFHEIGHT);
+        btnPlayedGames.setMaxWidth(800);
+
         btnRules = new Button("Rules");
         btnRules.setFont(Font.font("Verdana", 30));
         btnRules.setStyle("-fx-background-color: #032056; -fx-text-fill: #68C8FF; -fx-background-radius: 5px");
@@ -100,7 +107,7 @@ public class StartUpView extends BorderPane {
     private void layoutNodes() {
         VBox buttonbox = new VBox();
         buttonbox.setAlignment(Pos.CENTER);
-        buttonbox.getChildren().addAll(btnPlay1v1, btnPlayComputer, btnRules, btnExit);
+        buttonbox.getChildren().addAll(btnPlay1v1, btnPlayComputer, btnPlayedGames, btnRules, btnExit);
         buttonbox.setSpacing(15);
         this.setCenter(buttonbox);
         VBox.setVgrow(buttonbox, Priority.ALWAYS);
@@ -141,6 +148,10 @@ public class StartUpView extends BorderPane {
 
     Button getBtnPlayComputer() {
         return btnPlayComputer;
+    }
+
+    Button getBtnPlayedGames() {
+        return btnPlayedGames;
     }
 
     Button getBtnRules() {
