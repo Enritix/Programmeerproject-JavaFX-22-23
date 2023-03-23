@@ -11,10 +11,13 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
+import java.util.Optional;
+
 public class InitialiseComputerPresenter {
     private InitialiseComputerView view;
     private TicTacToe game;
     private boolean name1 = false;
+    private boolean custom = false;
 
     public InitialiseComputerPresenter(TicTacToe game, InitialiseComputerView view) {
         this.view = view;
@@ -66,22 +69,23 @@ public class InitialiseComputerPresenter {
         view.getBtnPlay().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                if (!name1) {
+                if (!name1 && !custom) {
                     String player1 = view.getTfNameP1().getText();
-                    if (!player1.isEmpty()) {
+                    String customSize = view.getTfCustom().getText();
+                    if ((view.getLblCustom().isVisible() && !customSize.isEmpty()) && !player1.isEmpty()) {
                         setBoardSize();
                         game.createBoard();
                         game.initialisePlayers("1p", view.getTfNameP1().getText(), "Computer");
                         GameView gameView = new GameView();
                         GamePresenter gamePresenter = new GamePresenter(game, gameView);
                         Scene scene = view.getScene();
-                        /*scene.getStylesheets().add(0, "/application.css");*/
                         scene.setRoot(gameView);
                         scene.getWindow().setHeight(view.getHeight() + 37);
                         scene.getWindow().setWidth(view.getWidth() + 14);
-                    } else {
-                        showMessage();
                     }
+                    if (player1.isEmpty() && view.getLblCustom().isVisible() && customSize.isEmpty()
+                            || view.getLblCustom().isVisible() && customSize.isEmpty())
+                        showMessage();
                 } else {
                     showMessage();
                 }
@@ -112,15 +116,62 @@ public class InitialiseComputerPresenter {
                 }
             }
         });
+
+        view.getTfCustom().setOnKeyTyped(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                String text = view.getTfCustom().getText();
+                if (text.length() > 1 || !"45678".contains(keyEvent.getCharacter())) {
+                    view.getTfCustom().setStyle(" -fx-border-color: red");
+                    custom = true;
+                } else {
+                    view.getTfCustom().setStyle(" -fx-border-color: transparent");
+                    custom = false;
+                }
+            }
+        });
+
+        view.getLblNameP1().setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                view.getTtName().show(view.getLblNameP1(), mouseEvent.getScreenX(), mouseEvent.getScreenY() + 10);
+            }
+        });
+
+        view.getLblNameP1().setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                view.getTtName().hide();
+            }
+        });
+
+        view.getLblCustom().setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                view.getTtCustom().show(view.getLblCustom(), mouseEvent.getScreenX(), mouseEvent.getScreenY() + 10);
+            }
+        });
+
+        view.getLblCustom().setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                view.getTtCustom().hide();
+            }
+        });
     }
 
     public void showMessage() {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Warning");
         alert.setHeaderText(null);
-        if (name1) {
+        if (name1 && custom) {
+            alert.setContentText("The name of player X and the custom size isn't correct.\nA name can't contain any numbers or special characters\n" +
+                    "and needs to be longer than 1 character!\nFor the custom size, check the tooltip for the usage!");
+        } else if (name1) {
             alert.setContentText("The name of player X isn't correct.\nThe name cant't contain any numbers or special characters and needs to be" +
                     "longer than 1 character!");
+        } else if (custom) {
+            alert.setContentText("The custom size isn't correct.\nCheck the tooltip for the usage!");
         } else {
             alert.setContentText("You need to fill in all the boxes!");
         }

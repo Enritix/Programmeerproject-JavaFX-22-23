@@ -3,10 +3,7 @@ package be.kdg.arno.enrico.tictactoe.domain.view;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -15,6 +12,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.TextAlignment;
+import javafx.util.Duration;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -24,9 +25,15 @@ import static be.kdg.arno.enrico.tictactoe.domain.view.UIConstants.BUTTON_PREFWI
 
 public class InitialiseView extends BorderPane {
 
+    private Label lblNameP1;
     private TextField tfNameP1;
+    private Label lblNameP2;
+    private Tooltip ttName;
     private TextField tfNameP2;
+    private Label lblDifficulty;
     private ComboBox<String> cbDifficulty;
+    private Label lblCustom;
+    private Tooltip ttCustom;
     private TextField tfCustom;
     private ImageView ivBack;
     private Button btnBack;
@@ -39,10 +46,16 @@ public class InitialiseView extends BorderPane {
     }
 
     private void initialiseNodes() {
+        lblNameP1 = new Label(" Name of player X:");
         tfNameP1 = new TextField();
+        ttName = new Tooltip();
+        lblNameP2 = new Label(" Name of player O:");
         tfNameP2 = new TextField();
+        lblDifficulty = new Label(" Difficulty:");
         cbDifficulty = new ComboBox<>(FXCollections.observableArrayList("Easy: 3x3 - 3 in a row", "Medium: 5x5 - 4 in a row", "Hard: 7x7 - 4 in a row", "Custom"));
         cbDifficulty.setValue("Easy: 3x3 - 3 in a row");
+        lblCustom = new Label(" Custom:");
+        ttCustom = new Tooltip();
         tfCustom = new TextField();
         try {
             ivBack = new ImageView(new Image(new FileInputStream("BoterKaasEieren/resources/images/arrow_back.png")));
@@ -64,17 +77,23 @@ public class InitialiseView extends BorderPane {
                 new Stop(0, Color.web("#fdea16")),     //colors
                 new Stop(1, Color.web("#fd60e9")))));
 
-        Label lblNameP1 = new Label(" Name of player X:");
         lblNameP1.setPrefWidth(300);
         lblNameP1.setId("mainLabel");
         tfNameP1.setMaxWidth(Double.MAX_VALUE);
         tfNameP1.setPrefHeight(40);
 
-        Label lblNameP2 = new Label(" Name of player O:");
+        ttName.setText("A name can't contain any numbers or special characters and needs to be longer than 1 character!");
+        ttName.setFont(Font.font("Arial", FontPosture.ITALIC, 15));
+        ttName.setTextAlignment(TextAlignment.CENTER);
+
+        Tooltip.install(lblNameP1, ttName);
+
         lblNameP2.setPrefWidth(300);
         lblNameP2.setId("mainLabel");
         tfNameP2.setMaxWidth(Double.MAX_VALUE);
         tfNameP2.setPrefHeight(40);
+
+        Tooltip.install(lblNameP2, ttName);
 
         HBox hbNameP1 = new HBox(lblNameP1, tfNameP1);
         hbNameP1.setEffect(new DropShadow(UIConstants.DEFAULT_SHADOW, Color.BLACK));
@@ -88,7 +107,6 @@ public class InitialiseView extends BorderPane {
         HBox.setHgrow(tfNameP2, Priority.ALWAYS);
         hbNameP2.setSpacing(10);
 
-        Label lblDifficulty = new Label(" Difficulty:");
         lblDifficulty.setPrefWidth(300);
         lblDifficulty.setId("mainLabel");
 
@@ -101,9 +119,14 @@ public class InitialiseView extends BorderPane {
         cbDifficulty.setPrefHeight(40);
         HBox.setHgrow(cbDifficulty, Priority.ALWAYS);
 
-        Label lblCustom = new Label(" Custom:");
         lblCustom.setPrefWidth(300);
         lblCustom.setId("mainLabel");
+
+        ttCustom.setText("The custom size needs to be between the range of 4 and 8! 'e.g. 6'");
+        ttCustom.setFont(Font.font("Arial", FontPosture.ITALIC, 15));
+        ttCustom.setTextAlignment(TextAlignment.CENTER);
+
+        Tooltip.install(lblNameP1, ttName);
 
         hbCustom = new HBox(lblCustom, tfCustom);
         hbCustom.setEffect(new DropShadow(UIConstants.DEFAULT_SHADOW, Color.BLACK));
@@ -173,5 +196,25 @@ public class InitialiseView extends BorderPane {
 
     public void setCustom(boolean input) {
         hbCustom.setVisible(input);
+    }
+
+    public Tooltip getTtName() {
+        return ttName;
+    }
+
+    public Label getLblNameP1() {
+        return lblNameP1;
+    }
+
+    public Label getLblNameP2() {
+        return lblNameP2;
+    }
+
+    public Label getLblCustom() {
+        return lblCustom;
+    }
+
+    public Tooltip getTtCustom() {
+        return ttCustom;
     }
 }

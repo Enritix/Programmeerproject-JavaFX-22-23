@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.input.DragEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -16,6 +17,7 @@ public class InitialisePresenter {
     private TicTacToe game;
     private boolean name1 = false;
     private boolean name2 = false;
+    private boolean custom = false;
 
     public InitialisePresenter(TicTacToe game, InitialiseView view) {
         this.view = view;
@@ -84,10 +86,11 @@ public class InitialisePresenter {
             @Override
             public void handle(ActionEvent actionEvent) {
                 game.reset();
-                if (!name1 && !name2) {
+                if (!name1 && !name2 && !custom) {
                     String player1 = view.getTfNameP1().getText();
                     String player2 = view.getTfNameP2().getText();
-                    if (!player1.isEmpty() && !player2.isEmpty()) {
+                    String customSize = view.getTfCustom().getText();
+                    if ((view.getLblCustom().isVisible() && !customSize.isEmpty()) && !player1.isEmpty() && !player2.isEmpty()) {
                         setBoardSize();
                         game.createBoard();
                         game.initialisePlayers("2p", view.getTfNameP1().getText(), view.getTfNameP2().getText());
@@ -97,12 +100,33 @@ public class InitialisePresenter {
                         scene.setRoot(gameView);
                         scene.getWindow().setHeight(view.getHeight() + 37);
                         scene.getWindow().setWidth(view.getWidth() + 14);
-                    } else {
-                        showMessage();
                     }
+                    if (player1.isEmpty() && view.getLblCustom().isVisible() && customSize.isEmpty() || player2.isEmpty() && view.getLblCustom().isVisible() && customSize.isEmpty()
+                            || player1.isEmpty() && player2.isEmpty() && view.getLblCustom().isVisible() && customSize.isEmpty() || view.getLblCustom().isVisible() && customSize.isEmpty())
+                        showMessage();
                 } else {
                     showMessage();
                 }
+                /*if (!name1 && !custom) {
+                    String player1 = view.getTfNameP1().getText();
+                    String customSize = view.getTfCustom().getText();
+                    if ((view.getLblCustom().isVisible() && !customSize.isEmpty()) && !player1.isEmpty()) {
+                        setBoardSize();
+                        game.createBoard();
+                        game.initialisePlayers("1p", view.getTfNameP1().getText(), "Computer");
+                        GameView gameView = new GameView();
+                        GamePresenter gamePresenter = new GamePresenter(game, gameView);
+                        Scene scene = view.getScene();
+                        scene.setRoot(gameView);
+                        scene.getWindow().setHeight(view.getHeight() + 37);
+                        scene.getWindow().setWidth(view.getWidth() + 14);
+                    }
+                    if (player1.isEmpty() && view.getLblCustom().isVisible() && customSize.isEmpty()
+                            || view.getLblCustom().isVisible() && customSize.isEmpty())
+                        showMessage();
+                } else {
+                    showMessage();
+                }*/
             }
         });
 
@@ -130,21 +154,82 @@ public class InitialisePresenter {
                 }
             }
         });
+
+        view.getTfCustom().setOnKeyTyped(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                String text = view.getTfCustom().getText();
+                if (text.length() > 1 || !"45678".contains(keyEvent.getCharacter())) {
+                    view.getTfCustom().setStyle(" -fx-border-color: red");
+                    custom = true;
+                } else {
+                    view.getTfCustom().setStyle(" -fx-border-color: transparent");
+                    custom = false;
+                }
+            }
+        });
+
+        view.getLblNameP1().setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                view.getTtName().show(view.getLblNameP1(), mouseEvent.getScreenX(), mouseEvent.getScreenY() + 10);
+            }
+        });
+
+        view.getLblNameP1().setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                view.getTtName().hide();
+            }
+        });
+
+        view.getLblNameP2().setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                view.getTtName().show(view.getLblNameP2(), mouseEvent.getScreenX(), mouseEvent.getScreenY() + 10);
+            }
+        });
+
+        view.getLblNameP2().setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                view.getTtName().hide();
+            }
+        });
+
+        view.getLblCustom().setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                view.getTtCustom().show(view.getLblCustom(), mouseEvent.getScreenX(), mouseEvent.getScreenY() + 10);
+            }
+        });
+
+        view.getLblCustom().setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                view.getTtCustom().hide();
+            }
+        });
     }
 
     public void showMessage() {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Warning");
         alert.setHeaderText(null);
-        if (name1 && name2) {
-            alert.setContentText("Both the names of the players aren't correct.\nThe names cant't contain any numbers or special characters\n" +
+        if (name1 && name2 && custom) {
+            alert.setContentText("The names of the players and the custom size aren't correct.\nThe names can't contain any numbers or special characters\n" +
+                    "and need to be longer than 1 character!\nFor the custom size, check the tooltip for the usage!");
+        } else if (name1 && name2) {
+            alert.setContentText("Both the names of the players aren't correct.\nThe names can't contain any numbers or special characters\n" +
                     "and need to be longer than 1 character!");
         } else if (name1) {
-            alert.setContentText("The name of player X isn't correct.\nThe name cant't contain any numbers or special characters\n" +
+            alert.setContentText("The name of player X isn't correct.\nThe name can't contain any numbers or special characters\n" +
                     "and needs to be longer than 1 character!");
         } else if (name2) {
-            alert.setContentText("The name of player O isn't correct.\nThe name cant't contain any numbers or special characters\n" +
+            alert.setContentText("The name of player O isn't correct.\nThe name can't contain any numbers or special characters\n" +
                     "and need to be longer than 1 character!");
+        } else if (custom) {
+            alert.setContentText("The custom size isn't correct.\nCheck the tooltip for the usage!");
         } else {
             alert.setContentText("You need to fill in all the boxes!");
         }
