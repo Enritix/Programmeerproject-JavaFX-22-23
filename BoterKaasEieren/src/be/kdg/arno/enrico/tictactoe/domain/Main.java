@@ -11,6 +11,14 @@ import javafx.stage.Stage;
 
 import java.io.FileInputStream;
 
+/**
+ * This class starts the application.
+ *
+ * @author Enrico Egghe
+ * @author Arno Bruyninckx
+ * @version 1.0
+ */
+
 public class Main extends Application {
     public static void main(String[] args) {
         Application.launch(args);
@@ -18,7 +26,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        //Set the board size to a standard of 3.
         UIConstants.setBoardSize(3);
+        //Create startupview, presenter and model.
         TicTacToe game = new TicTacToe(3);
         StartUpView startupView = new StartUpView();
         StartUpPresenter presenter = new StartUpPresenter(game, startupView);

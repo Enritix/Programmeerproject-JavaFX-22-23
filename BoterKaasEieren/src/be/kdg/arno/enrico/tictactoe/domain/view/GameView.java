@@ -1,7 +1,6 @@
 package be.kdg.arno.enrico.tictactoe.domain.view;
 
 
-import be.kdg.arno.enrico.tictactoe.domain.model.Leaderboard;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
@@ -19,7 +18,17 @@ import javafx.scene.text.Font;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+/**
+ * This class is the view for the game window.
+ * This is the window that gets opened as soon as the Play button is clicked inside one of the initialising windows is clicked.
+ *
+ * @author Enrico Egghe
+ * @author Arno Bruyninckx
+ * @version 1.0
+ */
+
 public class GameView extends BorderPane {
+    //Properties.
     public static final int FONT_SIZE = 30;
     private Label lblPlayer1;
     private Label lblPlayer1Score;
@@ -31,13 +40,14 @@ public class GameView extends BorderPane {
     private Button btnBack;
     private ImageView ivBack;
 
+    //Constructor.
     public GameView() {
         initialiseNodes();
         layoutNodes();
     }
 
+    //Methods.
     private void initialiseNodes() {
-
         try {
             ivBack = new ImageView(new Image(new FileInputStream("BoterKaasEieren/resources/images/arrow_back.png")));
         } catch (FileNotFoundException e) {
@@ -83,105 +93,72 @@ public class GameView extends BorderPane {
                 btnBoardSquares[i][j].setFont(Font.font("Verdana", FONT_SIZE));
             }
         }
-    }
+    }//initialiseNodes.
 
-        private void layoutNodes() {
-            this.setBackground(Background.fill(new LinearGradient(
-                    0, 0, 1, 1, true,                      //sizing
-                    CycleMethod.NO_CYCLE,                  //cycling
-                    new Stop(0, Color.web("#fdea16")),     //colors
-                    new Stop(1, Color.web("#fd60e9"))))
-            );
+    private void layoutNodes() {
+        this.setBackground(Background.fill(new LinearGradient(
+                0, 0, 1, 1, true,                      //sizing
+                CycleMethod.NO_CYCLE,                  //cycling
+                new Stop(0, Color.web("#fdea16")),     //colors
+                new Stop(1, Color.web("#fd60e9"))))
+        );
         GridPane gpBoard = new GridPane();
-            for (int i = 0; i < UIConstants.boardSize; i++) {
-                for (int j = 0; j < UIConstants.boardSize; j++) {
-                    gpBoard.add(btnBoardSquares[i][j], i, j);
-                    GridPane.setVgrow(btnBoardSquares[i][j], Priority.ALWAYS);
-                    GridPane.setHgrow(btnBoardSquares[i][j], Priority.ALWAYS);
-                }
+        for (int i = 0; i < UIConstants.boardSize; i++) {
+            for (int j = 0; j < UIConstants.boardSize; j++) {
+                gpBoard.add(btnBoardSquares[i][j], i, j);
+                GridPane.setVgrow(btnBoardSquares[i][j], Priority.ALWAYS);
+                GridPane.setHgrow(btnBoardSquares[i][j], Priority.ALWAYS);
             }
-            gpBoard.setVgap(10);
-            gpBoard.setHgap(10);
-            this.setCenter(gpBoard);
-            gpBoard.setMaxSize(300,300);
-            gpBoard.setStyle(" -fx-background-color: transparent"); //board bg
-
-            HBox hbTopLeft = new HBox(lblPlayer1, lblPlayer1Score);
-            HBox hbTopRight = new HBox(lblPlayer2Score, lblPlayer2);
-            hbTopLeft.setSpacing(20);
-            hbTopRight.setSpacing(20);
-            HBox hbTop = new HBox(hbTopLeft, hbTopRight);
-            HBox.setHgrow(hbTop, Priority.ALWAYS);
-            HBox.setHgrow(hbTopRight, Priority.ALWAYS);
-            hbTopLeft.setAlignment(Pos.BOTTOM_LEFT);
-            hbTopRight.setAlignment(Pos.BOTTOM_RIGHT);
-            hbTop.setSpacing(20);
-            lblPlayer1Score.setAlignment(Pos.BOTTOM_LEFT);
-            lblPlayer1.setAlignment(Pos.BOTTOM_LEFT);
-            lblPlayer2Score.setAlignment(Pos.BOTTOM_RIGHT);
-            lblPlayer2.setAlignment(Pos.BOTTOM_RIGHT);
-            this.setTop(hbTop);
-            BorderPane.setMargin(gpBoard, new Insets(10));
-            BorderPane.setMargin(hbTop, new Insets(10));
-            this.setBottom(btnNewGame);
-            BorderPane.setAlignment(btnNewGame, Pos.BOTTOM_LEFT);
-            BorderPane.setMargin(btnNewGame, new Insets(10));
-
-
-            HBox hbBottomLeft = new HBox(btnBack);
-            hbBottomLeft.setAlignment(Pos.CENTER_LEFT);
-            hbBottomLeft.setMaxWidth(UIConstants.BUTTON_PREFWIDTH*2);
-            HBox.setHgrow(hbBottomLeft,Priority.ALWAYS);
-
-            HBox hbBottomCenter = new HBox(btnNewGame, btnQuit);
-            hbBottomCenter.setSpacing(20);
-            hbBottomCenter.setAlignment(Pos.CENTER);
-            hbBottomCenter.setPadding(new Insets(10));
-            HBox.setHgrow(hbBottomCenter,Priority.SOMETIMES);
-            BorderPane.setMargin(hbBottomCenter, new Insets(10));
-
-            HBox hbBottomRight = new HBox();
-            hbBottomRight.setAlignment(Pos.CENTER);
-            hbBottomRight.setMaxWidth(UIConstants.BUTTON_PREFWIDTH*2);
-            HBox.setHgrow(hbBottomRight,Priority.ALWAYS);
-
-            HBox hbBottom = new HBox();
-            hbBottom.getChildren().addAll(hbBottomLeft,hbBottomCenter,hbBottomRight);
-            this.setBottom(hbBottom);
-
         }
+        gpBoard.setVgap(10);
+        gpBoard.setHgap(10);
+        this.setCenter(gpBoard);
+        gpBoard.setMaxSize(300, 300);
+        gpBoard.setStyle(" -fx-background-color: transparent"); //board bg
 
-    public Button[][] getBtnBoardSquares() {
-        return btnBoardSquares;
-    }
+        HBox hbTopLeft = new HBox(lblPlayer1, lblPlayer1Score);
+        HBox hbTopRight = new HBox(lblPlayer2Score, lblPlayer2);
+        hbTopLeft.setSpacing(20);
+        hbTopRight.setSpacing(20);
+        HBox hbTop = new HBox(hbTopLeft, hbTopRight);
+        HBox.setHgrow(hbTop, Priority.ALWAYS);
+        HBox.setHgrow(hbTopRight, Priority.ALWAYS);
+        hbTopLeft.setAlignment(Pos.BOTTOM_LEFT);
+        hbTopRight.setAlignment(Pos.BOTTOM_RIGHT);
+        hbTop.setSpacing(20);
+        lblPlayer1Score.setAlignment(Pos.BOTTOM_LEFT);
+        lblPlayer1.setAlignment(Pos.BOTTOM_LEFT);
+        lblPlayer2Score.setAlignment(Pos.BOTTOM_RIGHT);
+        lblPlayer2.setAlignment(Pos.BOTTOM_RIGHT);
+        this.setTop(hbTop);
+        BorderPane.setMargin(gpBoard, new Insets(10));
+        BorderPane.setMargin(hbTop, new Insets(10));
+        this.setBottom(btnNewGame);
+        BorderPane.setAlignment(btnNewGame, Pos.BOTTOM_LEFT);
+        BorderPane.setMargin(btnNewGame, new Insets(10));
 
-    public Button getBtnBack(){
-        return btnBack;
-    }
 
-    public Button getBtnNewGame() {
-        return btnNewGame;
-    }
+        HBox hbBottomLeft = new HBox(btnBack);
+        hbBottomLeft.setAlignment(Pos.CENTER_LEFT);
+        hbBottomLeft.setMaxWidth(UIConstants.BUTTON_PREFWIDTH * 2);
+        HBox.setHgrow(hbBottomLeft, Priority.ALWAYS);
 
-    public Button getBtnQuit() {
-        return btnQuit;
-    }
+        HBox hbBottomCenter = new HBox(btnNewGame, btnQuit);
+        hbBottomCenter.setSpacing(20);
+        hbBottomCenter.setAlignment(Pos.CENTER);
+        hbBottomCenter.setPadding(new Insets(10));
+        HBox.setHgrow(hbBottomCenter, Priority.SOMETIMES);
+        BorderPane.setMargin(hbBottomCenter, new Insets(10));
 
-    public Label getLblPlayer1() {
-        return lblPlayer1;
-    }
+        HBox hbBottomRight = new HBox();
+        hbBottomRight.setAlignment(Pos.CENTER);
+        hbBottomRight.setMaxWidth(UIConstants.BUTTON_PREFWIDTH * 2);
+        HBox.setHgrow(hbBottomRight, Priority.ALWAYS);
 
-    public Label getLblPlayer2() {
-        return lblPlayer2;
-    }
-
-    public Label getLblPlayer1Score() {
-        return lblPlayer1Score;
-    }
-
-    public Label getLblPlayer2Score() {
-        return lblPlayer2Score;
-    }
+        HBox hbBottom = new HBox();
+        hbBottom.getChildren().addAll(hbBottomLeft, hbBottomCenter, hbBottomRight);
+        this.setBottom(hbBottom);
+    }//initialiseNodes.
 
     public static void showMessage(String text) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -189,6 +166,38 @@ public class GameView extends BorderPane {
         alert.setHeaderText(null);
         alert.setContentText(text);
         alert.showAndWait();
+    }//showMessage.
+
+    Button[][] getBtnBoardSquares() {
+        return btnBoardSquares;
+    }
+
+    Button getBtnBack() {
+        return btnBack;
+    }
+
+    Button getBtnNewGame() {
+        return btnNewGame;
+    }
+
+    Button getBtnQuit() {
+        return btnQuit;
+    }
+
+    Label getLblPlayer1() {
+        return lblPlayer1;
+    }
+
+    Label getLblPlayer2() {
+        return lblPlayer2;
+    }
+
+    Label getLblPlayer1Score() {
+        return lblPlayer1Score;
+    }
+
+    Label getLblPlayer2Score() {
+        return lblPlayer2Score;
     }
 }
 

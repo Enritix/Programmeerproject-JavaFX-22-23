@@ -23,8 +23,17 @@ import java.io.FileNotFoundException;
 import static be.kdg.arno.enrico.tictactoe.domain.view.UIConstants.BUTTON_PREFHEIGHT;
 import static be.kdg.arno.enrico.tictactoe.domain.view.UIConstants.BUTTON_PREFWIDTH;
 
-public class InitialiseComputerView extends BorderPane {
+/**
+ * This class is the view for the play vs computer window.
+ * This is the window that gets opened as soon as the Play VS Computer button inside the starting screen is clicked.
+ *
+ * @author Enrico Egghe
+ * @author Arno Bruyninckx
+ * @version 1.0
+ */
 
+public class InitialiseComputerView extends BorderPane {
+    //Properties.
     private Leaderboard leaderboard = new Leaderboard();
     private Label lblNameP1;
     private ComboBox<String> cbNamesP1;
@@ -43,11 +52,13 @@ public class InitialiseComputerView extends BorderPane {
     private Button btnEdit;
     private HBox hbNameP1;
 
+    //Constructor.
     public InitialiseComputerView() {
         initialiseNodes();
         layoutNodes();
     }
 
+    //Methods.
     private void initialiseNodes() {
         lblNameP1 = new Label(" Name of player X:");
 
@@ -84,7 +95,7 @@ public class InitialiseComputerView extends BorderPane {
         btnEdit = new Button("", ivEdit);
         btnEdit.setStyle("-fx-background-color: #032056");
         btnEdit.setPrefSize(35, 35);
-    }
+    }//initialiseNodes.
 
     private void layoutNodes() {
         this.setBackground(Background.fill(new LinearGradient(
@@ -177,31 +188,12 @@ public class InitialiseComputerView extends BorderPane {
         BorderPane.setMargin(vbForm, new Insets(10));
         BorderPane.setMargin(btnPlay, new Insets(0, 10, 10, 10));
         BorderPane.setAlignment(btnPlay, Pos.BOTTOM_RIGHT);
-    }
+    }//layoutNodes.
 
-    public TextField getTfNameP1() {
-        return tfNameP1;
-    }
-
-    public ComboBox<String> getCbDifficulty() {
-        return cbDifficulty;
-    }
-
-    public Button getBtnPlay() {
-        return btnPlay;
-    }
-
-    public Button getBtnBack() {
-        return btnBack;
-    }
-
-    public TextField getTfCustom() {
-        return tfCustom;
-    }
     public void setCustom(boolean input) {
         hbCustom.setVisible(input);
         tfCustom.setText("");
-    }
+    }//setCustom.
 
     public void showPlayerList(String whichBox) {
 
@@ -218,31 +210,43 @@ public class InitialiseComputerView extends BorderPane {
             hbNameP1.getChildren().add(btnEdit);
             cbNamesP1.setVisible(true);
         }
-    }
+    }//showPlayerList.
 
-    public Tooltip getTtName() {
+    //Getters.
+    TextField getTfNameP1() {
+        return tfNameP1;
+    }
+    ComboBox<String> getCbDifficulty() {
+        return cbDifficulty;
+    }
+    Button getBtnPlay() {
+        return btnPlay;
+    }
+    Button getBtnBack() {
+        return btnBack;
+    }
+    TextField getTfCustom() {
+        return tfCustom;
+    }
+    Tooltip getTtName() {
         return ttName;
     }
-
-    public Label getLblNameP1() {
+    Label getLblNameP1() {
         return lblNameP1;
     }
-
-    public Label getLblCustom() {
+    Label getLblCustom() {
         return lblCustom;
     }
-
-    public Tooltip getTtCustom() {
+    Tooltip getTtCustom() {
         return ttCustom;
     }
-
-    public HBox getHbCustom() {
+    HBox getHbCustom() {
         return hbCustom;
     }
-    public Button getBtnEdit() {
+    Button getBtnEdit() {
         return btnEdit;
     }
-    public ComboBox<String> getCbNamesP1() {
+    ComboBox<String> getCbNamesP1() {
         return cbNamesP1;
     }
 }

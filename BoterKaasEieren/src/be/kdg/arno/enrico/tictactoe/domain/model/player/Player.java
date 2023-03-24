@@ -2,22 +2,31 @@ package be.kdg.arno.enrico.tictactoe.domain.model.player;
 
 import be.kdg.arno.enrico.tictactoe.domain.model.Board;
 
+/**
+ * This class is an interface for both the player possibilities.
+ *
+ * @author Enrico Egghe
+ * @author Arno Bruyninckx
+ * @version 1.0
+ */
+
 public interface Player {
+    //Methods.
+    boolean play(Board board, int col, int row);//play.
 
-    boolean play(Board board, int col, int row);
+    //Getters and Setters.
+    String getName();//getName.
 
-    String getName();
+    void setName(String name);//setName.
 
-    void setName(String name);
+    public String getPlayer();//getPlayer.
 
-    public String getPlayer();
+    void setX();//setX.
 
-    void setX();
+    void setY();//setY.
 
-    void setY();
+    int getX();//getX.
 
-    int getX();
-
-    int getY();
+    int getY();//getY.
 }
 

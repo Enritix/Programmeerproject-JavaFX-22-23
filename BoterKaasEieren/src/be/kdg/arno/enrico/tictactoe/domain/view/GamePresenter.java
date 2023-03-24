@@ -20,13 +20,23 @@ import java.util.Optional;
 
 import static javafx.application.Platform.exit;
 
+/**
+ * This class is the presenter for the game window.
+ * This is the window that gets opened as soon as the Play button is clicked inside one of the initialising windows is clicked.
+ *
+ * @author Enrico Egghe
+ * @author Arno Bruyninckx
+ * @version 1.0
+ */
+
 public class GamePresenter {
+    //Properties.
     private GameView view;
     private TicTacToe game;
     DelayedPlayerMoveTimer timer = new DelayedPlayerMoveTimer(1500000000);
     Leaderboard leaderboard = new Leaderboard();
 
-
+    //Constructor.
     public GamePresenter(TicTacToe game, GameView view) {
         this.view = view;
         this.game = game;
@@ -35,12 +45,12 @@ public class GamePresenter {
         updateView();
     }
 
+    //Methods.
     private void addEventHandlers() {
         view.getLblPlayer1().setText(game.getPlayers()[0].getName());
         view.getLblPlayer1Score().setText(leaderboard.getScoreFromLeaderboard(game.getPlayers()[0].getName()));
         view.getLblPlayer2().setText(game.getPlayers()[1].getName());
         view.getLblPlayer2Score().setText(leaderboard.getScoreFromLeaderboard(game.getPlayers()[1].getName()));
-
 
         view.getBtnNewGame().setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -205,7 +215,7 @@ public class GamePresenter {
                 view.getBtnBack().setEffect(null);
             }
         });
-    }
+    }//addEventHandlers.
 
     private void updateView() {
         if (game.getCurrentPlayer().getPlayer().equals("X")) {
@@ -220,7 +230,7 @@ public class GamePresenter {
         }
         view.getLblPlayer1Score().setText(leaderboard.getScoreFromLeaderboard(game.getPlayers()[0].getName()));
         view.getLblPlayer2Score().setText(leaderboard.getScoreFromLeaderboard(game.getPlayers()[1].getName()));
-    }
+    }//updateView.
 
     public void disableBoard() {
         for (int i = 0; i < game.getBoardSize(); i++) {
@@ -228,5 +238,5 @@ public class GamePresenter {
                 view.getBtnBoardSquares()[i][j].setDisable(true);
             }
         }
-    }
+    }//disableBoard.
 }

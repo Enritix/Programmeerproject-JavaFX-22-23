@@ -10,16 +10,28 @@ import javafx.scene.paint.Color;
 
 import static javafx.application.Platform.exit;
 
+/**
+ * This class is the presenter for the start up menu.
+ * This is the menu that gets opened as soon as the application starts.
+ *
+ * @author Enrico Egghe
+ * @author Arno Bruyninckx
+ * @version 1.0
+ */
+
 public class StartUpPresenter {
+    //Properties.
     private TicTacToe game;
     private StartUpView view;
 
+    //Constructor.
     public StartUpPresenter(TicTacToe game, StartUpView view) {
         this.game = game;
         this.view = view;
         addEventHandlers();
     }
 
+    //Methods.
     private void addEventHandlers() {
         view.getBtnPlay1v1().setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -142,5 +154,29 @@ public class StartUpPresenter {
                 view.getBtnExit().setEffect(null);
             }
         });
-    }
+        view.getVbLeaderboard().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                LeaderboardView leaderboardView = new LeaderboardView();
+                LeaderboardPresenter leaderboardPresenter = new LeaderboardPresenter(game, leaderboardView);
+                Scene scene = view.getScene();
+                scene.setRoot(leaderboardView);
+                scene.getWindow().setHeight(view.getHeight() + 37);
+                scene.getWindow().setWidth(view.getWidth() + 14);
+            }
+        });
+
+        view.getVbLeaderboard().setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                view.getVbLeaderboard().setEffect(new DropShadow(UIConstants.DEFAULT_SHADOW, Color.BLACK));
+            }
+        });
+        view.getVbLeaderboard().setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                view.getVbLeaderboard().setEffect(null);
+            }
+        });
+    }//addEventHandlers.
 }

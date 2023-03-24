@@ -51,5 +51,23 @@
     -fx-text-alignment: center;
 }
 
+#startupButton {
+    -fx-background-color: #032056;
+    -fx-text-fill: #68C8FF;
+    -fx-background-radius: 5px;
+}
+
+#startupLeaderboardMiddle {
+    -fx-background-color: #0a3dd7;
+    -fx-background-radius: 5px, 50px, 5px, 50px;
+}
+
+#startupLeaderboardOutline {
+    -fx-background-color: #032056;
+    -fx-background-radius: 5px, 50px, 5px, 50px;
+}
+
+
+
 
 

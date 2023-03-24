@@ -23,8 +23,17 @@ import java.io.FileNotFoundException;
 import static be.kdg.arno.enrico.tictactoe.domain.view.UIConstants.BUTTON_PREFHEIGHT;
 import static be.kdg.arno.enrico.tictactoe.domain.view.UIConstants.BUTTON_PREFWIDTH;
 
-public class InitialiseView extends BorderPane {
+/**
+ * This class is the view for the play 1 vs 1 window.
+ * This is the window that gets opened as soon as the Play 1 VS 1 button inside the starting screen is clicked.
+ *
+ * @author Enrico Egghe
+ * @author Arno Bruyninckx
+ * @version 1.0
+ */
 
+public class InitialiseView extends BorderPane {
+    //Properties.
     private Leaderboard leaderboard = new Leaderboard();
     private Label lblNameP1;
     private ComboBox<String> cbNamesP1;
@@ -49,11 +58,13 @@ public class InitialiseView extends BorderPane {
     private HBox hbNameP1;
     private HBox hbNameP2;
 
+    //Constructor.
     public InitialiseView() {
         initialiseNodes();
         layoutNodes();
     }
 
+    //Methods.
     private void initialiseNodes() {
         lblNameP1 = new Label(" Name of player X:");
 
@@ -107,7 +118,7 @@ public class InitialiseView extends BorderPane {
         btnEdit2 = new Button("", ivEdit2);
         btnEdit2.setStyle("-fx-background-color: #032056");
         btnEdit2.setPrefSize(35, 35);
-    }
+    }//initialiseNodes.
 
     private void layoutNodes() {
         this.setBackground(Background.fill(new LinearGradient(
@@ -220,36 +231,12 @@ public class InitialiseView extends BorderPane {
         BorderPane.setMargin(vbForm, new Insets(10));
         BorderPane.setMargin(btnPlay, new Insets(0, 10, 10, 10));
         BorderPane.setAlignment(btnPlay, Pos.BOTTOM_RIGHT);
-    }
-
-    public TextField getTfNameP1() {
-        return tfNameP1;
-    }
-
-    public TextField getTfNameP2() {
-        return tfNameP2;
-    }
-
-    public ComboBox<String> getCbDifficulty() {
-        return cbDifficulty;
-    }
-
-    public Button getBtnPlay() {
-        return btnPlay;
-    }
-
-    public Button getBtnBack() {
-        return btnBack;
-    }
-
-    public TextField getTfCustom() {
-        return tfCustom;
-    }
+    }//layoutNodes.
 
     public void setCustom(boolean input) {
         hbCustom.setVisible(input);
         tfCustom.setText("");
-    }
+    }//setCustom.
 
     public void showPlayerList(String player, String whichBox) {
         if (player.equals("p1") && whichBox.equals("text")) {
@@ -278,45 +265,70 @@ public class InitialiseView extends BorderPane {
             hbNameP2.getChildren().add(btnEdit2);
             cbNamesP2.setVisible(true);
         }
+    }//showPlayerList.
+
+    //Getters.
+    TextField getTfNameP1() {
+        return tfNameP1;
     }
 
-    public Tooltip getTtName() {
+    TextField getTfNameP2() {
+        return tfNameP2;
+    }
+
+    ComboBox<String> getCbDifficulty() {
+        return cbDifficulty;
+    }
+
+    Button getBtnPlay() {
+        return btnPlay;
+    }
+
+    Button getBtnBack() {
+        return btnBack;
+    }
+
+    TextField getTfCustom() {
+        return tfCustom;
+    }
+
+    Tooltip getTtName() {
         return ttName;
     }
 
-    public Label getLblNameP1() {
+    Label getLblNameP1() {
         return lblNameP1;
     }
 
-    public Label getLblNameP2() {
+    Label getLblNameP2() {
         return lblNameP2;
     }
 
-    public Label getLblCustom() {
+    Label getLblCustom() {
         return lblCustom;
     }
 
-    public Tooltip getTtCustom() {
+    Tooltip getTtCustom() {
         return ttCustom;
     }
 
-    public HBox getHbCustom() {
+    HBox getHbCustom() {
         return hbCustom;
     }
 
-    public Button getBtnEdit() {
+    Button getBtnEdit() {
         return btnEdit;
     }
 
-    public Button getBtnEdit2() {
+    Button getBtnEdit2() {
         return btnEdit2;
     }
 
-    public ComboBox<String> getCbNamesP1() {
+    ComboBox<String> getCbNamesP1() {
         return cbNamesP1;
     }
 
-    public ComboBox<String> getCbNamesP2() {
+    ComboBox<String> getCbNamesP2() {
         return cbNamesP2;
     }
 }

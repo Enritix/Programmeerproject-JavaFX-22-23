@@ -1,14 +1,14 @@
 # Programmeerproject-2022-2023
 
-Task management
+Tic Tac Toe
 ---------------
-✔ = Finished |
-📝 = Editing  |
- = Awaiting |
+Authors:
++ Enrico Egghe - 103A
++ Arno Bruyninckx - 103A
 ---------------
+To run our Tic Tac Toe game, you need to go into the Main.
+When you're there, you need to run the 'Current File'.
 
-[ 📝 ] PlayedGames fixen
 
-[ ✖ ] win op laatste beurt fixen (bij playGame() methode)
 
-[ ✖ ] zien wie er aan de beurt is (presenter)
+

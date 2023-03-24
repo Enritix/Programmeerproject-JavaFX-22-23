@@ -10,15 +10,23 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class saves the played games to the playedgames.csv file.
+ * You can also read the file with this class.
+ *
+ * @author Enrico Egghe
+ * @author Arno Bruyninckx
+ * @version 1.0
+ */
 public class PlayedGames {
-    static GameRecord grSave;
+    //Properties.
     private static LocalDateTime now = LocalDateTime.now();
     private static DateTimeFormatter nowFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
+    //Methods.
     public void save(Player playerName1, Player playerName2, int boardSize, String result) {
         now.format(nowFormat);
         System.out.println("Saving: " + playerName1.getName() + " + " + playerName2.getName() + " + " + boardSize + "x" + boardSize + " + " + result);
-        /*grSave = new GameRecord(String.valueOf(now), playerName1.getName(), playerName2.getName(), boardSize + "x" + boardSize, result);*/
         Path path = Paths.get("./playedgames.csv");
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(path.toFile(), true))) {
             writer.write(String.valueOf(now));
@@ -36,7 +44,7 @@ public class PlayedGames {
             System.out.println("Can't read the file");
             System.out.println(e.getMessage());
         }
-    }
+    }//save.
 
     public List<String> load() {
         List<String> lines = new ArrayList<>();
@@ -62,7 +70,7 @@ public class PlayedGames {
             System.out.println(e.getMessage());
         }
         return lines;
-    }
+    }//load.
 
     public String[] loadDate() {
         List<String> lines = load();
@@ -73,7 +81,7 @@ public class PlayedGames {
             j++;
         }
         return dates;
-    }
+    }//loadDate.
 
     public String[] loadNameX() {
         List<String> lines = load();
@@ -84,7 +92,7 @@ public class PlayedGames {
             j++;
         }
         return namesX;
-    }
+    }//loadNameX.
 
     public String[] loadNameO() {
         List<String> lines = load();
@@ -95,7 +103,7 @@ public class PlayedGames {
             j++;
         }
         return namesO;
-    }
+    }//loadNameO.
 
     public String[] loadBoardSize() {
         List<String> lines = load();
@@ -106,7 +114,7 @@ public class PlayedGames {
             j++;
         }
         return boardSizes;
-    }
+    }//loadBoardSize.
 
     public String[] loadResults() {
         List<String> lines = load();
@@ -117,5 +125,16 @@ public class PlayedGames {
             j++;
         }
         return results;
-    }
+    }//loadResults.
+
+    public void clearFile() {
+        Path path = Paths.get("./playedgames.csv");
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(path.toFile(), false))) {
+            //This can be empty, as the append false basically means it will overwrite everything
+            // instead of when it's true, add it on a new line.
+        } catch (IOException e) {
+            System.out.println("Can't read the file");
+            System.out.println(e.getMessage());
+        }
+    }//clearFile.
 }

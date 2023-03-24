@@ -1,6 +1,5 @@
 package be.kdg.arno.enrico.tictactoe.domain.view;
 
-import be.kdg.arno.enrico.tictactoe.domain.model.PlayedGames;
 import be.kdg.arno.enrico.tictactoe.domain.model.TicTacToe;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -10,22 +9,21 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
 /**
- * This class is the presenter for the played games window.
- * This is the window that gets opened as soon as the Played Games button inside the starting screen is clicked.
+ * This class is the presenter for the leaderboard window.
+ * This is the window that gets opened as soon as the Leaderboard box inside the starting screen is clicked.
  *
  * @author Enrico Egghe
  * @author Arno Bruyninckx
  * @version 1.0
  */
 
-public class PlayedGamesPresenter {
+public class LeaderboardPresenter {
     //Properties.
-    private PlayedGamesView view;
+    private LeaderboardView view;
     private TicTacToe game;
-    private PlayedGames playedGames = new PlayedGames();
 
     //Constructor.
-    public PlayedGamesPresenter(TicTacToe game, PlayedGamesView view) {
+    public LeaderboardPresenter(TicTacToe game, LeaderboardView view) {
         this.game = game;
         this.view = view;
         addEventHandlers();
@@ -57,28 +55,5 @@ public class PlayedGamesPresenter {
                 view.getBtnBack().setEffect(null);
             }
         });
-
-        view.getBtnReset().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                playedGames.clearFile();
-                view.getPgTable().getItems().clear();
-                view.getPgTable().refresh();
-            }
-        });
-
-        view.getBtnReset().setOnMouseEntered(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                view.getBtnReset().setEffect(new DropShadow(UIConstants.DEFAULT_SHADOW, Color.BLACK));
-            }
-        });
-
-        view.getBtnReset().setOnMouseExited(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                view.getBtnReset().setEffect(null);
-            }
-        });
-    }//addEventHandlers.
+    }//addEventHandlers
 }

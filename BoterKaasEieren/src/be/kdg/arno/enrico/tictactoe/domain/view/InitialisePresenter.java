@@ -7,22 +7,30 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.input.DragEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
+/**
+ * This class is the presenter for the play 1 vs 1 window.
+ * This is the window that gets opened as soon as the Play 1 VS 1 button inside the starting screen is clicked.
+ *
+ * @author Enrico Egghe
+ * @author Arno Bruyninckx
+ * @version 1.0
+ */
+
 public class InitialisePresenter {
+    //Properties.
     private InitialiseView view;
     private TicTacToe game;
     private boolean name1 = false;
     private boolean name2 = false;
-    private boolean comboName1 = false;
-    private boolean comboName2 = false;
     private boolean custom = false;
     private int editClickCounter = 0;
     private int editClickCounter2 = 0;
 
+    //Constructor.
     public InitialisePresenter(TicTacToe game, InitialiseView view) {
         this.view = view;
         this.game = game;
@@ -32,7 +40,7 @@ public class InitialisePresenter {
         }
     }
 
-
+    //Methods.
     private void addEventhandlers() {
         view.getTfNameP1().setOnKeyTyped(new EventHandler<KeyEvent>() {
             @Override
@@ -262,8 +270,9 @@ public class InitialisePresenter {
                 view.getBtnEdit2().setEffect(null);
             }
         });
-    }
+    }//addEventHandlers.
 
+    //Methods.
     public void showMessage() {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Warning");
@@ -287,7 +296,7 @@ public class InitialisePresenter {
         }
         alert.getButtonTypes().setAll(ButtonType.OK);
         alert.showAndWait();
-    }
+    }//showMessage.
 
     public void setBoardSize() {
         if (view.getCbDifficulty().getValue().equals("Easy: 3x3 - 3 in a row")) {
@@ -299,5 +308,5 @@ public class InitialisePresenter {
         } else {
             game.setSize(Integer.parseInt(view.getTfCustom().getText()));
         }
-    }
+    }//setBoardSize.
 }

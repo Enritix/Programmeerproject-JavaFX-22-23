@@ -19,15 +19,23 @@ import javafx.scene.text.Text;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+/**
+ * This class is the view for the rules window.
+ * This is the window that gets opened as soon as the Rules button inside the starting screen is clicked.
+ *
+ * @author Enrico Egghe
+ * @author Arno Bruyninckx
+ * @version 1.0
+ */
 public class RulesView extends BorderPane {
-
-
+    //Properties.
     private ImageView ivBack;
     private Label lblRulesTitle;
 
     private Text txtRules;
     private Button btnBack;
 
+    //Constructor.
     public RulesView() {
         initialiseNodes();
         layoutNodes();
@@ -47,7 +55,10 @@ public class RulesView extends BorderPane {
         lblRulesTitle = new Label("Rules");
         lblRulesTitle.setId("lblRules");
 
-        txtRules = new Text("The game is played on a 3 by 3 grid of 9 empty squares.\n The two players alternate marking the empty squares, the first player marks Xs and the second player marks Os. \n If one player places three of the same marks in a straight line, that player wins. \n If all the squares are filled and there is no winner, the game ends in a draw.");
+        txtRules = new Text("The game is played on a 3 by 3 grid of 9 empty squares.\n " +
+                "The two players alternate marking the empty squares, the first player marks Xs and the second player marks Os. \n " +
+                "If one player places three of the same marks in a straight line, that player wins and gets 3 points. \n " +
+                "If all the squares are filled and there is no winner, the game ends in a draw and both players get 1 point.");
         txtRules.setFont(Font.font("Lucida Calligraphy", 25));
         txtRules.setStyle("-fx-text-fill: #ed0202");
         txtRules.setWrappingWidth(700);
@@ -55,7 +66,7 @@ public class RulesView extends BorderPane {
         btnBack = new Button("", ivBack);
         btnBack.setStyle("-fx-background-color: transparent");
 
-    }
+    }//initialiseNodes.
 
     private void layoutNodes() {
 
@@ -84,8 +95,8 @@ public class RulesView extends BorderPane {
 
 
     }
-
-    public Button getBtnBack() {
+    //Getters.
+    Button getBtnBack() {
         return btnBack;
     }
 

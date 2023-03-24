@@ -5,18 +5,27 @@ import be.kdg.arno.enrico.tictactoe.domain.view.UIConstants;
 
 import java.util.Random;
 
+/**
+ * This class is used to create a Computer Player.
+ *
+ * @author Enrico Egghe
+ * @author Arno Bruyninckx
+ * @version 1.0
+ */
+
 public class ComputerPlayer implements Player {
+    //Properties.
     private String player;
     private int x;
     private int y;
-    private int[] move;
     Random r = new Random();
 
+    //Constructor.
     public ComputerPlayer(String player) {
         this.player = player;
-        this.move = new int[2];
     }
 
+    //Methods.
     @Override
     public boolean play(Board board, int col, int row) {
         if (board.isSquareEmpty(row, col)) {
@@ -32,28 +41,29 @@ public class ComputerPlayer implements Player {
         }
         System.out.println("\nComputer played: (" + row + "," + col + ")\n");
         return true;
-    }
+    }//play.
 
+    //Getters and Setters.
     public int getX() {
         return x;
-    }
+    }//getX.
 
     public int getY() {
         return y;
-    }
+    }//getY.
 
     public void setX() {
         this.x = r.nextInt(UIConstants.getBoardSize());
-    }
+    }//setX.
 
     public void setY() {
         this.y = r.nextInt(UIConstants.getBoardSize());
-    }
+    }//setY.
 
     @Override
     public String getName() {
         return "Computer";
-    }
+    }//getName.
 
     @Override
     public void setName(String name) {
@@ -62,11 +72,11 @@ public class ComputerPlayer implements Player {
     @Override
     public String getPlayer() {
         return this.player;
-    }
+    }//getPlayer.
 
     @Override
     public String toString() {
         return "Computer";
-    }
+    }//toString.
 }
 

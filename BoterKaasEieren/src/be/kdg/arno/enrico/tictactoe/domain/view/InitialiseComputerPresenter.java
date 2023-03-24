@@ -1,6 +1,5 @@
 package be.kdg.arno.enrico.tictactoe.domain.view;
 
-import be.kdg.arno.enrico.tictactoe.domain.model.Leaderboard;
 import be.kdg.arno.enrico.tictactoe.domain.model.TicTacToe;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -12,20 +11,31 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
+/**
+ * This class is the presenter for the play vs computer window.
+ * This is the window that gets opened as soon as the Play VS Computer button inside the starting screen is clicked.
+ *
+ * @author Enrico Egghe
+ * @author Arno Bruyninckx
+ * @version 1.0
+ */
+
 public class InitialiseComputerPresenter {
+    //Properties.
     private InitialiseComputerView view;
     private TicTacToe game;
     private boolean name1 = false;
     private boolean custom = false;
     private int editClickCounter = 0;
 
+    //Constructor.
     public InitialiseComputerPresenter(TicTacToe game, InitialiseComputerView view) {
         this.view = view;
         this.game = game;
         addEventhandlers();
     }
 
-
+    //Methods.
     private void addEventhandlers() {
         view.getTfNameP1().setOnKeyTyped(new EventHandler<KeyEvent>() {
             @Override
@@ -193,7 +203,7 @@ public class InitialiseComputerPresenter {
                 view.getBtnEdit().setEffect(null);
             }
         });
-    }
+    }//addEventHandlers.
 
     public void showMessage() {
         Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -212,7 +222,7 @@ public class InitialiseComputerPresenter {
         }
         alert.getButtonTypes().setAll(ButtonType.OK);
         alert.showAndWait();
-    }
+    }//showMessage.
 
     public void setBoardSize() {
         if (view.getCbDifficulty().getValue().equals("Easy: 3x3 - 3 in a row")) {
@@ -224,5 +234,5 @@ public class InitialiseComputerPresenter {
         } else {
             game.setSize(Integer.parseInt(view.getTfCustom().getText()));
         }
-    }
+    }//setBoardSize.
 }

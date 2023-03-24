@@ -3,11 +3,21 @@ package be.kdg.arno.enrico.tictactoe.domain.model;
 
 import be.kdg.arno.enrico.tictactoe.domain.view.UIConstants;
 
+/**
+ * This class makes the array which is needed for the application game board to work, because they're linked with eachother.
+ *
+ * @author Enrico Egghe
+ * @author Arno Bruyninckx
+ * @version 1.0
+ */
+
 public class Board {
+    //Properties.
     private int size;
     private String[][] tiles;
     private int pieceCounter;
 
+    //Constructor.
     public Board(int size) {
         this.size = size;
         createBoard();
@@ -15,6 +25,7 @@ public class Board {
         clearBoard();
     }
 
+    //Methods.
     public boolean addPiece(String player, int colNumber, int rowNumber) {
         if (this.tiles[colNumber][rowNumber].equals("")) {
             this.pieceCounter++;
@@ -23,7 +34,7 @@ public class Board {
         } else {
             return false;
         }
-    }
+    }//addPiece.
 
     public boolean isFull() {
         if (pieceCounter == UIConstants.getBoardSize() * UIConstants.getBoardSize()) {
@@ -31,11 +42,11 @@ public class Board {
         } else {
             return false;
         }
-    }
+    }//isFull.
 
     public boolean isSquareEmpty(int col, int row) {
         return tiles[col][row].equals("") || tiles[col][row].isEmpty();
-    }
+    }//isSquareEmpty.
 
     public void clearBoard() {
         for (int i = 0; i < tiles.length; i++) {
@@ -43,7 +54,7 @@ public class Board {
                 tiles[i][j] = "";
             }
         }
-    }
+    }//clearBoard.
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -77,7 +88,7 @@ public class Board {
             }
         }
         return sb.toString();
-    }
+    }//toString.
 
 
     public boolean checkWin() {
@@ -139,15 +150,15 @@ public class Board {
             }
         }
         return false;
-    }
-
-
-    public int getSize() {
-        return UIConstants.getBoardSize();
-    }
+    }//checkWin.
 
     public void createBoard() {
         this.tiles = new String[UIConstants.boardSize][UIConstants.boardSize];
         clearBoard();
-    }
+    }//createBoard.
+
+    //Getters.
+    public int getSize() {
+        return UIConstants.getBoardSize();
+    }//getSize.
 }

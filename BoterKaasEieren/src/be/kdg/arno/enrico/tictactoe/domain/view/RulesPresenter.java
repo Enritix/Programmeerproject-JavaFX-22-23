@@ -8,11 +8,20 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
+/**
+ * This class is the presenter for the rules window.
+ * This is the window that gets opened as soon as the Rules button inside the starting screen is clicked.
+ *
+ * @author Enrico Egghe
+ * @author Arno Bruyninckx
+ * @version 1.0
+ */
 public class RulesPresenter {
+    //Properties.
     private RulesView view;
     private TicTacToe game;
 
-
+    //Constructor.
     public RulesPresenter(TicTacToe game, RulesView view) {
         this.game = game;
         this.view = view;
@@ -44,5 +53,5 @@ public class RulesPresenter {
                 view.getBtnBack().setEffect(null);
             }
         });
-    }
+    }//addEventHandlers
 }
