@@ -1,5 +1,6 @@
 package be.kdg.arno.enrico.tictactoe.domain.view;
 
+import be.kdg.arno.enrico.tictactoe.domain.model.Leaderboard;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -24,7 +25,9 @@ import static be.kdg.arno.enrico.tictactoe.domain.view.UIConstants.BUTTON_PREFWI
 
 public class InitialiseComputerView extends BorderPane {
 
+    private Leaderboard leaderboard = new Leaderboard();
     private Label lblNameP1;
+    private ComboBox<String> cbNamesP1;
     private TextField tfNameP1;
     private Tooltip ttName;
     private Label lblDifficulty;
@@ -36,6 +39,9 @@ public class InitialiseComputerView extends BorderPane {
     private Button btnBack;
     private Button btnPlay;
     private HBox hbCustom;
+    private ImageView ivEdit;
+    private Button btnEdit;
+    private HBox hbNameP1;
 
     public InitialiseComputerView() {
         initialiseNodes();
@@ -44,6 +50,10 @@ public class InitialiseComputerView extends BorderPane {
 
     private void initialiseNodes() {
         lblNameP1 = new Label(" Name of player X:");
+
+        cbNamesP1 = new ComboBox<>();
+        cbNamesP1.getItems().addAll(leaderboard.getNameFromLeaderboard());
+
         tfNameP1 = new TextField();
         ttName = new Tooltip();
         lblDifficulty = new Label(" Difficulty:");
@@ -63,6 +73,17 @@ public class InitialiseComputerView extends BorderPane {
         btnBack.setStyle("-fx-background-color: transparent");
         btnPlay = new Button("Play");
         btnPlay.setPrefSize(180, 75);
+
+        try {
+            ivEdit = new ImageView(new Image(new FileInputStream("BoterKaasEieren/resources/images/edit_button.png")));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        ivEdit.setFitWidth(30);
+        ivEdit.setFitHeight(30);
+        btnEdit = new Button("", ivEdit);
+        btnEdit.setStyle("-fx-background-color: #032056");
+        btnEdit.setPrefSize(35, 35);
     }
 
     private void layoutNodes() {
@@ -77,6 +98,11 @@ public class InitialiseComputerView extends BorderPane {
         tfNameP1.setMaxWidth(Double.MAX_VALUE);
         tfNameP1.setPrefHeight(40);
 
+        cbNamesP1.setPrefHeight(40);
+        cbNamesP1.setPrefWidth(100);
+        cbNamesP1.prefWidthProperty().bind(tfNameP1.widthProperty().multiply(0.75 / 2));
+
+
         ttName.setText("A name can't contain any numbers or special characters and needs to be longer than 1 character!");
         ttName.setFont(Font.font("Arial", FontPosture.ITALIC, 15));
         ttName.setTextAlignment(TextAlignment.CENTER);
@@ -84,7 +110,9 @@ public class InitialiseComputerView extends BorderPane {
         Tooltip.install(lblNameP1, ttName);
 
 
-        HBox hbNameP1 = new HBox(lblNameP1, tfNameP1);
+        hbNameP1 = new HBox();
+        hbNameP1.getChildren().addAll(lblNameP1);
+        showPlayerList("text");
         hbNameP1.setEffect(new DropShadow(UIConstants.DEFAULT_SHADOW, Color.BLACK));
         hbNameP1.setPadding(new Insets(0, 10, 0, 10));
         HBox.setHgrow(tfNameP1, Priority.ALWAYS);
@@ -175,6 +203,23 @@ public class InitialiseComputerView extends BorderPane {
         tfCustom.setText("");
     }
 
+    public void showPlayerList(String whichBox) {
+
+        if (whichBox.equals("text")) {
+            hbNameP1.getChildren().remove(cbNamesP1);
+            hbNameP1.getChildren().remove(btnEdit);
+            hbNameP1.getChildren().add(tfNameP1);
+            hbNameP1.getChildren().add(btnEdit);
+            cbNamesP1.setVisible(false);
+        } else if (whichBox.equals("combo")){
+            hbNameP1.getChildren().remove(tfNameP1);
+            hbNameP1.getChildren().remove(btnEdit);
+            hbNameP1.getChildren().add(cbNamesP1);
+            hbNameP1.getChildren().add(btnEdit);
+            cbNamesP1.setVisible(true);
+        }
+    }
+
     public Tooltip getTtName() {
         return ttName;
     }
@@ -193,5 +238,11 @@ public class InitialiseComputerView extends BorderPane {
 
     public HBox getHbCustom() {
         return hbCustom;
+    }
+    public Button getBtnEdit() {
+        return btnEdit;
+    }
+    public ComboBox<String> getCbNamesP1() {
+        return cbNamesP1;
     }
 }

@@ -78,6 +78,7 @@ public class GameView extends BorderPane {
                 btnBoardSquares[i][j] = new Button();
                 btnBoardSquares[i][j].setMaxSize(UIConstants.BUTTON_MAXSIZE, UIConstants.BUTTON_MAXSIZE);
                 btnBoardSquares[i][j].setMinSize(UIConstants.BUTTON_MINSIZE, UIConstants.BUTTON_MINSIZE);
+                btnBoardSquares[i][j].setPrefSize(UIConstants.BUTTON_PREFHEIGHT, UIConstants.BUTTON_PREFWIDTH);
                 btnBoardSquares[i][j].setStyle("-fx-background-color: #032056; -fx-background-radius: 15px; -fx-text-fill: #68C8FF"); //board squares background
                 btnBoardSquares[i][j].setFont(Font.font("Verdana", FONT_SIZE));
             }
@@ -185,7 +186,6 @@ public class GameView extends BorderPane {
     public static void showMessage(String text) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(null);
-        /*alert.setGraphic(new ImageView(new Image("/application_logo.png")));*/
         alert.setHeaderText(null);
         alert.setContentText(text);
         alert.showAndWait();

@@ -99,11 +99,15 @@ public class InitialisePresenter {
                         setBoardSize();
                         game.createBoard();
                         if (view.getCbNamesP1().isVisible() && view.getCbNamesP2().isVisible()) {
-                            game.initialisePlayers("2p", view.getCbNamesP1().getValue(), view.getCbNamesP2().getValue());
+                            String comboNameX = view.getCbNamesP1().getValue().substring(0, 1).toUpperCase() + view.getCbNamesP1().getValue().substring(1).toLowerCase();
+                            String comboNameO = view.getCbNamesP2().getValue().substring(0, 1).toUpperCase() + view.getCbNamesP2().getValue().substring(1).toLowerCase();
+                            game.initialisePlayers("2p", comboNameX, comboNameO);
                         } else if (view.getCbNamesP1().isVisible() && !view.getCbNamesP2().isVisible()) {
-                            game.initialisePlayers("2p", view.getCbNamesP1().getValue(), view.getTfNameP2().getText());
+                            String comboNameX = view.getCbNamesP1().getValue().substring(0, 1).toUpperCase() + view.getCbNamesP1().getValue().substring(1).toLowerCase();
+                            game.initialisePlayers("2p", comboNameX, view.getTfNameP2().getText());
                         } else if (!view.getCbNamesP1().isVisible() && view.getCbNamesP2().isVisible()) {
-                            game.initialisePlayers("2p", view.getTfNameP1().getText(), view.getCbNamesP2().getValue());
+                            String comboNameO = view.getCbNamesP2().getValue().substring(0, 1).toUpperCase() + view.getCbNamesP2().getValue().substring(1).toLowerCase();
+                            game.initialisePlayers("2p", view.getTfNameP1().getText(), comboNameO);
                         } else {
                             game.initialisePlayers("2p", view.getTfNameP1().getText(), view.getTfNameP2().getText());
                         }

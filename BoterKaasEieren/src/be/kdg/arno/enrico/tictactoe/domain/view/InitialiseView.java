@@ -46,6 +46,8 @@ public class InitialiseView extends BorderPane {
     private Button btnEdit;
     private ImageView ivEdit2;
     private Button btnEdit2;
+    private HBox hbNameP1;
+    private HBox hbNameP2;
 
     public InitialiseView() {
         initialiseNodes();
@@ -118,10 +120,11 @@ public class InitialiseView extends BorderPane {
         lblNameP1.setId("mainLabel");
         tfNameP1.setMaxWidth(Double.MAX_VALUE);
         tfNameP1.setPrefHeight(40);
-        showPlayerList("p1", "text");
+
         cbNamesP1.setPrefHeight(40);
         cbNamesP1.setPrefWidth(100);
-        cbNamesP1.prefWidthProperty().bind(tfNameP1.widthProperty().multiply(0.75));
+        cbNamesP1.setMaxWidth(Double.MAX_VALUE);
+        cbNamesP1.setMinWidth(UIConstants.BUTTON_MAXSIZE);
 
         ttName.setText("A name can't contain any numbers or special characters and needs to be longer than 1 character!");
         ttName.setFont(Font.font("Arial", FontPosture.ITALIC, 15));
@@ -133,21 +136,24 @@ public class InitialiseView extends BorderPane {
         lblNameP2.setId("mainLabel");
         tfNameP2.setMaxWidth(Double.MAX_VALUE);
         tfNameP2.setPrefHeight(40);
-        showPlayerList("p2", "text");
+
         cbNamesP2.setPrefHeight(40);
-        cbNamesP2.prefWidthProperty().bind(tfNameP2.widthProperty().multiply(0.75));
+        cbNamesP2.setMaxWidth(Double.MAX_VALUE);
+        cbNamesP2.setMinWidth(UIConstants.BUTTON_MAXSIZE);
 
         Tooltip.install(lblNameP2, ttName);
 
-        HBox hbNameP1 = new HBox();
-        hbNameP1.getChildren().addAll(lblNameP1, tfNameP1, cbNamesP1, btnEdit);
+        hbNameP1 = new HBox();
+        hbNameP1.getChildren().addAll(lblNameP1);
+        showPlayerList("p1", "text");
         hbNameP1.setEffect(new DropShadow(UIConstants.DEFAULT_SHADOW, Color.BLACK));
         hbNameP1.setPadding(new Insets(0, 10, 0, 10));
         HBox.setHgrow(tfNameP1, Priority.ALWAYS);
         hbNameP1.setSpacing(10);
 
-        HBox hbNameP2 = new HBox();
-        hbNameP2.getChildren().addAll(lblNameP2, tfNameP2, cbNamesP2, btnEdit2);
+        hbNameP2 = new HBox();
+        hbNameP2.getChildren().addAll(lblNameP2);
+        showPlayerList("p2", "text");
         hbNameP2.setEffect(new DropShadow(UIConstants.DEFAULT_SHADOW, Color.BLACK));
         hbNameP2.setPadding(new Insets(0, 10, 0, 10));
         HBox.setHgrow(tfNameP2, Priority.ALWAYS);
@@ -247,31 +253,30 @@ public class InitialiseView extends BorderPane {
 
     public void showPlayerList(String player, String whichBox) {
         if (player.equals("p1") && whichBox.equals("text")) {
-            tfNameP1.setVisible(true);
-            /*tfNameP1.setPrefWidth(Double.MAX_VALUE);*/
+            hbNameP1.getChildren().remove(cbNamesP1);
+            hbNameP1.getChildren().remove(btnEdit);
+            hbNameP1.getChildren().add(tfNameP1);
+            hbNameP1.getChildren().add(btnEdit);
             cbNamesP1.setVisible(false);
-            /*cbNamesP1.setPrefWidth(0);*/
-
-            tfNameP1.requestFocus();
         } else if (player.equals("p1") && whichBox.equals("combo")){
-            tfNameP1.setVisible(false);
-            /*tfNameP1.setPrefWidth(0);*/
+            hbNameP1.getChildren().remove(tfNameP1);
+            hbNameP1.getChildren().remove(btnEdit);
+            hbNameP1.getChildren().add(cbNamesP1);
+            hbNameP1.getChildren().add(btnEdit);
             cbNamesP1.setVisible(true);
-            /*cbNamesP1.setPrefWidth(Double.MAX_VALUE);*/
-            cbNamesP1.requestFocus();
         }
         if (player.equals("p2") && whichBox.equals("text")) {
-            tfNameP2.setVisible(true);
-            /*tfNameP2.setPrefWidth(Double.MAX_VALUE);*/
+            hbNameP2.getChildren().remove(cbNamesP2);
+            hbNameP2.getChildren().remove(btnEdit2);
+            hbNameP2.getChildren().add(tfNameP2);
+            hbNameP2.getChildren().add(btnEdit2);
             cbNamesP2.setVisible(false);
-            /*cbNamesP2.setPrefWidth(0);*/
-            tfNameP2.requestFocus();
         } else if (player.equals("p2") && whichBox.equals("combo")){
-            tfNameP2.setVisible(false);
-            /*tfNameP1.setPrefWidth(0);*/
+            hbNameP2.getChildren().remove(tfNameP2);
+            hbNameP2.getChildren().remove(btnEdit2);
+            hbNameP2.getChildren().add(cbNamesP2);
+            hbNameP2.getChildren().add(btnEdit2);
             cbNamesP2.setVisible(true);
-            /*cbNamesP2.setPrefWidth(Double.MAX_VALUE);*/
-            cbNamesP2.requestFocus();
         }
     }
 

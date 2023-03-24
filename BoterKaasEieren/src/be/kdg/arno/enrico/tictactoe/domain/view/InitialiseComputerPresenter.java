@@ -1,5 +1,6 @@
 package be.kdg.arno.enrico.tictactoe.domain.view;
 
+import be.kdg.arno.enrico.tictactoe.domain.model.Leaderboard;
 import be.kdg.arno.enrico.tictactoe.domain.model.TicTacToe;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -11,13 +12,12 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
-import java.util.Optional;
-
 public class InitialiseComputerPresenter {
     private InitialiseComputerView view;
     private TicTacToe game;
     private boolean name1 = false;
     private boolean custom = false;
+    private int editClickCounter = 0;
 
     public InitialiseComputerPresenter(TicTacToe game, InitialiseComputerView view) {
         this.view = view;
@@ -72,10 +72,16 @@ public class InitialiseComputerPresenter {
                 if (!name1 && !custom) {
                     String player1 = view.getTfNameP1().getText();
                     String customSize = view.getTfCustom().getText();
-                    if (view.getHbCustom().isVisible() && !customSize.equals("") && !player1.isEmpty() || !player1.isEmpty() && !view.getHbCustom().isVisible()) {
+                    if ((view.getHbCustom().isVisible() && !customSize.equals("") && !player1.isEmpty() || !player1.isEmpty() && !view.getHbCustom().isVisible())
+                    || view.getCbNamesP1().isVisible()) {
                         setBoardSize();
                         game.createBoard();
-                        game.initialisePlayers("2p", view.getTfNameP1().getText(), "Computer");
+                        if (view.getCbNamesP1().isVisible()) {
+                            String comboNameX = view.getCbNamesP1().getValue().substring(0, 1).toUpperCase() + view.getCbNamesP1().getValue().substring(1).toLowerCase();
+                            game.initialisePlayers("1p", comboNameX, "Computer");
+                        } else {
+                            game.initialisePlayers("1p", view.getTfNameP1().getText(), "Computer");
+                        }
                         GameView gameView = new GameView();
                         GamePresenter gamePresenter = new GamePresenter(game, gameView);
                         Scene scene = view.getScene();
@@ -158,6 +164,33 @@ public class InitialiseComputerPresenter {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 view.getTtCustom().hide();
+            }
+        });
+
+        view.getBtnEdit().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                if (editClickCounter % 2 == 0) {
+                    editClickCounter++;
+                    view.showPlayerList("combo");
+                } else {
+                    editClickCounter++;
+                    view.showPlayerList("text");
+                }
+            }
+        });
+
+        view.getBtnEdit().setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                view.getBtnEdit().setEffect(new DropShadow(UIConstants.DEFAULT_SHADOW, Color.BLACK));
+            }
+        });
+
+        view.getBtnEdit().setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                view.getBtnEdit().setEffect(null);
             }
         });
     }
