@@ -1,6 +1,7 @@
 package be.kdg.arno.enrico.tictactoe.domain.view;
 
 
+import be.kdg.arno.enrico.tictactoe.domain.model.Leaderboard;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
@@ -21,7 +22,9 @@ import java.io.FileNotFoundException;
 public class GameView extends BorderPane {
     public static final int FONT_SIZE = 30;
     private Label lblPlayer1;
+    private Label lblPlayer1Score;
     private Label lblPlayer2;
+    private Label lblPlayer2Score;
     private Button[][] btnBoardSquares = new Button[UIConstants.boardSize][UIConstants.boardSize]; //new Button[Board.SIZE][Board.SIZE];
     private Button btnNewGame;
     private Button btnQuit;
@@ -51,9 +54,17 @@ public class GameView extends BorderPane {
         lblPlayer1.setFont(Font.font("Verdana", FONT_SIZE));
         lblPlayer1.setStyle("-fx-background-color: #032056; -fx-text-fill: #68C8FF; -fx-background-radius: 15px"); //player 2 text colour
 
+        lblPlayer1Score = new Label();
+        lblPlayer1Score.setFont(Font.font("Verdana", FONT_SIZE));
+        lblPlayer1Score.setStyle("-fx-background-color: #032056; -fx-text-fill: #68C8FF; -fx-background-radius: 15px");
+
         lblPlayer2 = new Label();
         lblPlayer2.setFont(Font.font("Verdana", FONT_SIZE));
         lblPlayer2.setStyle("-fx-background-color: #032056; -fx-text-fill: #68C8FF; -fx-background-radius: 15px"); //player 2 text colour
+
+        lblPlayer2Score = new Label();
+        lblPlayer2Score.setFont(Font.font("Verdana", FONT_SIZE));
+        lblPlayer2Score.setStyle("-fx-background-color: #032056; -fx-text-fill: #68C8FF; -fx-background-radius: 15px");
 
         btnNewGame = new Button("New Game");
         btnNewGame.setFont(Font.font("Verdana", FONT_SIZE));
@@ -94,12 +105,19 @@ public class GameView extends BorderPane {
             gpBoard.setMaxSize(300,300);
             gpBoard.setStyle(" -fx-background-color: transparent"); //board bg
 
-            HBox hbTopRight = new HBox(lblPlayer2);
+            HBox hbTopLeft = new HBox(lblPlayer1, lblPlayer1Score);
+            HBox hbTopRight = new HBox(lblPlayer2Score, lblPlayer2);
+            hbTopLeft.setSpacing(20);
             hbTopRight.setSpacing(20);
-            HBox hbTop = new HBox(lblPlayer1, hbTopRight);
+            HBox hbTop = new HBox(hbTopLeft, hbTopRight);
+            HBox.setHgrow(hbTop, Priority.ALWAYS);
             HBox.setHgrow(hbTopRight, Priority.ALWAYS);
+            hbTopLeft.setAlignment(Pos.BOTTOM_LEFT);
             hbTopRight.setAlignment(Pos.BOTTOM_RIGHT);
             hbTop.setSpacing(20);
+            lblPlayer1Score.setAlignment(Pos.BOTTOM_LEFT);
+            lblPlayer1.setAlignment(Pos.BOTTOM_LEFT);
+            lblPlayer2Score.setAlignment(Pos.BOTTOM_RIGHT);
             lblPlayer2.setAlignment(Pos.BOTTOM_RIGHT);
             this.setTop(hbTop);
             BorderPane.setMargin(gpBoard, new Insets(10));
@@ -156,7 +174,14 @@ public class GameView extends BorderPane {
         return lblPlayer2;
     }
 
-    
+    public Label getLblPlayer1Score() {
+        return lblPlayer1Score;
+    }
+
+    public Label getLblPlayer2Score() {
+        return lblPlayer2Score;
+    }
+
     public static void showMessage(String text) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(null);

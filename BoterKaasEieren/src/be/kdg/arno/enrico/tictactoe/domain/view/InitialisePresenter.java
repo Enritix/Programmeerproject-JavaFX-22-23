@@ -17,7 +17,11 @@ public class InitialisePresenter {
     private TicTacToe game;
     private boolean name1 = false;
     private boolean name2 = false;
+    private boolean comboName1 = false;
+    private boolean comboName2 = false;
     private boolean custom = false;
+    private int editClickCounter = 0;
+    private int editClickCounter2 = 0;
 
     public InitialisePresenter(TicTacToe game, InitialiseView view) {
         this.view = view;
@@ -90,10 +94,19 @@ public class InitialisePresenter {
                     String player1 = view.getTfNameP1().getText();
                     String player2 = view.getTfNameP2().getText();
                     String customSize = view.getTfCustom().getText();
-                    if (view.getHbCustom().isVisible() && !customSize.equals("") && !player1.isEmpty() && !player2.isEmpty() || !player1.isEmpty() && !player2.isEmpty() && !view.getHbCustom().isVisible()) {
+                    if ((view.getHbCustom().isVisible() && !customSize.equals("") && !player1.isEmpty() && !player2.isEmpty() || !player1.isEmpty() && !player2.isEmpty() && !view.getHbCustom().isVisible())
+                    || view.getCbNamesP1().isVisible() || view.getCbNamesP2().isVisible()) {
                         setBoardSize();
                         game.createBoard();
-                        game.initialisePlayers("2p", view.getTfNameP1().getText(), view.getTfNameP2().getText());
+                        if (view.getCbNamesP1().isVisible() && view.getCbNamesP2().isVisible()) {
+                            game.initialisePlayers("2p", view.getCbNamesP1().getValue(), view.getCbNamesP2().getValue());
+                        } else if (view.getCbNamesP1().isVisible() && !view.getCbNamesP2().isVisible()) {
+                            game.initialisePlayers("2p", view.getCbNamesP1().getValue(), view.getTfNameP2().getText());
+                        } else if (!view.getCbNamesP1().isVisible() && view.getCbNamesP2().isVisible()) {
+                            game.initialisePlayers("2p", view.getTfNameP1().getText(), view.getCbNamesP2().getValue());
+                        } else {
+                            game.initialisePlayers("2p", view.getTfNameP1().getText(), view.getTfNameP2().getText());
+                        }
                         GameView gameView = new GameView();
                         GamePresenter gamePresenter = new GamePresenter(game, gameView);
                         Scene scene = view.getScene();
@@ -189,6 +202,60 @@ public class InitialisePresenter {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 view.getTtCustom().hide();
+            }
+        });
+
+        view.getBtnEdit().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                if (editClickCounter % 2 == 0) {
+                    editClickCounter++;
+                    view.showPlayerList("p1", "combo");
+                } else {
+                    editClickCounter++;
+                    view.showPlayerList("p1", "text");
+                }
+            }
+        });
+
+        view.getBtnEdit().setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                view.getBtnEdit().setEffect(new DropShadow(UIConstants.DEFAULT_SHADOW, Color.BLACK));
+            }
+        });
+
+        view.getBtnEdit().setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                view.getBtnEdit().setEffect(null);
+            }
+        });
+
+        view.getBtnEdit2().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                if (editClickCounter2 % 2 == 0) {
+                    editClickCounter2++;
+                    view.showPlayerList("p2", "combo");
+                } else {
+                    editClickCounter2++;
+                    view.showPlayerList("p2", "text");
+                }
+            }
+        });
+
+        view.getBtnEdit2().setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                view.getBtnEdit2().setEffect(new DropShadow(UIConstants.DEFAULT_SHADOW, Color.BLACK));
+            }
+        });
+
+        view.getBtnEdit2().setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                view.getBtnEdit2().setEffect(null);
             }
         });
     }

@@ -1,6 +1,7 @@
 package be.kdg.arno.enrico.tictactoe.domain.view;
 
 
+import be.kdg.arno.enrico.tictactoe.domain.model.Leaderboard;
 import be.kdg.arno.enrico.tictactoe.domain.model.TicTacToe;
 import be.kdg.arno.enrico.tictactoe.domain.model.exceptions.TileNotEmptyException;
 import be.kdg.arno.enrico.tictactoe.domain.model.player.ComputerPlayer;
@@ -23,6 +24,7 @@ public class GamePresenter {
     private GameView view;
     private TicTacToe game;
     DelayedPlayerMoveTimer timer = new DelayedPlayerMoveTimer(1500000000);
+    Leaderboard leaderboard = new Leaderboard();
 
 
     public GamePresenter(TicTacToe game, GameView view) {
@@ -35,7 +37,10 @@ public class GamePresenter {
 
     private void addEventHandlers() {
         view.getLblPlayer1().setText(game.getPlayers()[0].getName());
+        view.getLblPlayer1Score().setText(leaderboard.getScoreFromLeaderboard(game.getPlayers()[0].getName()));
         view.getLblPlayer2().setText(game.getPlayers()[1].getName());
+        view.getLblPlayer2Score().setText(leaderboard.getScoreFromLeaderboard(game.getPlayers()[1].getName()));
+
 
         view.getBtnNewGame().setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -213,6 +218,8 @@ public class GamePresenter {
                     "-fx-border-color: red; -fx-border-radius: 14px; -fx-border-width: 3px");
             view.getLblPlayer1().setStyle("-fx-background-color: #032056; -fx-text-fill: #68C8FF; -fx-background-radius: 15px; -fx-border-color: transparent");
         }
+        view.getLblPlayer1Score().setText(leaderboard.getScoreFromLeaderboard(game.getPlayers()[0].getName()));
+        view.getLblPlayer2Score().setText(leaderboard.getScoreFromLeaderboard(game.getPlayers()[1].getName()));
     }
 
     public void disableBoard() {

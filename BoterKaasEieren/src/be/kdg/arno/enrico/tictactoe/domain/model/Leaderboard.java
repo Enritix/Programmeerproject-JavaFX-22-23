@@ -5,6 +5,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 
 public class Leaderboard {
 
@@ -89,7 +91,63 @@ public class Leaderboard {
             save(name, points);
         }
 
-
     }
 
+    public List<String> read() {
+        List<String> lines = new ArrayList<>();
+        Path path = Paths.get("./leaderboard.csv");
+        try (BufferedReader reader = new BufferedReader(new FileReader(path.toFile()))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] fields = line.split(";");
+                String name = fields[0];
+                String score = fields[1];
+
+                lines.add(name);
+                lines.add(score);
+            }
+        } catch (IOException e) {
+            System.out.println("Can't read the file");
+            System.out.println(e.getMessage());
+        }
+        return lines;
+    }
+
+    public List<String> readNames() {
+        List<String> lines = new ArrayList<>();
+        Path path = Paths.get("./leaderboard.csv");
+        try (BufferedReader reader = new BufferedReader(new FileReader(path.toFile()))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] fields = line.split(";");
+                String name = fields[0];
+
+                lines.add(name);
+            }
+        } catch (IOException e) {
+            System.out.println("Can't read the file");
+            System.out.println(e.getMessage());
+        }
+        return lines;
+    }
+    public String getScoreFromLeaderboard(String name) {
+        List<String> lines = read();
+        String searchName = name.toUpperCase();
+        for (int i = 0; i < lines.size(); i++) {
+            if (searchName.equals(lines.get(i))) {
+                return lines.get(i + 1);
+            }
+        }
+        return "0";
+    }
+
+    public List<String> getNameFromLeaderboard() {
+        List<String> lines = readNames();
+        List<String> names = new ArrayList<>();
+        for (Iterator<String> iterator = lines.iterator(); iterator.hasNext(); ) {
+            String next =  iterator.next();
+            names.add(next);
+        }
+        return names;
+    }
 }
