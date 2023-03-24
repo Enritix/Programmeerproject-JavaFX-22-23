@@ -3,7 +3,6 @@ package be.kdg.arno.enrico.tictactoe.domain.model;
 import be.kdg.arno.enrico.tictactoe.domain.model.player.ComputerPlayer;
 import be.kdg.arno.enrico.tictactoe.domain.model.player.HumanPlayer;
 import be.kdg.arno.enrico.tictactoe.domain.model.player.Player;
-import be.kdg.arno.enrico.tictactoe.domain.view.PlayedGamesPresenter;
 import be.kdg.arno.enrico.tictactoe.domain.view.UIConstants;
 
 public class TicTacToe {
@@ -83,15 +82,34 @@ public class TicTacToe {
             moveCounter++;
             System.out.println(board.toString());
             PlayedGames playedGames = new PlayedGames();
+
+
+            Leaderboard leaderboard = new Leaderboard();
+
+
             if (board.checkWin()) {
                 if (currentPlayer.getPlayer().equals("X")) {
                     System.out.println("\n" + players[0].getName() + " (X) wins!\n");
                     playerX = true;
                     playedGames.save(getPlayers()[0], getPlayers()[1], UIConstants.getBoardSize(),getPlayers()[0].getName() + " won");
+                    leaderboard.save(getPlayers()[0].getName(), "3");
+                    leaderboard.sort();
+
+
+
+
+
                 } else {
                     System.out.println("\n" + players[1].getName() + " (O) wins!\n");
                     playerO = true;
                     playedGames.save(getPlayers()[0], getPlayers()[1],UIConstants.getBoardSize(), getPlayers()[1].getName() + " won");
+                    leaderboard.save(getPlayers()[1].getName(), "3");
+                    leaderboard.sort();
+
+
+
+
+
                 }
                 board.clearBoard();
             } else if (board.isFull()) {
@@ -99,6 +117,16 @@ public class TicTacToe {
                 board.clearBoard();
                 draw = true;
                 playedGames.save(getPlayers()[0], getPlayers()[1], UIConstants.getBoardSize(),  "Draw");
+                leaderboard.save(getPlayers()[0].getName(), "1");
+                if (!getPlayers()[1].getName().equals("Computer")){
+                    leaderboard.save(getPlayers()[1].getName(), "1");
+                    leaderboard.sort();
+                }
+
+
+
+
+
             }
         } else {
             System.out.println("Tile is already taken. Try again.");

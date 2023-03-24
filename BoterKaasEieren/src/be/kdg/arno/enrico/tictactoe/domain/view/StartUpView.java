@@ -1,5 +1,6 @@
 package be.kdg.arno.enrico.tictactoe.domain.view;
 
+import be.kdg.arno.enrico.tictactoe.domain.model.Leaderboard;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -27,11 +28,11 @@ public class StartUpView extends BorderPane {
     Label lblScoreboardTitle;
     ImageView ivLogo;
 
-    Label lblPlayer1 = new Label("1. Hans - 69");
-    Label lblPlayer2 = new Label("2. Enrico - 55");
-    Label lblPlayer3 = new Label("3. Arno - 28");
-    Label lblPlayer4 = new Label("4. Jonas - 16");
-    Label lblPlayer5 = new Label("5. Seppe - 12");
+    Label lblPlayer1;
+    Label lblPlayer2;
+    Label lblPlayer3;
+    Label lblPlayer4;
+    Label lblPlayer5;
 
     Button btnPlay1v1;
     Button btnPlayComputer;
@@ -57,18 +58,25 @@ public class StartUpView extends BorderPane {
         lblScoreboardTitle.setFont(Font.font("Verdana", 35));
         lblScoreboardTitle.setStyle("-fx-text-fill: #68C8FF; -fx-font-weight: bold");
 
+        Leaderboard leaderboard = new Leaderboard();
+
+        lblPlayer1 = new Label(leaderboard.getPosition(1));
         lblPlayer1.setFont(Font.font("Verdana", 30));
         lblPlayer1.setStyle("-fx-text-fill: #68C8FF;");
 
+        lblPlayer2 = new Label(leaderboard.getPosition(2));
         lblPlayer2.setFont(Font.font("Verdana", 30));
         lblPlayer2.setStyle("-fx-text-fill: #68C8FF;");
 
+        lblPlayer3 = new Label(leaderboard.getPosition(3));
         lblPlayer3.setFont(Font.font("Verdana", 30));
         lblPlayer3.setStyle("-fx-text-fill: #68C8FF;");
 
+        lblPlayer4 = new Label(leaderboard.getPosition(4));
         lblPlayer4.setFont(Font.font("Verdana", 30));
         lblPlayer4.setStyle("-fx-text-fill: #68C8FF;");
 
+        lblPlayer5 = new Label(leaderboard.getPosition(5));
         lblPlayer5.setFont(Font.font("Verdana", 30));
         lblPlayer5.setStyle("-fx-text-fill: #68C8FF;");
 
