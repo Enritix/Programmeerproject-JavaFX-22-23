@@ -94,22 +94,12 @@ public class TicTacToe {
                     playedGames.save(getPlayers()[0], getPlayers()[1], UIConstants.getBoardSize(),getPlayers()[0].getName() + " won");
                     leaderboard.save(getPlayers()[0].getName(), "3");
                     leaderboard.sort();
-
-
-
-
-
                 } else {
                     System.out.println("\n" + players[1].getName() + " (O) wins!\n");
                     playerO = true;
                     playedGames.save(getPlayers()[0], getPlayers()[1],UIConstants.getBoardSize(), getPlayers()[1].getName() + " won");
                     leaderboard.save(getPlayers()[1].getName(), "3");
                     leaderboard.sort();
-
-
-
-
-
                 }
                 board.clearBoard();
             } else if (board.isFull()) {
@@ -122,11 +112,6 @@ public class TicTacToe {
                     leaderboard.save(getPlayers()[1].getName(), "1");
                     leaderboard.sort();
                 }
-
-
-
-
-
             }
         } else {
             System.out.println("Tile is already taken. Try again.");
