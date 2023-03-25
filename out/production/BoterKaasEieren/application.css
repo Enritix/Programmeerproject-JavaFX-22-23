@@ -1,0 +1,73 @@
+.button{
+    -fx-font-family: Verdana;
+    -fx-font-size: 30;
+    -fx-background-color: #032056;
+    -fx-background-radius: 15px;
+    -fx-text-fill: #68C8FF;
+}
+
+#mainLabel {
+    -fx-font-family: Verdana;
+    -fx-font-size: 30;
+    -fx-background-color: #032056;
+    -fx-text-fill: #68C8FF;
+    -fx-background-radius: 8px;
+    -fx-background-position: center;
+}
+
+#lblRules {
+    -fx-text-fill: #ed0202;
+    -fx-font-family: 'Lucida Calligraphy';
+    -fx-font-size: 55
+}
+
+.table-view .column-header-background {
+    -fx-background-color: transparent; /*linear-gradient(to right, #fdea16, #fd60e9)*/
+    -fx-background-radius: 7px 7px 0px 0px;
+    -fx-background-insets: 0 11px 0 0;
+    -fx-padding: 0 0 5px 0;
+}
+
+.table-cell{
+    -fx-border-color: #010d21;
+    -fx-padding: 2 0 2 10px;
+}
+
+.table-row-cell:odd{
+    -fx-background-color: #032056;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+    -fx-text-background-color: #68C8FF;
+    -fx-font-weight: bold;
+    -fx-text-alignment: center;
+}
+
+.table-row-cell:even{
+    -fx-background-color: #052d77;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+    -fx-text-background-color: #68C8FF;
+    -fx-font-weight: bold;
+    -fx-text-alignment: center;
+}
+
+#startupButton {
+    -fx-background-color: #032056;
+    -fx-text-fill: #68C8FF;
+    -fx-background-radius: 5px;
+}
+
+#startupLeaderboardMiddle {
+    -fx-background-color: #0a3dd7;
+    -fx-background-radius: 5px, 50px, 5px, 50px;
+}
+
+#startupLeaderboardOutline {
+    -fx-background-color: #032056;
+    -fx-background-radius: 5px, 50px, 5px, 50px;
+}
+
+
+
+
+

@@ -5,7 +5,9 @@ import be.kdg.arno.enrico.tictactoe.domain.model.player.Player;
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,16 +22,20 @@ import java.util.List;
  */
 public class PlayedGames {
     //Properties.
-    private static LocalDateTime now = LocalDateTime.now();
-    private static DateTimeFormatter nowFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+    private static LocalDate nowDate = LocalDate.now();
+    private static DateTimeFormatter nowDateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private static LocalTime nowTime = LocalTime.now();
+    private static DateTimeFormatter nowTimeFormat = DateTimeFormatter.ofPattern("HH:mm:ss");
 
     //Methods.
     public void save(Player playerName1, Player playerName2, int boardSize, String result) {
-        now.format(nowFormat);
+        nowDate.format(nowDateFormat);
+        nowTime.format(nowTimeFormat);
+        String formattedTime = nowDate.format(nowDateFormat) + " " + nowTime.format(nowTimeFormat);
         System.out.println("Saving: " + playerName1.getName() + " + " + playerName2.getName() + " + " + boardSize + "x" + boardSize + " + " + result);
         Path path = Paths.get("./playedgames.csv");
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(path.toFile(), true))) {
-            writer.write(String.valueOf(now));
+            writer.write(formattedTime);
             writer.write(";");
             writer.write(playerName1.getName());
             writer.write(";");
