@@ -60,7 +60,7 @@ public class RulesView extends BorderPane {
                 "If one player places three of the same marks in a straight line, that player wins and gets 3 points. \n " +
                 "If all the squares are filled and there is no winner, the game ends in a draw and both players get 1 point.");
         txtRules.setFont(Font.font("Lucida Calligraphy", 25));
-        txtRules.setStyle("-fx-text-fill: #ed0202");
+        txtRules.setStyle("-fx-text-fill: #ed0202;");
         txtRules.setWrappingWidth(700);
 
         btnBack = new Button("", ivBack);

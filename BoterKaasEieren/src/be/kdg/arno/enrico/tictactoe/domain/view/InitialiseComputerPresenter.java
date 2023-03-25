@@ -83,10 +83,10 @@ public class InitialiseComputerPresenter {
                     String player1 = view.getTfNameP1().getText();
                     String customSize = view.getTfCustom().getText();
                     if ((view.getHbCustom().isVisible() && !customSize.equals("") && !player1.isEmpty() || !player1.isEmpty() && !view.getHbCustom().isVisible())
-                    || view.getCbNamesP1().isVisible()) {
+                            || view.getCbNamesP1().isVisible()) {
                         setBoardSize();
                         game.createBoard();
-                        if (view.getCbNamesP1().isVisible()) {
+                        if (view.getCbNamesP1().isVisible() && !view.getCbNamesP1().getValue().isEmpty()) {
                             String comboNameX = view.getCbNamesP1().getValue().substring(0, 1).toUpperCase() + view.getCbNamesP1().getValue().substring(1).toLowerCase();
                             game.initialisePlayers("1p", comboNameX, "Computer");
                         } else {
@@ -98,11 +98,10 @@ public class InitialiseComputerPresenter {
                         scene.setRoot(gameView);
                         scene.getWindow().setHeight(view.getHeight() + 37);
                         scene.getWindow().setWidth(view.getWidth() + 14);
-                    }
-                    else if ((player1.isEmpty() && customSize.equals("")
+                    } else if ((player1.isEmpty() && customSize.equals("")
                             || player1.isEmpty() && !customSize.equals("")
                             || !player1.isEmpty() && !customSize.equals("")
-                            ||!player1.isEmpty() && customSize.equals("")) && view.getHbCustom().isVisible())
+                            || !player1.isEmpty() && customSize.equals("")) && view.getHbCustom().isVisible())
                         showMessage();
                 } else {
                     showMessage();
@@ -149,28 +148,28 @@ public class InitialiseComputerPresenter {
             }
         });
 
-        view.getLblNameP1().setOnMouseEntered(new EventHandler<MouseEvent>() {
+        view.getIvQuestionMark1().setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 view.getTtName().show(view.getLblNameP1(), mouseEvent.getScreenX(), mouseEvent.getScreenY() + 10);
             }
         });
 
-        view.getLblNameP1().setOnMouseExited(new EventHandler<MouseEvent>() {
+        view.getIvQuestionMark1().setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 view.getTtName().hide();
             }
         });
 
-        view.getLblCustom().setOnMouseEntered(new EventHandler<MouseEvent>() {
+        view.getIvQuestionMark2().setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 view.getTtCustom().show(view.getLblCustom(), mouseEvent.getScreenX(), mouseEvent.getScreenY() + 10);
             }
         });
 
-        view.getLblCustom().setOnMouseExited(new EventHandler<MouseEvent>() {
+        view.getIvQuestionMark2().setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 view.getTtCustom().hide();
@@ -182,6 +181,9 @@ public class InitialiseComputerPresenter {
             public void handle(ActionEvent actionEvent) {
                 if (editClickCounter % 2 == 0) {
                     editClickCounter++;
+                    view.getTfNameP1().setText("");
+                    view.getTfNameP1().setStyle(" -fx-border-color: transparent");
+                    name1 = false;
                     view.showPlayerList("combo");
                 } else {
                     editClickCounter++;

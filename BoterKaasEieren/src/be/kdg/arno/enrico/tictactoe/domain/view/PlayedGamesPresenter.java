@@ -62,7 +62,6 @@ public class PlayedGamesPresenter {
             @Override
             public void handle(ActionEvent actionEvent) {
                 playedGames.clearFile();
-                view.getPgTable().getItems().clear();
                 view.getPgTable().refresh();
             }
         });

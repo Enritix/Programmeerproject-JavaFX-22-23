@@ -1,8 +1,10 @@
 package be.kdg.arno.enrico.tictactoe.domain.model;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -29,7 +31,7 @@ public class Leaderboard {
     }
 
     //Methods.
-    public void save(String player, String points) {    //write one player and points to leaderboard.csv
+    public void savePlayerData(String player, String points) {    //write one player and points to leaderboard.csv
         System.out.println("Leaderboard: " + player + " earns " + points + " points.");
         Path path = Paths.get("./leaderboard.csv");
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(path.toFile(), true))) {
@@ -42,7 +44,7 @@ public class Leaderboard {
             System.out.println("Can't read the file");
             System.out.println(e.getMessage());
         }
-    }//save.
+    }//saveGame.
 
 
     public String getPosition(int p) {   //returns Score object that is in  p'th position (highest scores)
@@ -96,7 +98,7 @@ public class Leaderboard {
             String name = score.getName();
             String points = Integer.toString(score.getScores());
 
-            save(name, points);
+            savePlayerData(name, points);
         }
     }//sort.
 
@@ -176,4 +178,28 @@ public class Leaderboard {
         }
         return names;
     }//getNameFromLeaderboard.
+
+    public void resetScores() {
+        Path inputPath = Paths.get("./leaderboard.csv");
+        Path outputPath = Paths.get("./templeaderboard.csv");
+        try (BufferedReader reader = new BufferedReader(new FileReader(inputPath.toFile()));
+             BufferedWriter writer = new BufferedWriter(new FileWriter(outputPath.toFile()))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] fields = line.split(";");
+                String name = fields[0];
+                /*int points = Integer.parseInt(fields[1]);*/
+                writer.write(name + ";" + 0 + "\n");
+            }
+        } catch (IOException e) {
+            System.out.println("Can't read the file");
+            System.out.println(e.getMessage());
+        }
+        try {
+            Files.move(outputPath, inputPath, StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            System.out.println("Can't move the file");
+            System.out.println(e.getMessage());
+        }
+    }
 }

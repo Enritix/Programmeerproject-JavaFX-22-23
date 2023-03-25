@@ -103,10 +103,10 @@ public class InitialisePresenter {
                     String player2 = view.getTfNameP2().getText();
                     String customSize = view.getTfCustom().getText();
                     if ((view.getHbCustom().isVisible() && !customSize.equals("") && !player1.isEmpty() && !player2.isEmpty() || !player1.isEmpty() && !player2.isEmpty() && !view.getHbCustom().isVisible())
-                    || view.getCbNamesP1().isVisible() || view.getCbNamesP2().isVisible()) {
+                            || view.getCbNamesP1().isVisible() || view.getCbNamesP2().isVisible()) {
                         setBoardSize();
                         game.createBoard();
-                        if (view.getCbNamesP1().isVisible() && view.getCbNamesP2().isVisible()) {
+                        if (view.getCbNamesP1().isVisible() && view.getCbNamesP2().isVisible() && !view.getCbNamesP1().getValue().isEmpty() && !view.getCbNamesP2().getValue().isEmpty()) {
                             String comboNameX = view.getCbNamesP1().getValue().substring(0, 1).toUpperCase() + view.getCbNamesP1().getValue().substring(1).toLowerCase();
                             String comboNameO = view.getCbNamesP2().getValue().substring(0, 1).toUpperCase() + view.getCbNamesP2().getValue().substring(1).toLowerCase();
                             game.initialisePlayers("2p", comboNameX, comboNameO);
@@ -125,8 +125,7 @@ public class InitialisePresenter {
                         scene.setRoot(gameView);
                         scene.getWindow().setHeight(view.getHeight() + 37);
                         scene.getWindow().setWidth(view.getWidth() + 14);
-                    }
-                    else if ((player1.isEmpty() && customSize.equals("") || player2.isEmpty() && customSize.equals("")
+                    } else if ((player1.isEmpty() && customSize.equals("") || player2.isEmpty() && customSize.equals("")
                             || player1.isEmpty() && !player2.isEmpty() && !customSize.equals("") || !player1.isEmpty() && player2.isEmpty() && !customSize.equals("")
                             || player1.isEmpty() && player2.isEmpty() && customSize.equals("") || customSize.equals("")) && view.getHbCustom().isVisible())
                         showMessage();
@@ -175,42 +174,42 @@ public class InitialisePresenter {
             }
         });
 
-        view.getLblNameP1().setOnMouseEntered(new EventHandler<MouseEvent>() {
+        view.getIvQuestionMark1().setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 view.getTtName().show(view.getLblNameP1(), mouseEvent.getScreenX(), mouseEvent.getScreenY() + 10);
             }
         });
 
-        view.getLblNameP1().setOnMouseExited(new EventHandler<MouseEvent>() {
+        view.getIvQuestionMark1().setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 view.getTtName().hide();
             }
         });
 
-        view.getLblNameP2().setOnMouseEntered(new EventHandler<MouseEvent>() {
+        view.getIvQuestionMark2().setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 view.getTtName().show(view.getLblNameP2(), mouseEvent.getScreenX(), mouseEvent.getScreenY() + 10);
             }
         });
 
-        view.getLblNameP2().setOnMouseExited(new EventHandler<MouseEvent>() {
+        view.getIvQuestionMark2().setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 view.getTtName().hide();
             }
         });
 
-        view.getLblCustom().setOnMouseEntered(new EventHandler<MouseEvent>() {
+        view.getIvQuestionMark3().setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 view.getTtCustom().show(view.getLblCustom(), mouseEvent.getScreenX(), mouseEvent.getScreenY() + 10);
             }
         });
 
-        view.getLblCustom().setOnMouseExited(new EventHandler<MouseEvent>() {
+        view.getIvQuestionMark3().setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 view.getTtCustom().hide();
@@ -222,10 +221,14 @@ public class InitialisePresenter {
             public void handle(ActionEvent actionEvent) {
                 if (editClickCounter % 2 == 0) {
                     editClickCounter++;
-                    view.showPlayerList("p1", "combo");
+                    view.getTfNameP1().setText("");
+                    view.getTfNameP1().setStyle(" -fx-border-color: transparent");
+                    name1 = false;
+                    view.switchPlayerBox("p1", "combo");
                 } else {
                     editClickCounter++;
-                    view.showPlayerList("p1", "text");
+                    name1 = false;
+                    view.switchPlayerBox("p1", "text");
                 }
             }
         });
@@ -249,10 +252,13 @@ public class InitialisePresenter {
             public void handle(ActionEvent actionEvent) {
                 if (editClickCounter2 % 2 == 0) {
                     editClickCounter2++;
-                    view.showPlayerList("p2", "combo");
+                    view.getTfNameP2().setText("");
+                    view.getTfNameP2().setStyle(" -fx-border-color: transparent");
+                    name2 = false;
+                    view.switchPlayerBox("p2", "combo");
                 } else {
                     editClickCounter2++;
-                    view.showPlayerList("p2", "text");
+                    view.switchPlayerBox("p2", "text");
                 }
             }
         });

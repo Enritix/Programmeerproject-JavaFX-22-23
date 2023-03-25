@@ -5,7 +5,6 @@ import be.kdg.arno.enrico.tictactoe.domain.model.Leaderboard;
 import be.kdg.arno.enrico.tictactoe.domain.model.TicTacToe;
 import be.kdg.arno.enrico.tictactoe.domain.model.exceptions.TileNotEmptyException;
 import be.kdg.arno.enrico.tictactoe.domain.model.player.ComputerPlayer;
-import be.kdg.arno.enrico.tictactoe.domain.model.player.DelayedPlayerMoveTimer;
 import be.kdg.arno.enrico.tictactoe.domain.model.player.HumanPlayer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -33,7 +32,6 @@ public class GamePresenter {
     //Properties.
     private GameView view;
     private TicTacToe game;
-    DelayedPlayerMoveTimer timer = new DelayedPlayerMoveTimer(1500000000);
     Leaderboard leaderboard = new Leaderboard();
 
     //Constructor.
@@ -101,17 +99,6 @@ public class GamePresenter {
                                 /*view.getBtnBoardSquares()[col][row].setDisable(true);*/
                                 updateView();
                             }
-                            if (!game.getBoard().checkWin() || !game.isDraw()) {
-                                if (game.getCurrentPlayer() instanceof ComputerPlayer) {
-                                    game.getPlayers()[1].setY();
-                                    game.getPlayers()[1].setX();
-                                    game.addPieceOnBoard(game.getPlayers()[1].getX(), game.getPlayers()[1].getY());
-                                    timer.reset();
-                                    view.getBtnBoardSquares()[game.getPlayers()[1].getX()][game.getPlayers()[1].getY()].setText("O");
-                                    /*view.getBtnBoardSquares()[game.getPlayers()[1].getX()][game.getPlayers()[1].getY()].setDisable(true);*/
-                                    updateView();
-                                }
-                            }
                             if (game.hasPlayerXWon()) {
                                 GameView.showMessage(String.format("%s (%s) has won!%nTo play again, press on 'New Game'",
                                         game.getPlayers()[0].getName(), game.getPlayers()[0].getPlayer()));
@@ -126,6 +113,29 @@ public class GamePresenter {
                                 GameView.showMessage("Draw!\nTo play again, press on 'New Game'");
                                 disableBoard();
                                 updateView();
+                            } else {
+                                if (game.getCurrentPlayer() instanceof ComputerPlayer) {
+                                    game.getPlayers()[1].setY();
+                                    game.getPlayers()[1].setX();
+                                    game.addPieceOnBoard(game.getPlayers()[1].getX(), game.getPlayers()[1].getY());
+                                    view.getBtnBoardSquares()[game.getPlayers()[1].getX()][game.getPlayers()[1].getY()].setText("O");
+                                    updateView();
+                                    if (game.hasPlayerXWon()) {
+                                        GameView.showMessage(String.format("%s (%s) has won!%nTo play again, press on 'New Game'",
+                                                game.getPlayers()[0].getName(), game.getPlayers()[0].getPlayer()));
+                                        disableBoard();
+                                        updateView();
+                                    } else if (game.hasPlayerOWon()) {
+                                        GameView.showMessage(String.format("%s (%s) has won!%nTo play again, press on 'New Game'",
+                                                game.getPlayers()[1].getName(), game.getPlayers()[1].getPlayer()));
+                                        disableBoard();
+                                        updateView();
+                                    } else if (game.isDraw()) {
+                                        GameView.showMessage("Draw!\nTo play again, press on 'New Game'");
+                                        disableBoard();
+                                        updateView();
+                                    }
+                                }
                             }
                         } else {
                             try {
@@ -153,68 +163,80 @@ public class GamePresenter {
             }
         }
 
-        view.getBtnQuit().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("Quit");
-                alert.setHeaderText(null);
-                alert.setContentText("Are you sure you want to quit?");
-                alert.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO);
-                Optional<ButtonType> result = alert.showAndWait();
-                if (result.isPresent() && result.get() == ButtonType.YES) {
-                    exit();
-                }
-            }
-        });
+        view.getBtnQuit().
 
-        view.getBtnQuit().setOnMouseEntered(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                view.getBtnQuit().setEffect(new DropShadow(UIConstants.DEFAULT_SHADOW, Color.BLACK));
-            }
-        });
+                setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent actionEvent) {
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setTitle("Quit");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Are you sure you want to quit?");
+                        alert.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO);
+                        Optional<ButtonType> result = alert.showAndWait();
+                        if (result.isPresent() && result.get() == ButtonType.YES) {
+                            exit();
+                        }
+                    }
+                });
 
-        view.getBtnQuit().setOnMouseExited(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                view.getBtnQuit().setEffect(null);
-            }
-        });
+        view.getBtnQuit().
 
-        view.getBtnBack().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("Quit");
-                alert.setHeaderText(null);
-                alert.setContentText("Are you sure you want to quit?");
-                alert.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO);
-                Optional<ButtonType> result = alert.showAndWait();
-                if (result.isPresent() && result.get() == ButtonType.YES) {
-                    StartUpView startUpView = new StartUpView();
-                    StartUpPresenter startUpPresenter = new StartUpPresenter(game, startUpView);
-                    Scene scene = view.getScene();
-                    scene.setRoot(startUpView);
-                    scene.getWindow().setHeight(view.getHeight() + 37);
-                    scene.getWindow().setWidth(view.getWidth() + 14);
-                }
-            }
-        });
+                setOnMouseEntered(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        view.getBtnQuit().setEffect(new DropShadow(UIConstants.DEFAULT_SHADOW, Color.BLACK));
+                    }
+                });
 
-        view.getBtnBack().setOnMouseEntered(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                view.getBtnBack().setEffect(new DropShadow(UIConstants.DEFAULT_SHADOW, Color.BLACK));
-            }
-        });
+        view.getBtnQuit().
 
-        view.getBtnBack().setOnMouseExited(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                view.getBtnBack().setEffect(null);
-            }
-        });
+                setOnMouseExited(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        view.getBtnQuit().setEffect(null);
+                    }
+                });
+
+        view.getBtnBack().
+
+                setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent actionEvent) {
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setTitle("Quit");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Are you sure you want to quit?");
+                        alert.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO);
+                        Optional<ButtonType> result = alert.showAndWait();
+                        if (result.isPresent() && result.get() == ButtonType.YES) {
+                            StartUpView startUpView = new StartUpView();
+                            StartUpPresenter startUpPresenter = new StartUpPresenter(game, startUpView);
+                            Scene scene = view.getScene();
+                            scene.setRoot(startUpView);
+                            scene.getWindow().setHeight(view.getHeight() + 37);
+                            scene.getWindow().setWidth(view.getWidth() + 14);
+                        }
+                    }
+                });
+
+        view.getBtnBack().
+
+                setOnMouseEntered(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        view.getBtnBack().setEffect(new DropShadow(UIConstants.DEFAULT_SHADOW, Color.BLACK));
+                    }
+                });
+
+        view.getBtnBack().
+
+                setOnMouseExited(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        view.getBtnBack().setEffect(null);
+                    }
+                });
     }//addEventHandlers.
 
     private void updateView() {

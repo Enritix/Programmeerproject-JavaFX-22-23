@@ -6,7 +6,6 @@ import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -28,7 +27,7 @@ public class PlayedGames {
     private static DateTimeFormatter nowTimeFormat = DateTimeFormatter.ofPattern("HH:mm:ss");
 
     //Methods.
-    public void save(Player playerName1, Player playerName2, int boardSize, String result) {
+    public void saveGame(Player playerName1, Player playerName2, int boardSize, String result) {
         nowDate.format(nowDateFormat);
         nowTime.format(nowTimeFormat);
         String formattedTime = nowDate.format(nowDateFormat) + " " + nowTime.format(nowTimeFormat);
@@ -50,7 +49,7 @@ public class PlayedGames {
             System.out.println("Can't read the file");
             System.out.println(e.getMessage());
         }
-    }//save.
+    }//saveGame.
 
     public List<String> load() {
         List<String> lines = new ArrayList<>();

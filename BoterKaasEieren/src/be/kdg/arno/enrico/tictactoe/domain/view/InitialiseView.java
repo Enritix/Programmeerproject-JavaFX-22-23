@@ -57,6 +57,9 @@ public class InitialiseView extends BorderPane {
     private Button btnEdit2;
     private HBox hbNameP1;
     private HBox hbNameP2;
+    private ImageView ivQuestionMark1;
+    private ImageView ivQuestionMark2;
+    private ImageView ivQuestionMark3;
 
     //Constructor.
     public InitialiseView() {
@@ -66,25 +69,53 @@ public class InitialiseView extends BorderPane {
 
     //Methods.
     private void initialiseNodes() {
+        try {
+            ivQuestionMark1 = new ImageView(new Image(new FileInputStream("BoterKaasEieren/resources/images/question_mark.png")));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        ivQuestionMark1.setFitWidth(40);
+        ivQuestionMark1.setFitHeight(40);
+
         lblNameP1 = new Label(" Name of player X:");
 
         cbNamesP1 = new ComboBox<>();
         cbNamesP1.getItems().addAll(leaderboard.getNameFromLeaderboard());
+        cbNamesP1.setValue(leaderboard.readNames().get(0));
 
-        tfNameP1 = new TextField();
+        tfNameP1 = new TextField("");
         ttName = new Tooltip();
         lblNameP2 = new Label(" Name of player O:");
 
+        try {
+            ivQuestionMark2 = new ImageView(new Image(new FileInputStream("BoterKaasEieren/resources/images/question_mark.png")));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        ivQuestionMark2.setFitWidth(40);
+        ivQuestionMark2.setFitHeight(40);
+
+
         cbNamesP2 = new ComboBox<>();
         cbNamesP2.getItems().addAll(leaderboard.getNameFromLeaderboard());
+        cbNamesP2.setValue(leaderboard.readNames().get(1));
 
-        tfNameP2 = new TextField();
+        tfNameP2 = new TextField("");
         lblDifficulty = new Label(" Difficulty:");
         cbDifficulty = new ComboBox<>(FXCollections.observableArrayList("Easy: 3x3 - 3 in a row", "Medium: 5x5 - 4 in a row", "Hard: 7x7 - 4 in a row", "Custom"));
         cbDifficulty.setValue("Easy: 3x3 - 3 in a row");
         lblCustom = new Label(" Custom:");
         ttCustom = new Tooltip();
         tfCustom = new TextField();
+
+        try {
+            ivQuestionMark3 = new ImageView(new Image(new FileInputStream("BoterKaasEieren/resources/images/question_mark.png")));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        ivQuestionMark3.setFitWidth(40);
+        ivQuestionMark3.setFitHeight(40);
+
         try {
             ivBack = new ImageView(new Image(new FileInputStream("BoterKaasEieren/resources/images/arrow_back.png")));
         } catch (FileNotFoundException e) {
@@ -141,7 +172,7 @@ public class InitialiseView extends BorderPane {
         ttName.setFont(Font.font("Arial", FontPosture.ITALIC, 15));
         ttName.setTextAlignment(TextAlignment.CENTER);
 
-        Tooltip.install(lblNameP1, ttName);
+        Tooltip.install(ivQuestionMark1, ttName);
 
         lblNameP2.setPrefWidth(300);
         lblNameP2.setId("mainLabel");
@@ -152,19 +183,19 @@ public class InitialiseView extends BorderPane {
         cbNamesP2.setMaxWidth(Double.MAX_VALUE);
         cbNamesP2.setMinWidth(UIConstants.BUTTON_MAXSIZE);
 
-        Tooltip.install(lblNameP2, ttName);
+        Tooltip.install(ivQuestionMark2, ttName);
 
         hbNameP1 = new HBox();
-        hbNameP1.getChildren().addAll(lblNameP1);
-        showPlayerList("p1", "text");
+        hbNameP1.getChildren().addAll(lblNameP1, ivQuestionMark1);
+        switchPlayerBox("p1", "text");
         hbNameP1.setEffect(new DropShadow(UIConstants.DEFAULT_SHADOW, Color.BLACK));
         hbNameP1.setPadding(new Insets(0, 10, 0, 10));
         HBox.setHgrow(tfNameP1, Priority.ALWAYS);
         hbNameP1.setSpacing(10);
 
         hbNameP2 = new HBox();
-        hbNameP2.getChildren().addAll(lblNameP2);
-        showPlayerList("p2", "text");
+        hbNameP2.getChildren().addAll(lblNameP2, ivQuestionMark2);
+        switchPlayerBox("p2", "text");
         hbNameP2.setEffect(new DropShadow(UIConstants.DEFAULT_SHADOW, Color.BLACK));
         hbNameP2.setPadding(new Insets(0, 10, 0, 10));
         HBox.setHgrow(tfNameP2, Priority.ALWAYS);
@@ -176,7 +207,7 @@ public class InitialiseView extends BorderPane {
         HBox hbDifficulty = new HBox(lblDifficulty, cbDifficulty);
         hbDifficulty.setEffect(new DropShadow(UIConstants.DEFAULT_SHADOW, Color.BLACK));
         hbDifficulty.setPadding(new Insets(0, 10, 0, 10));
-        hbDifficulty.setSpacing(10);
+        hbDifficulty.setSpacing(60);
 
         cbDifficulty.setMaxWidth(Double.MAX_VALUE);
         cbDifficulty.setPrefHeight(40);
@@ -189,9 +220,9 @@ public class InitialiseView extends BorderPane {
         ttCustom.setFont(Font.font("Arial", FontPosture.ITALIC, 15));
         ttCustom.setTextAlignment(TextAlignment.CENTER);
 
-        Tooltip.install(lblNameP1, ttName);
+        Tooltip.install(ivQuestionMark3, ttName);
 
-        hbCustom = new HBox(lblCustom, tfCustom);
+        hbCustom = new HBox(lblCustom, ivQuestionMark3, tfCustom);
         hbCustom.setEffect(new DropShadow(UIConstants.DEFAULT_SHADOW, Color.BLACK));
         hbCustom.setPadding(new Insets(0, 10, 0, 10));
         hbCustom.setSpacing(10);
@@ -238,7 +269,7 @@ public class InitialiseView extends BorderPane {
         tfCustom.setText("");
     }//setCustom.
 
-    public void showPlayerList(String player, String whichBox) {
+    public void switchPlayerBox(String player, String whichBox) {
         if (player.equals("p1") && whichBox.equals("text")) {
             hbNameP1.getChildren().remove(cbNamesP1);
             hbNameP1.getChildren().remove(btnEdit);
@@ -265,7 +296,7 @@ public class InitialiseView extends BorderPane {
             hbNameP2.getChildren().add(btnEdit2);
             cbNamesP2.setVisible(true);
         }
-    }//showPlayerList.
+    }//switchPlayerBox.
 
     //Getters.
     TextField getTfNameP1() {
@@ -330,5 +361,17 @@ public class InitialiseView extends BorderPane {
 
     ComboBox<String> getCbNamesP2() {
         return cbNamesP2;
+    }
+
+    ImageView getIvQuestionMark1() {
+        return ivQuestionMark1;
+    }
+
+    ImageView getIvQuestionMark2() {
+        return ivQuestionMark2;
+    }
+
+    ImageView getIvQuestionMark3() {
+        return ivQuestionMark3;
     }
 }

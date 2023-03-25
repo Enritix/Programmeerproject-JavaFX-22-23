@@ -55,7 +55,7 @@ public class LeaderboardView extends BorderPane {
         btnBack = new Button("", ivBack);
         btnBack.setStyle("-fx-background-color: transparent");
 
-        btnReset = new Button("Reset");
+        btnReset = new Button("Reset scores");
 
         lbTable = new TableView<>();
 
@@ -100,14 +100,29 @@ public class LeaderboardView extends BorderPane {
         btnBack.setStyle("-fx-background-color: transparent");
         btnReset.setMaxWidth(Double.MAX_VALUE);
 
+        HBox rightBox = new HBox();
+        rightBox.getChildren().add(btnReset);
+        HBox.setHgrow(rightBox, Priority.ALWAYS);
+        rightBox.setAlignment(Pos.CENTER_RIGHT);
+        HBox.setMargin(btnReset, new Insets(0, 10, 0, 10));
+
         leftBox.getChildren().add(btnBack);
         leftBox.setAlignment(Pos.CENTER_LEFT);
-        this.setBottom(leftBox);
+        buttonBox.getChildren().addAll(leftBox, rightBox);
+        this.setBottom(buttonBox);
         BorderPane.setMargin(buttonBox, new Insets(10));
     }//layoutNodes.
 
     //Getters.
     Button getBtnBack() {
         return btnBack;
+    }
+
+    Button getBtnReset() {
+        return btnReset;
+    }
+
+    TableView<Scores> getLbTable() {
+        return lbTable;
     }
 }

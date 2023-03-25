@@ -74,15 +74,17 @@ public class TicTacToe {
                 if (currentPlayer.getPlayer().equals("X")) {
                     System.out.println("\n" + players[0].getName() + " (X) wins!\n");
                     playerX = true;
-                    playedGames.save(getPlayers()[0], getPlayers()[1], UIConstants.getBoardSize(),getPlayers()[0].getName() + " won");
-                    leaderboard.save(getPlayers()[0].getName(), "3");
+                    playedGames.saveGame(getPlayers()[0], getPlayers()[1], UIConstants.getBoardSize(),getPlayers()[0].getName() + " won");
+                    leaderboard.savePlayerData(getPlayers()[0].getName(), "3");
+                    leaderboard.savePlayerData(getPlayers()[1].getName(), "0");
                     leaderboard.sort();
                 } else {
                     System.out.println("\n" + players[1].getName() + " (O) wins!\n");
                     playerO = true;
-                    playedGames.save(getPlayers()[0], getPlayers()[1],UIConstants.getBoardSize(), getPlayers()[1].getName() + " won");
+                    playedGames.saveGame(getPlayers()[0], getPlayers()[1],UIConstants.getBoardSize(), getPlayers()[1].getName() + " won");
                     if (!getPlayers()[1].getName().equals("Computer")) {
-                        leaderboard.save(getPlayers()[1].getName(), "3");
+                        leaderboard.savePlayerData(getPlayers()[1].getName(), "3");
+                        leaderboard.savePlayerData(getPlayers()[0].getName(), "0");
                         leaderboard.sort();
                     }
                 }
@@ -91,10 +93,10 @@ public class TicTacToe {
                 System.out.println("\nDraw!\n");
                 board.clearBoard();
                 draw = true;
-                playedGames.save(getPlayers()[0], getPlayers()[1], UIConstants.getBoardSize(),  "Draw");
-                leaderboard.save(getPlayers()[0].getName(), "1");
+                playedGames.saveGame(getPlayers()[0], getPlayers()[1], UIConstants.getBoardSize(),  "Draw");
+                leaderboard.savePlayerData(getPlayers()[0].getName(), "1");
                 if (!getPlayers()[1].getName().equals("Computer")){
-                    leaderboard.save(getPlayers()[1].getName(), "1");
+                    leaderboard.savePlayerData(getPlayers()[1].getName(), "1");
                     leaderboard.sort();
                 }
             }
