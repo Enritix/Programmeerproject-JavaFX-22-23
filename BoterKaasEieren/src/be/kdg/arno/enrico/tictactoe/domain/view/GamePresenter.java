@@ -6,6 +6,7 @@ import be.kdg.arno.enrico.tictactoe.domain.model.TicTacToe;
 import be.kdg.arno.enrico.tictactoe.domain.model.exceptions.TileNotEmptyException;
 import be.kdg.arno.enrico.tictactoe.domain.model.player.ComputerPlayer;
 import be.kdg.arno.enrico.tictactoe.domain.model.player.HumanPlayer;
+import javafx.animation.RotateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -14,6 +15,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 
 import java.util.Optional;
 
@@ -91,6 +93,9 @@ public class GamePresenter {
                 view.getBtnBoardSquares()[i][j].setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent actionEvent) {
+                        RotateTransition rotateButton = new RotateTransition(Duration.seconds(1), view.getBtnBoardSquares()[col][row]);
+                        rotateButton.setByAngle(360);
+                        rotateButton.play();
                         if ((!game.getBoard().checkWin() || !game.isDraw()) && view.getBtnBoardSquares()[col][row].getText().equals("")) {
                             if (game.getCurrentPlayer() instanceof HumanPlayer) {
                                 String playerXorO = game.getCurrentPlayer().getPlayer();

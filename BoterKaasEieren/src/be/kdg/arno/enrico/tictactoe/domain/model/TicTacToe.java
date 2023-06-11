@@ -97,8 +97,8 @@ public class TicTacToe {
                 leaderboard.savePlayerData(getPlayers()[0].getName(), "1");
                 if (!getPlayers()[1].getName().equals("Computer")){
                     leaderboard.savePlayerData(getPlayers()[1].getName(), "1");
-                    leaderboard.sort();
                 }
+                leaderboard.sort();
             }
         } else {
             System.out.println("Tile is already taken. Try again.");
